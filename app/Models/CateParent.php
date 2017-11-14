@@ -35,7 +35,9 @@ class CateParent extends Model  {
                             'meta_id',                            
                             'is_hover',
                             'created_user',
-                            'updated_user'
+                            'updated_user',
+                            'color_code',
+                            'icon_url'
                         ];
     public static function getList($params = []){
         $query = self::where('status', 1);

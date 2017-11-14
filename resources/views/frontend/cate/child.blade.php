@@ -1,71 +1,126 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')
 @section('content')
-<div class="block block-breadcrumb">
-    <div class="container">
-        <ul class="breadcrumb">
+<div class="container">
+    <div class="block-breadcrumb">
+        <ol class="breadcrumb">
             <li><a href="{{ route('home') }}" title="Trở về trang chủ">Trang chủ</a></li>
             <li><a href="{{ route('cate-parent', [$cateDetail->cateParent->slug]) }}">{!! $cateDetail->cateParent->name !!}</a></li>
             <li class="active">{!! $cateDetail->name !!}</li>
-        </ul>
+        </ol>
     </div>
-</div><!-- /block-breadcrumb -->
-<div class="block block-two-col container">
-    <div class="row">
-        <div class="col-sm-9 col-xs-12 block-col-main">
-            <div class="block-page-common clearfix">
-                <div class="block block-title">
-                    <h1 class="title-main">{!! $cateDetail->name !!}</h1>
-                </div>
-                <div class="block-content">
-                    <div class="product-list">
-                        <div class="row">
-                            @if($productList)
+</div><!-- /.breadcrumb -->
+
+<main class="main-content clearfix">
+    <div class="container">
+        <div class="row" id="block-main-container">
+            <div class="col-md-3 category-sidebar" id="category_sidebar">
+                <form action="" method="post" id="filter_page_category">
+                    <div class="product-filters box box-shadow box-no-padding">
+                        <div class="filter filter-listing">
+                            <div class="filter_title">
+                                <i class="filter_icon fa fa-bars"></i> DANH MỤC
+                            </div>
+                            <div class="filter_body">
+                                <label class="filter_button">
+                                    <a href="{!! route('cate-parent', $parentDetail->slug) !!}" title="{!! $parentDetail->name !!}">{!! $parentDetail->name !!} <span>165</span></a>
+                                    <ul>
+                                        @foreach($cateArrByLoai[$parentDetail->id] as $obj)
+                                        <li><a href="{!! route('cate', [$parentDetail->slug, $obj->slug]) !!}" title="{!! $obj->name !!}">{!! $obj->name !!} <span>74</span></a></li>
+                                        @endforeach
+                                    </ul>
+                                </label>
+                            </div>
+                        </div><!-- /.filter -->                        
+                    </div>
+                </form>
+            </div><!-- /.col-md-3 -->
+            <div class="col-md-9 category-content">
+                <!--<div class="cate-on-slide">
+                    <ul class="owl-carousel nav-center" data-items="1" data-dots="false" data-autoplay="true" data-loop="true" data-nav="true">
+                        <li><a href="#" title=""><img src="images/cate-slide/59c48b6c59b53-hnangi-cate.jpg" alt=""></a></li>
+                        <li><a href="#" title=""><img src="images/cate-slide/59dc842e9722d-880x330.jpg" alt=""></a></li>
+                        <li><a href="#" title=""><img src="images/cate-slide/59ddc46c468b5-880x330-10.jpg" alt=""></a></li>
+                        <li><a href="#" title=""><img src="images/cate-slide/59f9466a96444-cotedazur-880x330.jpg" alt=""></a></li>
+                        <li><a href="#" title=""><img src="images/cate-slide/59fae88c2c29f-880x330-17.jpg" alt=""></a></li>
+                    </ul>
+                </div><!-- /.cate-on-slide -->
+                <div class="block branding category-header">
+                    <div class="block_header has-branding">
+                        <h1 class="block_title category-header-heading" style="text-transform: uppercase;">
+                            <span class="block_branding"><i class="fa fa-cutlery"></i></span>{!! $cateDetail->name !!}</h1>
+                    </div>
+                </div><!-- /.header -->
+                <!--<div class="filter-inline current-filter">
+                    <div class="filter_title">Tìm kiếm được 174 deals theo chọn lọc:</div>
+                    <div class="filter_body">
+                        <div id="current-filter-tag">
+                            <label class="filter_button active">
+                                Bình Chánh <i class="fa fa-times"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div><!-- /.current-filter -->
+                <div id="category_content">
+                    <div class="row products">
+                        @if($productList)
                             @foreach($productList as $obj)
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="product-item">
-                                    <div class="product-img">
-                                            <p class="box-ico">
-                                               @if( $obj->is_new == 1)
-                                                <span class="ico-new ico">NEW</span>
-                                                @endif
-                                                @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )
-                                                <span class="ico-sales ico">-{{ $obj->sale_percent }}%</span>
-                                                @endif
-                                            </p>
+                            <div class="col-md-4 product-item">
+                                <div class="product product-kind-1">
+                                    <div class="product_image">
                                         <a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">
-                                        <img src="{!! Helper::showImageThumb( $obj->image_url ) !!}" class="img-1" alt="{!! $obj->name !!}">
-                                    </a>
+                                            <img class="img-responsive" alt="{!! $obj->name !!}" src="{{ Helper::showImage($obj->image_url) }}" />
+                                        </a>
                                     </div>
-                                    <div class="product-info">
-                                        <h2 class="title"><a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">{!! $obj->name !!}</a></h2>
-                                        <div class="product-price">
-                                        <span class="label-txt">Giá:</span> <span class="price-new">
-                                            @if($obj->is_sale == 1 && $obj->price_sale > 0)
-                                            {{ number_format($obj->price_sale) }}đ
-                                            @else
-                                                {{ number_format($obj->price) }}đ
-                                            @endif  
-                                        </span>
-                                        @if( $obj->is_sale == 1)
-                                        <span class="price-old">{{ number_format($obj->price) }}đ</span>
+                                    <div class="product_header">
+                                        <h3 class="product_title">
+                                            <a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">{!! $obj->name !!}</a>
+                                        </h3>
+                                    </div>
+                                    <div class="product_info">
+                                        <div class="product_price _product_price">
+                                            <span class="price">
+                                                <span class="price_value" itemprop="price">
+                                                    @if($obj->is_sale == 1 && $obj->price_sale > 0)
+                                                    {{ number_format($obj->price_sale) }}
+                                                    @else
+                                                        {{ number_format($obj->price) }}
+                                                    @endif  </span><span class="price_symbol">đ</span>
+                                                @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )                                                        
+                                                <span class="price_discount">-{{ $obj->sale_percent }}%</span>
+                                                @endif
+                                                
+                                            </span>
+                                        </div>
+                                        @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )
+                                        <div class="product_price product_price-list-price _product_price_old " style="display: inline-block;">
+                                            <span class="price price-list-price">
+                                            <span class="price_value">{{ number_format($obj->price) }}</span><span class="price_symbol">đ</span>
+                                            </span>
+                                        </div>
                                         @endif
-                                    </div>
+                                        <div class="product_views">
+                                            <i class="fa fa-user-o"></i> 161
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div><!-- /.product-item -->                                    
                             @endforeach
-                            @endif 
-                        </div>
-
-                        <nav class="block-pagination">
-                            {{ $productList->links() }}
-                        </nav><!-- /block-pagination -->
+                        @endif
+                        
                     </div>
-                </div>
-            </div><!-- /block-ct-news -->
-        </div><!-- /block-col-right -->
-        @include('frontend.cate.sidebar')
+                </div><!-- /.category_content -->
+                <!--<div class="block-pagination pull-right">
+                    <span class="pagination_text mmm">Trang 1/2</span>
+                    <ul class="pagination">
+                        <li class="page-number active"><a href="#" title="">1</a></li>
+                        <li class="page-number"><a href="#" title="">2</a></li>
+                        <li class="page-next"><a href="#" title=""><i class="fa fa-chevron-right"></i></a></li>
+                        <li class="page-last"><a href="#" title="">Cuối</a></li>
+                    </ul>
+                </div><!-- /.block-pagination -->
+            </div><!-- /.col-md-9 -->
+        </div>
     </div>
-</div><!-- /block_big-title -->
+</main><!-- /.main -->
 @stop

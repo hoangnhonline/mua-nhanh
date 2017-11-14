@@ -1,99 +1,181 @@
 @extends('frontend.layout')
-
 @include('frontend.partials.meta')  
-  
 @section('content')
-<?php 
-$bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
-?>
-@if($bannerArr)
-<div class="block block-side">
-    <div class="owl-carousel owl-style2" data-nav="true" data-margin="0" data-items='1' data-autoplayTimeout="1000" data-autoplay="true" data-loop="true" data-navcontainer="true">
-      <?php $i = 0; ?>
-      @foreach($bannerArr as $banner)
-      <?php $i++; ?>
-      <div class="item-slide">
-        @if($banner->ads_url !='')
-        <a href="{{ $banner->ads_url }}" title="banner slide {{ $i }}">
-        @endif
-        <img src="{{ Helper::showImage($banner->image_url) }}" alt="slide {{ $i }}">
-        @if($banner->ads_url !='')
-        </a>
-        @endif
-      </div>
-      @endforeach   
-    </div>
-  </div><!-- /block-side -->
-@endif
-  <div class="block block-title-cm block-categories-home">
+<div id="home-slider">
     <div class="container">
-      <div class="block-title">
-        <h2 data-text="1" @if($isEdit) class="edit" @endif>{!! $textList[1] !!}</h2>
-        <p data-text="2" class="desc @if($isEdit) edit @endif">{!! $textList[2] !!}</p>
-      </div>
-      <div class="block-cate-product">
-        <div class="row">
-          @foreach( $cateParentHot as $obj )
-          <div class="col-sm-3">
-            <div class="cate-item">
-              <figure class="box-thumb">
-                <a href="{!! route( 'cate-parent', $obj->slug ) !!}" title="{!! $obj->name !!}"><img src="{{ Helper::showImage( $obj->image_url ) }}" alt="{!! $obj->name !!}"></a>
-              </figure>
-              <figcaption class="box-caption">
-                <h2 class="cate-name"><a href="{!! route( 'cate-parent', $obj->slug ) !!}" title="{!! $obj->name !!}">{!! $obj->name !!}</a></h2>
-                <p class="cate-desc" style="text-align:center">{!! $obj->description !!}</p>
-                <p class="cate-btn"><a href="{!! route( 'cate-parent', $obj->slug ) !!}">Xem chi tiết</a></p>
-              </figcaption>
-            </div>
-          </div><!-- /item -->
-          @endforeach
+      <div class="header-top-right-wapper">
+        <div class="homeslider">
+          <ul id="contenhomeslider">
+            <li><img alt="Funky roots" src="{{ URL::asset('public/assets/images/slider/slider1.jpg') }}" title="Funky roots" /></li>            
+          </ul>
         </div>
       </div>
     </div>
-  </div><!-- /block_big-title -->
-<?php 
-$bannerArr = DB::table('banner')->where(['object_id' => 2, 'object_type' => 3])->orderBy('display_order', 'asc')->get();
-?>
-@if($bannerArr)  
-  <?php $i = 0; ?>
-  @foreach($bannerArr as $banner)
-  <?php $i++; ?>
-  <div class="block block-banner">
-    @if($banner->ads_url !='')
-    <a href="{{ $banner->ads_url }}" title="banner slide {{ $i }}">
-    @endif
-    <img src="{{ Helper::showImage($banner->image_url) }}" alt="slide {{ $i }}">
-    @if($banner->ads_url !='')
-    </a>
-    @endif
-  </div><!-- /block-banner -->
-  @endforeach
-@endif
-  <div class="block block-title-cm">
+  </div><!-- /#home-slider -->
+  <?php 
+  $j = 0;
+  ?>
+@foreach($cateParentHot as $parent)
+<?php $j++; ?>
+  <div class="box-products cosmetic">
     <div class="container">
-      <div class="block-title">
-        <h2 data-text="3" @if($isEdit) class="edit" @endif>{!! $textList[3] !!}</h2>
-        <p data-text="4" class="desc @if($isEdit) edit @endif">{!! $textList[4] !!}</p>
+      <div class="box-product-head">
+        <a href="{{ route('cate-parent', $parent->slug) }}"  title="{!! $parent->name !!}"><span class="box-title"><img src="{{ URL::asset('public/assets/images/food.png') }}" style="display: inline-block; vertical-align: middle;" alt=""> {!! $parent->name !!}</span></a>
+        <ul class="box-tabs nav-tab">
+            <?php 
+            $i = 0;
+            ?>
+            @foreach($cateArrByLoai[$parent->id] as $cate)
+            <?php $i++; ?>
+            <li><a href="{!! route('cate', [$parent->slug, $cate->slug]) !!}" title="{!! $cate->name !!}">{!! $cate->name !!}</a></li>
+            @endforeach
+            <li><a href="{{ route('cate-parent', $parent->slug) }}">Xem tất cả <i class="hd hd-long-arrow-right"></i></a></li>
+        </ul>
       </div>
-      <div class="block-news-home">
-        <div class="row">
-          @foreach( $articlesHotList as $obj )
-          <div class="col-sm-3">
-            <div class="news-item">
-              <figure class="box-thumb">
-                <a href="{!! route('news-detail', [ $obj->cate->slug, $obj->slug, $obj->id ]) !!}" title="{!! $obj->title !!}"><img src="{{ Helper::showImage( $obj->image_url ) }}" alt="{!! $obj->title !!}"></a>
-              </figure>
-              <figcaption class="box-caption">
-                <h2 class="news-title"><a href="{!! route('news-detail', [ $obj->cate->slug, $obj->slug, $obj->id ]) !!}" title="{!! $obj->title !!}">{!! $obj->title !!}</a></h2>
-                <p class="news-meta"><i class="fa fa-calendar"></i> {{ date('d/m/Y', strtotime($obj->created_at)) }}</p>
-                <p class="news-desc">{!! $obj->description !!}</p>
-              </figcaption>
-              <p class="news-btn"><a href="{!! route('news-detail', [$obj->cate->slug, $obj->slug, $obj->id ]) !!}">Xem chi tiết</a></p>
-            </div>
-          </div><!-- /item -->
-          @endforeach
+      <div class="box-product-content">
+        <div class="box-product-adv">
+          <ul class="nav-center" data-items="1" data-dots="false" data-autoplay="true" data-loop="false" data-nav="true">
+              <li><a href="#"><img src="{{ Helper::showImage($parent->image_url) }}" alt="adv"></a></li>
+          </ul>
+        </div>
+        <div class="box-product-list">
+          <div class="tab-container">
+            <div class="product-wrapper">              
+              <div class="tab-panel active">
+                <ul class="products owl-carousel nav-center" data-dots="false" data-loop="false" data-nav = "true" data-margin = "10" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                    @foreach($productArr[$parent->id] as $obj)                     
+                    <li>
+                      <div class="product product-kind-1">
+                        <div class="product_image">
+                          <a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">
+                            <img class="img-responsive" alt="product" src="{{ Helper::showImageThumb($obj->image_url) }}" />
+                          </a>
+                        </div>
+                        <div class="product_header">
+                          <h3 class="product_title">
+                            <a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">{!! $obj->name !!}</a>
+                          </h3>
+                        </div>
+                        <div class="product_info">
+                            <div class="product_price _product_price">
+                              <span class="price">
+                                <span class="price_value" itemprop="price">
+                                  @if($obj->is_sale == 1 && $obj->price_sale > 0)
+                                  {{ number_format($obj->price_sale) }}
+                                  @else
+                                      {{ number_format($obj->price) }}
+                                  @endif
+                                </span><span class="price_symbol">đ</span>
+                                @if( $obj->is_sale == 1 && $obj->sale_percent > 0 ) 
+                                <span class="price_discount">-{{ $obj->sale_percent }}%</span>
+                                @endif
+                              </span>
+                            </div>
+                            <div class="clearfix"></div>
+                            @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )
+                            <div class="product_price product_price-list-price _product_price_old " style="display: inline-block;">
+                                <span class="price price-list-price">
+                                <span class="price_value">{{ number_format($obj->price) }}</span><span class="price_symbol">đ</span>
+                                </span>
+                            </div>
+                            @endif
+                            <div class="product_views">
+                              <i class="hd hd-user"></i> 161
+                            </div>
+                        </div>
+                      </div>
+                    </li> 
+                    @endforeach
+                </ul>
+              </div>
+              
+            </div><!-- /.product-wrapper -->
+          </div>
         </div>
       </div>
     </div>
-  </div><!-- /block_big-title -->
+  </div><!-- /.cosmetic -->
+@endforeach
+
+  <div class="row-blog">
+    <div class="container">
+      <div class="blog-list">
+        <h2 class="page-heading">
+                  <span class="page-heading-title">Tin Tức</span>
+              </h2>
+              <div class="blog-list-wapper">
+                <ul class="owl-carousel" data-dots="false" data-loop="true" data-nav = "true" data-margin = "30" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                      <li>
+                          <div class="post-thumb image-hover2">
+                              <a href="#"><img src="{{ URL::asset('public/assets/images/news/blog1.jpg') }}" alt="Blog"></a>
+                          </div>
+                          <div class="post-desc">
+                              <h5 class="post-title">
+                                  <a href="#">Đầm Vintage Mùa Thu Cirino Đầm Vintage Mùa Thu Cirino Đầm Vintage Mùa Thu Cirino Đầm Vintage Mùa Thu Cirino</a>
+                              </h5>
+                              <div class="post-meta">
+                                  <span class="date">February 27, 2015</span>
+                                  <span class="comment">27 comment</span>
+                              </div>
+                              <div class="readmore">
+                                  <a href="#">Readmore</a>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="post-thumb image-hover2">
+                              <a href="#"><img src="{{ URL::asset('public/assets/images/news//blog2.jpg') }}" alt="Blog"></a>
+                          </div>
+                          <div class="post-desc">
+                              <h5 class="post-title">
+                                  <a href="#">Đầm Vintage Mùa Thu Cirino</a>
+                              </h5>
+                              <div class="post-meta">
+                                  <span class="date">February 27, 2015</span>
+                                  <span class="comment">27 comment</span>
+                              </div>
+                              <div class="readmore">
+                                  <a href="#">Readmore</a>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="post-thumb image-hover2">
+                              <a href="#"><img src="{{ URL::asset('public/assets/images/news//blog3.jpg') }}" alt="Blog"></a>
+                          </div>
+                          <div class="post-desc">
+                              <h5 class="post-title">
+                                  <a href="#">Big sales this summer</a>
+                              </h5>
+                              <div class="post-meta">
+                                  <span class="date">February 27, 2015</span>
+                                  <span class="comment">27 comment</span>
+                              </div>
+                              <div class="readmore">
+                                  <a href="#">Readmore</a>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="post-thumb image-hover2">
+                              <a href="#"><img src="{{ URL::asset('public/assets/images/news//blog4.jpg') }}" alt="Blog"></a>
+                          </div>
+                          <div class="post-desc">
+                              <h5 class="post-title">
+                                  <a href="#">How to shop with us</a>
+                              </h5>
+                              <div class="post-meta">
+                                  <span class="date">February 27, 2015</span>
+                                  <span class="comment">27 comment</span>
+                              </div>
+                              <div class="readmore">
+                                  <a href="#">Readmore</a>
+                              </div>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+      </div>
+    </div>
+  </div><!-- /.row-blog -->
 @stop

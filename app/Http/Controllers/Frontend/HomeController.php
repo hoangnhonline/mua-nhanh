@@ -39,6 +39,7 @@ class HomeController extends Controller
    
     public function index(Request $request)
     {   
+        $productArr = [];
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $seo = $settingArr;
         $seo['title'] = $settingArr['site_title'];
@@ -46,7 +47,10 @@ class HomeController extends Controller
         $seo['keywords'] = $settingArr['site_keywords'];
         $socialImage = $settingArr['banner'];
 
-        $cateParentHot = CateParent::getList(['is_hot' => 1, 'limit' => 4]);
+        $cateParentHot = CateParent::getList(['limit' => 4]);
+        foreach($cateParentHot as $parent){
+            $productArr[$parent->id] = Product::getList(['parent_id' => $parent->id, 'limit' => 10]);
+        }
 
         $articlesHotList = Articles::where(['cate_id' => 4, 'status' => 1])->orderBy('id', 'desc')->limit(4)->get();
                 
@@ -55,7 +59,8 @@ class HomeController extends Controller
                                 'socialImage', 
                                 'seo', 
                                 'cateParentHot',
-                                'articlesHotList'
+                                'articlesHotList',
+                                'productArr'
                             ));
     }
 

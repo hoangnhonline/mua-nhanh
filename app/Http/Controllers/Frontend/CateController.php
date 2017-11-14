@@ -39,7 +39,7 @@ class CateController extends Controller
             $cateList = Cate::getList(['parent_id' => $parent_id, 'limit' => 20, 'status' => 1]);           
             if($cateList){
                 foreach($cateList as $cate){					
-                    $productArr[$cate->id] = Product::getList( ['cate_id' => $cate->id, 'limit' => 10, 'status' => 1] );
+                    $productArr[$cate->id] = Product::getList( ['cate_id' => $cate->id, 'limit' => 9, 'status' => 1] );
                 }
             }       
             if( $parentDetail->meta_id > 0){
@@ -81,7 +81,8 @@ class CateController extends Controller
             $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5, 'status' => 1]);   
             $colorList = Color::all(); 
             $priceList = PriceRange::all();
-            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page', 'kmHot', 'colorList', 'priceList'));
+            $parentDetail = CateParent::find($cateDetail->parent_id);
+            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page', 'kmHot', 'colorList', 'priceList', 'parentDetail'));
             
         }else{
             return redirect()->route('home');   

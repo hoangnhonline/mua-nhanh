@@ -1,52 +1,111 @@
-<footer class="footer">
-	<div class="footer-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 col-xs-12 ft-info">
-					<div class="ft-block">
-						<h3 class="ft-block-tit @if($isEdit) edit @endif" data-text="5">{!! $textList[5] !!}</h3>
-						<div class="ft-block-body">
-							<div class="about-info">
-								<p data-text="6" @if($isEdit) class="edit" @endif>{!! $textList[6] !!}</p>
-							</div>
-							<address>
-								<p><i class="fa fa-map-marker"></i><span @if($isEdit) class="edit" @endif" data-text="9">{!! $textList[9] !!}</span></p>
-								<p><i class="fa fa-phone"></i> <span @if($isEdit) class="edit" @endif" data-text="10">{!! $textList[10] !!}</span></p>
-								<p><i class="fa fa-envelope"></i> <a href="mailto:{!! $textList[11] !!}"><span @if($isEdit) class="edit" @endif" data-text="11">{!! $textList[11] !!}</span></a></p>
-								<p><i class="fa fa-globe"></i> <a href="http://phukiencuoigiang.com">phukiencuoigiang.com</a></p>
-							</address>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-sm-4 col-xs-12 ft-getemail">
-					<div class="ft-block">
-						<h3 class="ft-block-tit @if($isEdit) edit @endif" data-text="7">{!! $textList[7] !!}</h3>
-						<div class="ft-block-body">
-							<p class="txt-desc @if($isEdit) edit @endif" data-text="8">{!! $textList[8] !!}</h3></p>
-							<div class="frm-getemail">
+<footer id="footer" class="footer clearfix">
+		<div class="footer_top">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-md-8">
+		                <div class="row footer-menu">
+		                    <div class="col-md-4 footer-menu_column menu">
+		                        <h3 class="menu_heading">Giới thiệu</h3>
+		                        <ul class="menu_listing">
+		                            <li><a href="#">Về Chúng Tôi</a></li>
+		                            <li><a href="#">Quy chế hoạt động</a></li>
+		                            <li><a href="#">Chính sách bảo mật thông tin</a></li>
+		                            <li><a href="#">Cơ chế giải quyết tranh chấp</a></li>
+		                            <li><a href="#">Liên Hệ</a></li>
+		                        </ul>
+		                    </div>
+		                    <div class="col-md-4 footer-menu_column menu">
+		                        <h3 class="menu_heading">Trợ giúp</h3>
+		                        <ul class="menu_listing">
+		                            <li><a href="#">Quy trình xử lý khi phát hiện hành vi kinh doanh vi phạm </a></li>
+		                            <li><a href="#">Biện pháp xử lý khi phát hiện hành vi kinh doanh vi phạm </a></li>
+		                            <li><a href="#">Cơ chế kiểm soát các nhà cung cấp</a></li>
+		                            <li><a href="#">Hotdeal E-voucher</a></li>
+		                            <li><a href="#">Chính sách giao hàng</a></li>
+		                            <li><a href="#">Chính sách đổi trả hàng</a></li>
+		                            <li><a href="#">Cách thức thanh toán</a></li>
+		                        </ul>
+		                    </div>
+		                    <div class="col-md-4 footer-menu_column menu">
+		                        <h3 class="menu_heading">Hợp tác</h3>
+		                        <ul class="menu_listing">
+		                            <li><a href="#">Hợp tác kinh doanh</a></li>
+		                            <li><a href="#">Liên hệ hợp tác</a></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="col-md-4 support-info">
+		                <div class="col-md-12">
+		                    <h3 class="support-info_heading">Trung tâm chăm sóc khách hàng Tp.HCM</h3>
+		                    <div class="support-info_address">
+		                        70 Lữ Gia, Phường 15, Quận 11, TP.HCM 
+		                    </div>
+		                    <div class="support-info_contact contact">
+		                        <div class="contact_email">Fax: (028) 3866 6237</div>
+		                        <div class="contact_email">Email: <a href="mailto:cs@hotdeal.vn"> cs@hotdeal.vn</a></div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<div class="footer_middle">
+			<div class="container">
+				<div class="col-fter-1 col-xs-0">
+					<form action="#" class="fv-form fv-form-bootstrap">
+						<p style="margin-bottom: 10px;"><strong>Đăng ký nhận bản tin khuyến mãi</strong></p>
+						<div class="newsletter form-inline">
+							<div class="form-group has-feedback">
 								<div class="input-group">
-							    <input id="txtNewsletter" type="email" class="form-control" name="txtNewsletter" placeholder="Email của bạn">
-									<span class="input-group-addon" id="btnNewsletter"><i class="fa fa-envelope"></i></span>
-							  </div>
+									<input type="text" class="form-control newsletter_input" name="" placeholder="Nhập email của bạn" value="">
+								</div>
 							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<button type="submit" class="btn btn-success newsletter_button">Đăng ký
+									</button>
+								</div>
+							</div>
+						</div>
+						<label class="control-label register-new-letter-comfirm-footer" style="font-weight: normal;">
+							<input type="checkbox" name="" value="1">
+							Đồng ý với <a target="_blank" href="#">chính sách bảo mật thông tin</a>.
+						</label>
+					</form>
+				</div>
+				<div class="col-fter-3">
+					<div class="social">
+						<div class="social_heading footer-menu-heading">KẾT NỐI VỚI Shop</div>
+						<div class="social_items">
+							<a target="_blank" class="social_item social_item-facebook" href="#" rel="nofollow"><i class="fa fa-facebook"></i></a>
+							<a target="_blank" class="social_item social_item-twitter" href="#" rel="nofollow"><i class="fa fa-twitter"></i></a>
+							<a target="_blank" class="social_item social_item-google-plus" href="#" rel="nofollow"><i class="fa fa-google-plus"></i></a>
+							<a target="_blank" class="social_item social_item-linkedin" href="#" rel="nofollow"><i class="fa fa-linkedin"></i></a>
+							<a target="_blank" class="social_item social_item-youtube" href="#" rel="nofollow"><i class="fa fa-youtube"></i></a>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4 col-xs-12 ft-map">
-					<object data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2797486755094!2d106.64915531480094!3d10.789872992312441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eb56d6b1189%3A0x9fdf733d6f3750c3!2zMTEyOS8xNyBM4bqhYyBMb25nIFF1w6JuLCBwaMaw4budbmcgMTEsIFTDom4gQsOsbmgsIEjhu5MgQ2jDrSBNaW5o!5e0!3m2!1svi!2s!4v1510323544950"></object>
+				<div class="col-fter-4">
+					<div class="hotline">
+						<span class="hotline_text">HOTLINE&nbsp;</span>
+						<span class="hotline_number">1900 6760</span>
+					</div>
 				</div>
+				 <div class="col-fter-5">
+		            <a target="_blank" href="#">
+		            <img class="img-responsive" src="{{ URL::asset('public/assets/images/logo-bct.png') }}" style="max-width: 165px;">
+		            </a>
+		        </div>
 			</div>
 		</div>
-	</div>
-	<div class="footer-bot">
-		<div class="container">
-			<p class="text-center"><i data-text="12" @if($isEdit) class="edit" @endif>{!! $textList[12] !!}</i></p>
-			<div class="fbchatbox hidden-xs">
-				<div class="fb-page fb-page1" data-href="{{ $settingArr['facebook_fanpage'] }}" data-small-header="true" data-adapt-container-width="false" data-height="300" data-width="300" data-hide-cover="true" data-show-facepile="true" data-show-posts="false" data-tabs="messages"><div class="fb-xfbml-parse-ignore"></div></div>
-				<span id="closefbchat" style="white-space: nowrap; position: absolute; right: 2px; bottom: 0px; padding: 5px 25px; background: #008244; color: rgb(255, 255, 255); cursor: pointer; border-radius: 4px 4px 0 0;">Tắt Chat</span>
-			</div>
+		<div class="footer_bottom ">
+		    <div class="container">
+	            <p class="text-center">
+	                <strong class="font15">CÔNG TY CỔ PHẦN HOTDEAL - <br class="visible-xs visible-sm"> TẦNG 2, LỮ GIA PLAZA, 70 LỮ GIA, P.15, Q.11, TP HCM</strong><br>
+	                Mã số thuế: 0310955176 do Sở Kế hoạch đầu tư <br class="visible-xs visible-sm">TP HCM cấp ngày 29/06/2011<br>
+	                ĐT: 028.73055707 – Fax: 028.38666237 - <br class="visible-xs visible-sm">Email: <a href="mailto:kinhdoanh@.vn">kinhdoanh@.vn</a>
+	            </p>
+		    </div>
 		</div>
-	</div><!-- /footer-bot-->
-	
-</footer><!-- footer -->
+	</footer><!-- /.footer -->

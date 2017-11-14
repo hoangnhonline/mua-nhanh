@@ -348,13 +348,13 @@ class ProductController extends Controller
                        
                         if($w_img > $h_img){
 
-                            Image::make($origin_img)->resize(204, null, function ($constraint) {
+                            Image::make($origin_img)->resize(235, null, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(204, 204)->save($new_img);
+                            })->crop(235, 235)->save($new_img);
                         }else{
-                            Image::make($origin_img)->resize(null, 204, function ($constraint) {
+                            Image::make($origin_img)->resize(null, 235, function ($constraint) {
                                     $constraint->aspectRatio();
-                            })->crop(204, 204)->save($new_img);
+                            })->crop(235, 235)->save($new_img);
                         }                           
 
                         $imageArr['name'][] = $image_url;
