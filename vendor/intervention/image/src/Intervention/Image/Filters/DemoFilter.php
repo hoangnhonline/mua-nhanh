@@ -7,7 +7,7 @@ class DemoFilter implements FilterInterface
     /**
      * Default size of filter effects
      */
-    const DEFAULT_SIZE = 10;
+    const DEFAULT_SIZE = 00;
 
     /**
      * Size of filter effects
