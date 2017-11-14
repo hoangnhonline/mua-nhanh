@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2017 at 05:14 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: Nov 14, 2017 at 11:06 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `phukiencuoi`
+-- Database: `deal`
 --
 
 -- --------------------------------------------------------
@@ -47,17 +49,6 @@ CREATE TABLE `articles` (
   `updated_user` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `articles`
---
-
-INSERT INTO `articles` (`id`, `title`, `slug`, `alias`, `description`, `image_url`, `cate_id`, `content`, `is_hot`, `project_id`, `type`, `status`, `display_order`, `meta_id`, `created_at`, `updated_at`, `created_user`, `updated_user`) VALUES
-(1, 'What is Lorem Ipsum?', 'what-is-lorem-ipsum', 'What is Lorem Ipsum', 'LLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', '/public/uploads/images/tin-tuc/tin-tuc-1-1508128024.png', 1, '', 1, NULL, 1, 1, 0, 1604, '2017-10-16 11:31:05', '2017-10-16 11:39:29', 1, 1),
-(2, 'Why do we use it?', 'why-do-we-use-it', 'Why do we use it', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.', '/public/uploads/images/tin-tuc/tin-tuc-2-1508128024.png', 1, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 1, NULL, 1, 1, 0, 1605, '2017-10-16 11:39:14', '2017-10-16 11:39:21', 1, 1),
-(3, 'Where does it come from?', 'where-does-it-come-from', 'Where does it come from', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.', '/public/uploads/images/tin-tuc/tin-tuc-3-1508128024.png', 1, '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\r\n\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n', 1, NULL, 1, 1, 0, 1606, '2017-10-16 11:40:14', '2017-10-16 11:40:14', 1, 1),
-(4, 'Where can I get some?', 'where-can-i-get-some', 'Where can I get some', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. ', '/public/uploads/images/tin-tuc/tin-tuc-trang-chu-2-1508128024.png', 1, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', 1, NULL, 1, 1, 0, 1607, '2017-10-16 11:40:38', '2017-10-16 11:40:38', 1, 1),
-(5, 'Khuyến mãi 01', 'khuyen-mai-01', 'Khuyen mai 01', '', '/public/uploads/images/tin-tuc/tin-tuc-4-1508128024.png', 2, '', 1, NULL, 1, 1, 0, 1616, '2017-10-16 15:32:11', '2017-10-16 15:32:11', 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -85,15 +76,6 @@ CREATE TABLE `articles_cate` (
   `is_hot` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `articles_cate`
---
-
-INSERT INTO `articles_cate` (`id`, `name`, `slug`, `alias`, `description`, `type`, `image_url`, `created_at`, `updated_at`, `created_user`, `updated_user`, `status`, `display_order`, `meta_title`, `meta_description`, `meta_keywords`, `custom_text`, `is_hot`) VALUES
-(1, 'Tin tức', 'tin-tuc', 'Tin tuc', '', 1, '', '2017-10-16 11:13:28', '2017-10-16 11:13:28', 0, 0, 1, 0, 'Tin tức', 'Tin tức', '', '', 0),
-(2, 'Khuyến mãi', 'khuyen-mai', 'Khuyen mai', '', 1, '', '2017-10-16 11:13:40', '2017-10-16 11:13:40', 0, 0, 1, 0, 'Khuyến mãi', 'Khuyến mãi', 'Khuyến mãi', '', 0),
-(3, 'Tuyển dụng', 'tuyen-dung', 'Tuyen dung', '', 1, '', '2017-10-16 11:13:49', '2017-10-16 11:13:49', 0, 0, 1, 0, 'Tuyển dụng', 'Tuyển dụng', 'Tuyển dụng', '', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -116,18 +98,6 @@ CREATE TABLE `banner` (
   `created_user` tinyint(4) NOT NULL,
   `updated_user` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `banner`
---
-
-INSERT INTO `banner` (`id`, `image_url`, `ads_url`, `time_start`, `time_end`, `object_id`, `object_type`, `type`, `display_order`, `status`, `created_at`, `updated_at`, `created_user`, `updated_user`) VALUES
-(5, '2017/08/09/htb1nfo5sxxxxxcmxfxxq6xxfxxx1-1502244470.jpg', '', 0, 0, 3, 3, 1, 0, 1, '2017-08-09 09:07:51', '2017-08-09 09:07:51', 1, 1),
-(6, '2017/08/09/advertising-s8-1502244480.jpg', '', 0, 0, 4, 3, 1, 0, 1, '2017-08-09 09:08:03', '2017-08-09 09:08:03', 1, 1),
-(7, '/public/uploads/images/banner/main-slideshow-1508133866.png', '', 0, 0, 1, 3, 1, 0, 1, '2017-10-16 13:06:16', '2017-10-16 13:06:16', 1, 1),
-(8, '/public/uploads/images/banner/2-1508133868.jpg', '', 0, 0, 1, 3, 1, 0, 1, '2017-10-16 13:07:00', '2017-10-16 13:07:00', 1, 1),
-(9, '/public/uploads/images/banner/3-1508133868.jpg', '', 0, 0, 1, 3, 1, 0, 1, '2017-10-16 13:07:06', '2017-10-16 13:07:06', 1, 1),
-(10, '/public/uploads/images/banner/banner-img-1508134050.jpg', '', 0, 0, 2, 3, 1, 0, 1, '2017-10-16 13:07:33', '2017-10-16 13:07:33', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -158,10 +128,22 @@ CREATE TABLE `cate` (
 --
 
 INSERT INTO `cate` (`id`, `name`, `alias`, `slug`, `description`, `image_url`, `parent_id`, `is_hot`, `status`, `display_order`, `meta_id`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, 'Vương miện cho bé', 'Vuong mien cho be', 'vuong-mien-cho-be', '', NULL, 2, 0, 1, 1, 1600, 1, 1, '2017-10-16 11:07:32', '2017-10-16 12:09:02'),
-(2, 'Cài tóc cho bé', 'Cai toc cho be', 'cai-toc-cho-be', '', NULL, 2, 0, 1, 2, 1601, 1, 1, '2017-10-16 11:08:16', '2017-10-16 12:09:09'),
-(3, 'Trang phục hóa thân nhân vật', 'Trang phuc hoa than nhan vat', 'trang-phuc-hoa-than-nhan-vat', '', NULL, 2, 0, 1, 3, 1602, 1, 1, '2017-10-16 11:08:29', '2017-10-16 12:09:15'),
-(4, 'Giày cho bé', 'Giay cho be', 'giay-cho-be', '', NULL, 0, 0, 1, 1, 1608, 1, 1, '2017-10-16 11:41:14', '2017-10-16 12:48:08');
+(1, 'Sản phẩm chăm sóc da', 'San pham cham soc da', 'san-pham-cham-soc-da', '', NULL, 1, 0, 1, 1, 1656, 1, 1, '2017-11-14 10:46:19', '2017-11-14 10:46:19'),
+(2, 'Sữa tắm', 'Sua tam', 'sua-tam', '', NULL, 1, 0, 1, 1, 1657, 1, 1, '2017-11-14 10:46:29', '2017-11-14 10:46:29'),
+(3, 'Sữa dưỡng da', 'Sua duong da', 'sua-duong-da', '', NULL, 1, 0, 1, 1, 1658, 1, 1, '2017-11-14 10:46:38', '2017-11-14 10:46:38'),
+(4, 'Phấn trang điểm', 'Phan trang diem', 'phan-trang-diem', '', NULL, 1, 0, 1, 1, 1659, 1, 1, '2017-11-14 10:46:50', '2017-11-14 10:46:50'),
+(5, 'Bánh', 'Banh', 'banh', '', NULL, 2, 0, 1, 1, 1660, 1, 1, '2017-11-14 10:47:05', '2017-11-14 10:47:05'),
+(6, 'Thực phẩm khô', 'Thuc pham kho', 'thuc-pham-kho', '', NULL, 2, 0, 1, 1, 1661, 1, 1, '2017-11-14 10:47:12', '2017-11-14 10:47:12'),
+(7, 'Thực phẩm tươi', 'Thuc pham tuoi', 'thuc-pham-tuoi', '', NULL, 2, 0, 1, 1, 1662, 1, 1, '2017-11-14 10:47:29', '2017-11-14 10:47:29'),
+(8, 'Giỏ xách', 'Gio xach', 'gio-xach', '', NULL, 3, 0, 1, 1, 1663, 1, 1, '2017-11-14 10:47:59', '2017-11-14 10:47:59'),
+(9, 'Ví cầm tay', 'Vi cam tay', 'vi-cam-tay', '', NULL, 3, 0, 1, 1, 1664, 1, 1, '2017-11-14 10:48:05', '2017-11-14 10:48:05'),
+(10, 'Chăn, ga, gối Nhật', 'Chan, ga, goi Nhat', 'chan', '', NULL, 3, 0, 1, 1, 1665, 1, 1, '2017-11-14 10:48:20', '2017-11-14 10:48:20'),
+(11, 'Gia dụng', 'Gia dung', 'gia-dung', '', NULL, 3, 0, 1, 1, 1666, 1, 1, '2017-11-14 10:48:41', '2017-11-14 10:48:41'),
+(12, 'Sản phẩm trẻ sơ sinh', 'San pham tre so sinh', 'san-pham-tre-so-sinh', '', NULL, 3, 0, 1, 1, 1667, 1, 1, '2017-11-14 10:48:50', '2017-11-14 10:48:50'),
+(13, 'Sâm, linh chi, tổ yến', 'Sam, linh chi, to yen', 'sam-linh-chi-to-yen', '', NULL, 4, 0, 1, 1, 1668, 1, 1, '2017-11-14 10:49:06', '2017-11-14 10:49:06'),
+(14, 'Rượu nhập', 'Ruou nhap', 'ruou-nhap', '', NULL, 4, 0, 1, 1, 1669, 1, 1, '2017-11-14 10:49:18', '2017-11-14 10:49:18'),
+(15, 'Bánh Nhật', 'Banh Nhat', 'banh-nhat', '', NULL, 4, 0, 1, 1, 1670, 1, 1, '2017-11-14 10:49:33', '2017-11-14 10:49:33'),
+(16, 'Thực phẩm chức năng', 'Thuc pham chuc nang', 'thuc-pham-chuc-nang', '', NULL, 4, 0, 1, 1, 1671, 1, 1, '2017-11-14 10:49:44', '2017-11-14 10:49:44');
 
 -- --------------------------------------------------------
 
@@ -176,6 +158,8 @@ CREATE TABLE `cate_parent` (
   `slug` varchar(255) NOT NULL,
   `description` text,
   `image_url` varchar(255) DEFAULT NULL,
+  `icon_url` varchar(255) DEFAULT NULL,
+  `color_code` varchar(15) NOT NULL,
   `display_order` tinyint(4) NOT NULL,
   `is_hot` tinyint(1) NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -190,11 +174,11 @@ CREATE TABLE `cate_parent` (
 -- Dumping data for table `cate_parent`
 --
 
-INSERT INTO `cate_parent` (`id`, `name`, `alias`, `slug`, `description`, `image_url`, `display_order`, `is_hot`, `status`, `meta_id`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, 'Phụ kiện cưới', '', 'phu-kien-cuoi', 'It is a long established fact that a reader will be distracted by the readable content', '/public/uploads/images/cate/danh-muc-1-1508127657.png', 1, 1, 1, 1596, 1, 1, '2017-10-16 11:05:40', '2017-10-16 11:22:53'),
-(2, 'Phụ kiện bé yêu', '', 'phu-kien-be-yeu', 'It is a long established fact that a reader will be distracted by the readable content', '/public/uploads/images/cate/danh-muc-2-1508127657.png', 2, 1, 1, 1597, 1, 1, '2017-10-16 11:06:03', '2017-10-16 11:21:49'),
-(3, 'Đồ trang điểm', '', 'do-trang-diem', 'It is a long established fact that a reader will be distracted by the readable content', '/public/uploads/images/cate/danh-muc-3-1508127657.png', 3, 1, 1, 1598, 1, 1, '2017-10-16 11:06:22', '2017-10-16 11:23:00'),
-(4, 'Phụ kiện Anh', '', 'phu-kien-anh', 'It is a long established fact that a reader will be distracted by the readable content', '/public/uploads/images/cate/danh-muc-4-1508127657.png', 4, 1, 1, 1599, 1, 1, '2017-10-16 11:06:31', '2017-10-16 11:23:08');
+INSERT INTO `cate_parent` (`id`, `name`, `alias`, `slug`, `description`, `image_url`, `icon_url`, `color_code`, `display_order`, `is_hot`, `status`, `meta_id`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
+(1, 'Mỹ phẩm', '', 'my-pham', '', '/public/uploads/images/danh-muc/laneige-white-pl-1024x1348-1510630968.jpg', NULL, '', 1, 0, 1, 1652, 1, 1, '2017-11-14 09:54:54', '2017-11-14 10:42:51'),
+(2, 'Thức ăn homemade', '', 'thuc-an-homemade', '', '/public/uploads/images/danh-muc/thuc-an-1510630968.jpg', NULL, '', 2, 0, 1, 1653, 1, 1, '2017-11-14 09:55:11', '2017-11-14 10:42:59'),
+(3, 'Sản phẩm Family', '', 'san-pham-family', '', '/public/uploads/images/danh-muc/213248589192_slide_1-1510630967.jpg', NULL, '', 3, 0, 1, 1654, 1, 1, '2017-11-14 09:55:41', '2017-11-14 10:43:07'),
+(4, 'Quà tặng cao cấp', '', 'qua-tang-cao-cap', '', '/public/uploads/images/danh-muc/chivas-regal-25y-0.75l-1510630289.jpg', NULL, '', 4, 0, 1, 1655, 1, 1, '2017-11-14 09:56:01', '2017-11-14 10:31:34');
 
 -- --------------------------------------------------------
 
@@ -303,10 +287,15 @@ INSERT INTO `color` (`id`, `name`, `color_code`, `icon_url`, `display_order`) VA
 (3, 'Bạc', '#B2B2B2', NULL, 3),
 (4, 'Xám', '#41403E', NULL, 4),
 (5, 'Vàng hồng', '#D3B5B5', NULL, 5),
-(6, 'Vàng', '#EAD8CA', NULL, 6),
+(6, 'Hồng Trắng', '#EAD8CA', NULL, 6),
 (7, 'Xanh Đen', '#000', NULL, 7),
 (9, 'Hồng', 'pink', NULL, 9),
-(10, 'Đỏ', 'red', NULL, 11);
+(10, 'Đỏ', 'red', NULL, 11),
+(11, 'xanh lá', '#00994b', NULL, NULL),
+(12, 'Vàng', '#fcff2a', NULL, NULL),
+(13, 'Cam', '#ffb12a', NULL, NULL),
+(14, 'Xanh dương', '#2a3eff', NULL, NULL),
+(15, 'Tím', '#af0ab5', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -329,13 +318,6 @@ CREATE TABLE `contact` (
   `updated_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `contact`
---
-
-INSERT INTO `contact` (`id`, `type`, `title`, `gender`, `full_name`, `email`, `phone`, `content`, `status`, `created_at`, `updated_at`, `updated_user`) VALUES
-(2, 0, '', 1, 'Tuyền', 'mongtuyen1112@gmail.com', '0964462257', 'aaaaaa', 1, '2017-08-16 09:08:11', '2017-08-16 09:08:11', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -348,6 +330,13 @@ CREATE TABLE `counter_ips` (
   `object_type` tinyint(4) NOT NULL COMMENT '1 : product 2: articles 3 :home',
   `visit` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `counter_ips`
+--
+
+INSERT INTO `counter_ips` (`ip`, `object_id`, `object_type`, `visit`) VALUES
+('127.0.0.1', 1, 3, 1510651718);
 
 -- --------------------------------------------------------
 
@@ -363,6 +352,13 @@ CREATE TABLE `counter_values` (
   `day_value` bigint(11) NOT NULL,
   `all_value` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `counter_values`
+--
+
+INSERT INTO `counter_values` (`id`, `object_id`, `object_type`, `day_id`, `day_value`, `all_value`) VALUES
+(1, 1, 3, 317, 7, 229);
 
 -- --------------------------------------------------------
 
@@ -2784,7 +2780,83 @@ INSERT INTO `meta_data` (`id`, `title`, `description`, `keywords`, `custom_text`
 (1613, '', '', '', '', 1, 1, '2017-10-16 12:51:38', '2017-10-16 12:51:38'),
 (1614, '', '', '', '', 1, 1, '2017-10-16 12:52:04', '2017-10-16 12:52:04'),
 (1615, '', '', '', '', 1, 1, '2017-10-16 12:52:28', '2017-10-16 12:52:28'),
-(1616, '', '', '', '', 1, 1, '2017-10-16 15:32:11', '2017-10-16 15:32:11');
+(1616, '', '', '', '', 1, 1, '2017-10-16 15:32:11', '2017-10-16 15:32:11'),
+(1617, '', '', '', '', 1, 1, '2017-10-18 05:07:33', '2017-10-18 05:07:33'),
+(1618, '', '', '', '', 1, 1, '2017-10-20 06:03:32', '2017-10-20 06:03:32'),
+(1619, '', '', '', '', 1, 1, '2017-10-21 10:08:41', '2017-10-21 10:08:41'),
+(1620, 'test title', 'test description', 'test keyword', 'test custom', 1, 1, '2017-10-21 10:09:32', '2017-10-21 10:09:55'),
+(1621, '', '', '', '', 1, 1, '2017-10-26 10:54:50', '2017-10-26 10:54:50'),
+(1622, 'Cài tóc cô dâu', 'Cài tóc cô dâu', 'cai toc co dau', 'Cài tóc cô dâu', 1, 1, '2017-11-10 16:07:31', '2017-11-10 16:07:31'),
+(1623, '', '', '', '', 1, 1, '2017-11-10 16:10:30', '2017-11-10 16:10:30'),
+(1624, '', '', '', '', 1, 1, '2017-11-10 16:13:00', '2017-11-10 16:13:00'),
+(1625, '', '', '', '', 1, 1, '2017-11-10 16:13:22', '2017-11-10 16:13:22'),
+(1626, '', '', '', '', 1, 1, '2017-11-10 16:13:43', '2017-11-10 16:13:43'),
+(1627, '', '', '', '', 1, 1, '2017-11-10 16:36:09', '2017-11-10 16:36:09'),
+(1628, '', '', '', '', 1, 1, '2017-11-10 16:36:30', '2017-11-10 16:36:30'),
+(1629, '', '', '', '', 1, 1, '2017-11-10 16:36:53', '2017-11-10 16:36:53'),
+(1630, '', '', '', '', 1, 1, '2017-11-10 16:37:46', '2017-11-10 16:37:46'),
+(1631, '', '', '', '', 1, 1, '2017-11-10 16:38:03', '2017-11-10 16:38:03'),
+(1632, '', '', '', '', 1, 1, '2017-11-10 16:38:24', '2017-11-10 16:38:24'),
+(1633, '', '', '', '', 1, 1, '2017-11-10 16:39:04', '2017-11-10 16:39:04'),
+(1634, '', '', '', '', 1, 1, '2017-11-10 16:39:18', '2017-11-10 16:39:18'),
+(1635, '', '', '', '', 1, 1, '2017-11-10 16:40:40', '2017-11-10 16:40:40'),
+(1636, '', '', '', '', 1, 1, '2017-11-10 16:41:02', '2017-11-10 16:41:02'),
+(1637, '', '', '', '', 1, 1, '2017-11-10 16:41:53', '2017-11-10 16:41:53'),
+(1638, 'Bộ cài tóc cô dâu với màu sắc tươi xinh', 'Cài tóc cô dâu xinh xắn, nhẹ nhàng mang đến cho cô dâu một diện mạo xinh tươi, cuốn hút. ', 'cai toc co dau', '', 1, 1, '2017-11-10 18:01:44', '2017-11-10 18:04:44'),
+(1639, '', '', '', '', 1, 1, '2017-11-10 20:24:52', '2017-11-10 20:24:52'),
+(1640, '', '', '', '', 1, 1, '2017-11-10 20:31:26', '2017-11-10 20:31:26'),
+(1641, '', '', '', '', 1, 1, '2017-11-10 20:41:02', '2017-11-10 20:41:02'),
+(1642, '', '', '', '', 1, 1, '2017-11-10 20:43:21', '2017-11-10 20:43:21'),
+(1643, '', '', '', '', 1, 1, '2017-11-10 20:45:31', '2017-11-10 20:45:31'),
+(1644, '', '', '', '', 1, 1, '2017-11-10 20:47:05', '2017-11-10 20:47:05'),
+(1645, '', '', '', '', 1, 1, '2017-11-10 20:52:59', '2017-11-10 20:52:59'),
+(1646, '', '', '', '', 1, 1, '2017-11-10 20:53:17', '2017-11-10 20:53:17'),
+(1647, '', '', '', '', 1, 1, '2017-11-10 21:33:31', '2017-11-10 21:33:31'),
+(1648, 'Cài tóc cô dâu được làm từ những loại hoa nhỏ xinh', 'Cài tóc cô dâu có rất nhiều kiểu để giúp cô dâu trở nên xinh đẹp hơn. Cùng tham khảo để có được lựa chọn tốt cho mình nhé.\r\n', 'cài tóc cô dâu', '', 1, 1, '2017-11-10 23:46:04', '2017-11-10 23:46:04'),
+(1649, 'Cài tóc cô dâu nào phù hợp với các kiểu tóc búi?', 'Cài tóc cô dâu tuy nhỏ nhưng có vai trò quan trọng trong việc tạo nên vẻ đẹp của người phụ nữ. Tùy vào từng kiểu tóc mà bạn có những lựa chọn phù hợp về cài tóc.\r\n', 'cài tóc cô dâu , cai toc co dau', '', 1, 1, '2017-11-11 09:53:01', '2017-11-11 09:53:01'),
+(1650, 'Cài tóc cô dâu với sự kết hợp từ nhiều chất liệu khác nhau', 'Cài tóc cô dâu là thứ mà nhiều người lựa chọn để tôn lên mái tóc cũng như vẻ đẹp của mình. Vào ngày trọng đại nhất thì đây chính là bạn đồng hành không thể thiếu.\r\n', 'cài tóc cô dâu , cai toc co dau', '', 1, 1, '2017-11-11 11:06:27', '2017-11-11 11:06:27'),
+(1651, 'Mách bạn những kiểu tóc cưới kết hợp dễ dàng với cài tóc cô dâu', 'Cài tóc cô dâu với nhiều kiểu dáng khác nhau nên phù hợp với nhiều kiểu tóc cưới. Tùy vào kiểu tóc mà bạn lựa chọn phụ kiện cho phù hợp.\r\n', 'cài tóc cô dâu , cai toc co dau', '', 1, 1, '2017-11-11 11:26:20', '2017-11-11 11:26:20'),
+(1652, 'Mỹ Phẩm', 'Mỹ Phẩm', 'Mỹ Phẩm', '', 1, 1, '2017-11-14 09:54:54', '2017-11-14 09:54:54'),
+(1653, 'Thức ăn homemade', 'Thức ăn homemade', 'Thức ăn homemade', '', 1, 1, '2017-11-14 09:55:11', '2017-11-14 09:55:11'),
+(1654, 'Sản phẩm Family', 'Sản phẩm Family', 'Sản phẩm Family', '', 1, 1, '2017-11-14 09:55:41', '2017-11-14 09:55:41'),
+(1655, 'Quà tặng cao cấp', 'Quà tặng cao cấp', 'Quà tặng cao cấp', '', 1, 1, '2017-11-14 09:56:01', '2017-11-14 09:56:01'),
+(1656, 'Sản phẩm chăm sóc da', '', '', '', 1, 1, '2017-11-14 10:46:19', '2017-11-14 10:46:19'),
+(1657, 'Sữa tắm', '', '', '', 1, 1, '2017-11-14 10:46:29', '2017-11-14 10:46:29'),
+(1658, 'Sữa dưỡng da', '', '', '', 1, 1, '2017-11-14 10:46:38', '2017-11-14 10:46:38'),
+(1659, 'Phấn trang điểm', '', '', '', 1, 1, '2017-11-14 10:46:50', '2017-11-14 10:46:50'),
+(1660, 'Bánh', '', '', '', 1, 1, '2017-11-14 10:47:05', '2017-11-14 10:47:05'),
+(1661, 'Thực phẩm khô', '', '', '', 1, 1, '2017-11-14 10:47:12', '2017-11-14 10:47:12'),
+(1662, 'Thực phẩm tươi', '', '', '', 1, 1, '2017-11-14 10:47:29', '2017-11-14 10:47:29'),
+(1663, 'Giỏ xách', '', '', '', 1, 1, '2017-11-14 10:47:59', '2017-11-14 10:47:59'),
+(1664, 'Ví cầm tay', '', '', '', 1, 1, '2017-11-14 10:48:05', '2017-11-14 10:48:05'),
+(1665, 'Chăn, ga, gối Nhật', '', '', '', 1, 1, '2017-11-14 10:48:20', '2017-11-14 10:48:20'),
+(1666, 'Gia dụng', '', '', '', 1, 1, '2017-11-14 10:48:41', '2017-11-14 10:48:41'),
+(1667, 'Sản phẩm trẻ sơ sinh', '', '', '', 1, 1, '2017-11-14 10:48:50', '2017-11-14 10:48:50'),
+(1668, 'Sâm, linh chi, tổ yến', '', '', '', 1, 1, '2017-11-14 10:49:06', '2017-11-14 10:49:06'),
+(1669, 'Rượu nhập', '', '', '', 1, 1, '2017-11-14 10:49:18', '2017-11-14 10:49:18'),
+(1670, 'Bánh Nhật', '', '', '', 1, 1, '2017-11-14 10:49:33', '2017-11-14 10:49:33'),
+(1671, 'Thực phẩm chức năng', '', '', '', 1, 1, '2017-11-14 10:49:44', '2017-11-14 10:49:44'),
+(1672, 'Bộ chăm sóc chuyên sâu cho da mụn nhạy cảm, giảm mụn ngừa thâm hiệu quả trong 24h  La Roche Posay Effaclar Kit  ', 'Bộ chăm sóc chuyên sâu cho da mụn nhạy cảm, giảm mụn ngừa thâm hiệu quả trong 24h  La Roche Posay Effaclar Kit  ', 'Bộ chăm sóc chuyên sâu cho da mụn nhạy cảm, giảm mụn ngừa thâm hiệu quả trong 24h  La Roche Posay Effaclar Kit  ', '', 1, 1, '2017-11-14 10:56:23', '2017-11-14 10:56:23'),
+(1673, '', '', '', '', 1, 1, '2017-11-14 10:56:37', '2017-11-14 10:56:37'),
+(1674, 'Chăm sóc da SKY II', 'Chăm sóc da SKY II', 'Chăm sóc da SKY II', '', 1, 1, '2017-11-14 10:57:24', '2017-11-14 10:57:24'),
+(1675, 'Chăm sóc da SHEAS', 'Chăm sóc da SHEAS', 'Chăm sóc da SHEAS', '', 1, 1, '2017-11-14 10:58:08', '2017-11-14 10:58:08'),
+(1676, 'Bộ sản phẩm phục hồi và chăm sóc da Estee Lauder', 'Bộ sản phẩm phục hồi và chăm sóc da Estee Lauder', 'Bộ sản phẩm phục hồi và chăm sóc da Estee Lauder', '', 1, 1, '2017-11-14 10:58:41', '2017-11-14 10:58:41'),
+(1677, 'Bộ sản phẩm chăm sóc da mặt chuyên sâu White Label', 'Bộ sản phẩm chăm sóc da mặt chuyên sâu White Label', 'Bộ sản phẩm chăm sóc da mặt chuyên sâu White Label', '', 1, 1, '2017-11-14 10:59:54', '2017-11-14 10:59:54'),
+(1678, 'Bộ chăm sóc da cao cấp A&Plus', 'Bộ chăm sóc da cao cấp A&Plus', 'Bộ chăm sóc da cao cấp A&Plus', '', 1, 1, '2017-11-14 11:02:47', '2017-11-14 11:02:47'),
+(1679, 'Vang Tây Ban Nha Mven Grand', 'Vang Tây Ban Nha Mven Grand', 'Vang Tây Ban Nha Mven Grand', '', 1, 1, '2017-11-14 11:11:28', '2017-11-14 11:11:28'),
+(1680, 'Vang Tây Ban Nha Lagranja 2005', 'Vang Tây Ban Nha Lagranja 2005', 'Vang Tây Ban Nha Lagranja 2005', '', 1, 1, '2017-11-14 11:13:45', '2017-11-14 11:13:45'),
+(1681, 'Vang Pháp Les Portes De Bordeaux Sauvignon Blanc', 'Vang Pháp Les Portes De Bordeaux Sauvignon Blanc', 'Vang Pháp Les Portes De Bordeaux Sauvignon Blanc', '', 1, 1, '2017-11-14 11:15:07', '2017-11-14 11:15:07'),
+(1682, 'Vang pháp Chateau Langoa-Barton 3eme Cru Classe Bordeaux Medoc', 'Vang pháp Chateau Langoa-Barton 3eme Cru Classe Bordeaux Medoc', 'Vang pháp Chateau Langoa-Barton 3eme Cru Classe Bordeaux Medoc', '', 1, 1, '2017-11-14 11:15:47', '2017-11-14 11:15:47'),
+(1683, 'Rượu vang ý Luigi Guarini Primitivo di Manduria', 'Rượu vang ý Luigi Guarini Primitivo di Manduria', 'Rượu vang ý Luigi Guarini Primitivo di Manduria', '', 1, 1, '2017-11-14 11:16:32', '2017-11-14 11:16:32'),
+(1684, 'Khô bò sợi', 'Khô bò sợi', 'Khô bò sợi', '', 1, 1, '2017-11-14 11:20:24', '2017-11-14 11:20:24'),
+(1685, 'Khô gà lá chanh', 'Khô gà lá chanh', 'Khô gà lá chanh', '', 1, 1, '2017-11-14 11:21:27', '2017-11-14 11:21:27'),
+(1686, 'Mực chiên nước mắm', 'Mực chiên nước mắm', 'Mực chiên nước mắm', '', 1, 1, '2017-11-14 11:22:24', '2017-11-14 11:22:24'),
+(1687, 'Cơm cháy chà bông', 'Cơm cháy chà bông', 'Cơm cháy chà bông', '', 1, 1, '2017-11-14 11:23:24', '2017-11-14 11:23:24'),
+(1688, 'Giỏ xách nữ 001', 'Giỏ xách nữ 001', 'Giỏ xách nữ 001', '', 1, 1, '2017-11-14 11:26:15', '2017-11-14 11:26:15'),
+(1689, 'Giỏ xách 002', 'Giỏ xách 002', 'Giỏ xách 002', '', 1, 1, '2017-11-14 11:26:35', '2017-11-14 11:26:35'),
+(1690, 'Giỏ xách 003', 'Giỏ xách 003', 'Giỏ xách 003', '', 1, 1, '2017-11-14 11:26:55', '2017-11-14 11:26:55'),
+(1691, 'Giỏ xách 004', 'Giỏ xách 004', 'Giỏ xách 004', '', 1, 1, '2017-11-14 11:27:20', '2017-11-14 11:27:20'),
+(1692, 'Giỏ xách đen cho nữ', 'Giỏ xách đen cho nữ', 'Giỏ xách đen cho nữ', '', 1, 1, '2017-11-14 11:27:50', '2017-11-14 11:27:50');
 
 -- --------------------------------------------------------
 
@@ -2802,6 +2874,13 @@ CREATE TABLE `newsletter` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `newsletter`
+--
+
+INSERT INTO `newsletter` (`id`, `email`, `is_member`, `status`, `updated_user`, `created_at`, `updated_at`) VALUES
+(3, 'bottaytrangvaycuoi@gmail.com', 0, 1, NULL, '2017-11-10 19:37:38', '2017-11-10 19:37:38');
+
 -- --------------------------------------------------------
 
 --
@@ -2812,19 +2891,26 @@ CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL,
   `total_bill` int(11) DEFAULT NULL,
   `total_product` tinyint(4) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL,
-  `method_id` tinyint(4) DEFAULT NULL,
-  `discount` int(11) DEFAULT NULL,
   `total_payment` int(11) NOT NULL,
-  `updated_user` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `method_id` tinyint(4) DEFAULT NULL,
   `fullname` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `discount` int(11) DEFAULT NULL,
+  `is_other_address` tinyint(1) NOT NULL DEFAULT '0',
+  `other_address` varchar(255) DEFAULT NULL,
+  `other_fullname` varchar(255) DEFAULT NULL,
+  `other_email` varchar(255) DEFAULT NULL,
+  `other_phone` varchar(255) DEFAULT NULL,
   `shipping_fee` int(11) DEFAULT '0',
-  `cod_fee` int(11) NOT NULL DEFAULT '0'
+  `cod_fee` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL,
+  `payment_status` tinyint(4) NOT NULL DEFAULT '0',
+  `is_pay` tinyint(1) DEFAULT '0',
+  `updated_user` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -2872,7 +2958,7 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `title`, `alias`, `description`, `content`, `image_url`, `slug`, `status`, `meta_title`, `meta_description`, `meta_keywords`, `custom_text`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, 'Giới thiệu', 'Gioi thieu', 'Lorem Ipsum is simply dummy text of the printing and typesetting industrys.', '<strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '/public/uploads/images/san-pham/1496828069_14192695_1832406100321028_8477858881709443185_n.jp-1508126602.jpg', 'gioi-thieu', 1, 'Giới thiệu', 'Giới thiệu', 'Giới thiệu', '', 1, 1, '2017-10-16 12:56:04', '2017-10-16 12:59:06');
+(1, 'Giới thiệu', 'Gioi thieu', 'Phụ kiện cưới Giang tự hào là địa chỉ mua sắm phụ kiện, trang phục cưới uy tín và đáng tin cậy dành cho quý khách hàng tại Việt Nam. ', '<div style=\"text-align: center;\"><span style=\"color:#056839;\"><span style=\"font-size:18px;\"><strong>PHỤ KIỆN CƯỚI GIANG</strong></span></span><br />\r\n&nbsp;</div>\r\n\r\n<div style=\"text-align: justify;\"><span style=\"font-size:16px;\"><strong>Về ch&uacute;ng t&ocirc;i</strong></span></div>\r\n\r\n<div style=\"text-align: justify;\">Đ&aacute;m cưới lu&ocirc;n mang đến một &yacute; nghĩa thi&ecirc;ng li&ecirc;ng đối với mỗi ch&uacute;ng ta v&agrave; việc l&agrave;m đẹp cho c&ocirc; d&acirc;u trong ng&agrave;y cưới l&agrave; một sứ mệnh thi&ecirc;ng li&ecirc;ng m&agrave; bất kỳ ai cũng mong muốn c&oacute; thể thực hiện. Thấu hiểu điều ấy, phụ kiện cưới Giang đ&atilde; ra đời với mong muốn c&oacute; thể mang đến địa chỉ mua sắm những phụ kiện cần thiết cho c&ocirc; d&acirc;u trong ng&agrave;y cưới theo phong c&aacute;ch hiện đại, sang trọng v&agrave; ấn tượng.</div>\r\n\r\n<div style=\"text-align: justify;\"><br />\r\n<span style=\"font-size:16px;\"><strong>Lĩnh vực kinh doanh</strong></span><br />\r\nHiện nay Phụ kiện cưới Giang đang cung cấp một số sản phẩm sau:</div>\r\n\r\n<ul>\r\n	<li style=\"text-align: justify;\">Phụ kiện cưới</li>\r\n	<li style=\"text-align: justify;\">Phụ kiện b&eacute; y&ecirc;u</li>\r\n	<li style=\"text-align: justify;\">Phụ kiện ảnh</li>\r\n	<li style=\"text-align: justify;\">Đồ trang điểm</li>\r\n</ul>\r\n\r\n<div style=\"text-align: center;\"><img alt=\"\" src=\"/public/uploads/images/phu-kien-cuoi5-1510309261.jpeg\" style=\"width: 700px; height: 466px;\" /></div>\r\n\r\n<div style=\"text-align: center;\"><em>T&ugrave;y theo nhu cầu v&agrave; sở th&iacute;ch m&agrave; c&aacute;c c&ocirc; d&acirc;u c&oacute; thể tha hồ lựa chọn cho m&igrave;nh những mẫu phụ kiện ưng &yacute; với chất lượng ho&agrave;n hảo nhất tại Phụ kiện cưới Giang</em></div>\r\n\r\n<div style=\"text-align: justify;\"><br />\r\n<strong><span style=\"font-size:16px;\">Sứ mệnh</span></strong><br />\r\nMang đến vẻ đẹp ho&agrave;n hảo v&agrave; tỏa s&aacute;ng cho c&ocirc; d&acirc;u.<br />\r\n<br />\r\n<span style=\"font-size:16px;\"><strong>Tầm nh&igrave;n</strong></span><br />\r\nTrở th&agrave;nh địa chỉ cung cấp phụ kiện cưới uy t&iacute;n v&agrave; chất lượng tại Việt Nam.&nbsp;<br />\r\n<br />\r\n<span style=\"font-size:16px;\"><strong>Gi&aacute; trị cốt l&otilde;i</strong></span><br />\r\nVẻ đẹp của bạn - niềm vui của t&ocirc;i<br />\r\n&nbsp;</div>\r\n\r\n<div style=\"text-align: right;\"><em>Phụ kiện cưới Giang!</em></div>\r\n', '/public/uploads/images/san-pham/1496828069_14192695_1832406100321028_8477858881709443185_n.jp-1508126602.jpg', 'gioi-thieu', 1, 'Giới thiệu', 'Giới thiệu', 'gioi thieu', '', 1, 1, '2017-10-16 12:56:04', '2017-11-10 17:21:12');
 
 -- --------------------------------------------------------
 
@@ -2943,17 +3029,26 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `code`, `name`, `alias`, `slug`, `thumbnail_id`, `is_hot`, `is_sale`, `is_new`, `price`, `price_sale`, `price_sell`, `parent_id`, `cate_id`, `description`, `content`, `out_of_stock`, `inventory`, `views`, `display_order`, `so_lan_mua`, `sale_percent`, `color_id`, `status`, `meta_id`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Iphone 6s plus 64gb grey', 'Iphone 6s plus 64gb grey', 'iphone-6s-plus-64gb-grey', 2, 1, 0, 0, 7700000, NULL, 7700000, 8, 37, '', NULL, 0, 3, 0, 0, 0, NULL, 4, 1, 1592, 1, 1, '2017-10-14 11:55:04', '2017-10-14 11:55:05'),
-(2, NULL, 'Samsung Galaxy Note 8 Black', 'Samsung Galaxy Note 8 Black', 'samsung-galaxy-note-8-black', 8, 1, 0, 0, 18500000, NULL, 18500000, 8, 38, '', NULL, 0, 4, 0, 0, 0, NULL, 1, 1, 1593, 1, 1, '2017-10-14 11:58:46', '2017-10-14 11:58:47'),
-(3, NULL, 'iPhone 8 Plus 64Gb', 'iPhone 8 Plus 64Gb', 'iphone-8-plus-64gb', 11, 1, 0, 1, 20199000, 0, 20199000, 8, 37, '', NULL, 1, 0, 0, 1, 0, NULL, 1, 1, 1594, 1, 1, '2017-10-14 12:32:43', '2017-10-14 12:33:34'),
-(4, NULL, 'Ipad Gen 5 silver 32g 4g fulbox', 'Ipad Gen 5 silver 32g 4g fulbox', 'ipad-gen-5-silver-32g-4g-fulbox', 12, 1, 0, 0, 8700000, NULL, 8700000, 10, 57, '', NULL, 0, 2, 0, 1, 0, NULL, 3, 1, 1595, 1, 1, '2017-10-14 15:00:45', '2017-10-14 15:00:45'),
-(8, 'VM001', 'Vương miện cho bé 001', 'Vuong mien cho be 001', 'vuong-mien-cho-be-001', 16, 1, 0, 1, 120000, 0, 120000, 2, 1, '', '', 0, 12, 0, 4, 0, 0, 5, 1, 1609, 1, 1, '2017-10-16 12:18:18', '2017-10-16 18:40:20'),
-(9, 'VM002', 'Vương miện cho bé 002', 'Vuong mien cho be 002', 'vuong-mien-cho-be-002', 17, 1, 0, 1, 150000, 0, 150000, 2, 1, '', '', 0, 2, 0, 5, 0, 0, 3, 1, 1610, 1, 1, '2017-10-16 12:49:14', '2017-10-16 18:40:16'),
-(10, 'VM003', 'Vương miện cho bé 003', 'Vuong mien cho be 003', 'vuong-mien-cho-be-003', 18, 1, 0, 1, 90000, 0, 90000, 2, 1, '', '', 0, 2, 0, 6, 0, 0, 6, 1, 1611, 1, 1, '2017-10-16 12:49:38', '2017-10-16 18:40:13'),
-(11, 'CT001', 'Cài tóc cho bé 001', 'Cai toc cho be 001', 'cai-toc-cho-be-001', 19, 1, 0, 1, 40000, 0, 40000, 2, 2, '', '<h2>What is Lorem Ipsum?</h2>\r\n\r\n<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\r\n\r\n<h2>Why do we use it?</h2>\r\n\r\n<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>\r\n&nbsp;\r\n\r\n<h2>Where does it come from?</h2>\r\n\r\n<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.</p>\r\n\r\n<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n', 0, 2, 0, 1, 0, 0, 9, 1, 1612, 1, 1, '2017-10-16 12:51:18', '2017-10-16 18:46:40'),
-(12, 'CT002', 'Cài tóc cho bé 002', 'Cai toc cho be 002', 'cai-toc-cho-be-002', 21, 1, 0, 1, 50000, 0, 50000, 2, 2, '', '', 0, 2, 0, 2, 0, 0, 2, 1, 1613, 1, 1, '2017-10-16 12:51:38', '2017-10-16 18:39:48'),
-(13, 'CT003', 'Cài tóc cho bé 003', 'Cai toc cho be 003', 'cai-toc-cho-be-003', 22, 1, 0, 1, 60000, 0, 60000, 2, 2, '', '', 0, 2, 0, 3, 0, 0, 5, 1, 1614, 1, 1, '2017-10-16 12:52:03', '2017-10-16 18:39:42'),
-(14, 'CT004', 'Cài tóc cho bé 004', 'Cai toc cho be 004', 'cai-toc-cho-be-004', 23, 1, 0, 1, 56000, 0, 56000, 2, 2, '', '', 0, 2, 0, 4, 0, 0, 6, 1, 1615, 1, 1, '2017-10-16 12:52:28', '2017-10-16 18:39:07');
+(1, 'CSD001', 'Bộ chăm sóc chuyên sâu cho da 24h  La Roche Posay Effaclar Kit  ', 'Bo cham soc chuyen sau cho da 24h  La Roche Posay Effaclar Kit  ', 'bo-cham-soc-chuyen-sau-cho-da-24h-la-roche-posay-effaclar-kit', 41, 0, 0, 0, 179000, 0, 179000, 1, 1, 'Thành phần an toàn\r\nGiảm mụn\r\nThông thoáng lỗ chân lông\r\nNgăn ngừa vết thâm sau ', '<h2>Giới thiệu sản phẩm Bộ chăm s&oacute;c chuy&ecirc;n s&acirc;u cho da mụn nhạy cảm, giảm mụn ngừa th&acirc;m hiệu quả trong 24h &nbsp;La Roche Posay Effaclar Kit</h2>\r\n\r\n<p align=\"center\"><img data-original=\"http://hcm.lazada.vn/static/content/Health%20beauty/LA739HBAA35T8OVNAMZ-5517388.png\" src=\"http://hcm.lazada.vn/static/content/Health%20beauty/LA739HBAA35T8OVNAMZ-5517388.png\" width=\"900\" /></p>\r\n\r\n<p><b>Kem dưỡng giảm mụn th&ocirc;ng tho&aacute;ng lỗ ch&acirc;n l&ocirc;ng v&agrave; ngừa vết th&acirc;m saumụn La Roche Posay Effaclar Duo+ 15ml</b><br />\r\n<b>Loại sản phẩm</b><br />\r\nKem dưỡng được b&agrave;o chế theo công thức vượt trội với sự kết hợp của các hoạt ch&acirc;́t trong ng&agrave;nh da liễu gi&uacute;p giảm mụn, thông thoáng l&ocirc;̃ chân lông v&agrave; ngừa vết th&acirc;m sau mụn.<br />\r\n<b>Loại da ph&ugrave; hợp</b><br />\r\nD&agrave;nh cho l&agrave;n da c&oacute; nhiều khuyết điểm về mụn, lỗ ch&acirc;n l&ocirc;ng tắc nghẽn, da nhiều dầu.<br />\r\n<b>Th&agrave;nh phần ch&iacute;nh</b><br />\r\n- Niacinamide, LHA, Pirotone Olamine: giúp giảm viêm, giảm mụn, thông thoáng l&ocirc;̃ chân lông v&agrave; làm đ&ecirc;̀u b&ecirc;̀ mặt da.<br />\r\n- Procerad&trade;: một hoạt chât độc quy&ecirc;̀n của Viện nghi&ecirc;n cứu La Roche-Posay giúp ngăn ngừa sự xu&acirc;́t hiện của các vết thâm sau mụn.<br />\r\n<b>Độ an to&agrave;n</b><br />\r\nSản phẩm kh&ocirc;ng g&acirc;y mụn trứng c&aacute; hay dị ứng v&agrave; kh&ocirc;ng chứa paraben, tuyệt đối an to&agrave;n cho người sử dụng.<br />\r\n<b>C&aacute;ch d&ugrave;ng</b><br />\r\nSử dụng hằng ngày vào bu&ocirc;̉i sáng và/hoặc t&ocirc;́i sau bước làm sạch với gel rửa mặt, nước cân bằng và làm dịu với nước khoáng. Lấy lượng sản phẩm vừa đủ vừa đủ thoa l&ecirc;n mặt, nhẹ nhàng mát-xa đ&ecirc;̉ kem th&acirc;́m sâu vào trong da.<br />\r\n<b>M&aacute;ch nhỏ</b><br />\r\nNên k&ecirc;́t hợp sử dụng với kem giảm mụn chuyên biệt đ&ecirc;̉ đạt hiệu quả t&ocirc;́i ưu.</p>\r\n\r\n<p><b>Gel rửa mặt Effaclar 50ml</b><br />\r\n<b>Loại sản phẩm</b><br />\r\nSữa rửa mặt với c&aacute;c hoạt chất l&agrave;m sạch dịu nhẹ được chọn lọc kĩ c&agrave;ng, nhẹ nh&agrave;ng loại bỏ độc tố cho da, đồng thời lấy đi b&atilde; nhờn dư thừa gi&uacute;p da lu&ocirc;n sạch v&agrave; tho&aacute;ng m&aacute;t.<br />\r\n<b>Loại da ph&ugrave; hợp</b><br />\r\nDa dầu v&agrave; da mụn nhạy cảm.<br />\r\n<b>Độ an to&agrave;n</b><br />\r\nSản phẩm không chứa paraben, không xà phòng, không màu, không c&ocirc;̀n v&agrave; c&oacute; độ pH trung t&iacute;nh 5.5 n&ecirc;n tuyệt đối an to&agrave;n cho người sử dụng.<br />\r\n<b>C&aacute;ch d&ugrave;ng</b><br />\r\nSử dụng hằng ngày vào bu&ocirc;̉i sáng và t&ocirc;́i. Làm &acirc;̉m da với nước &acirc;́m, lấy một lượng vừa đủ sản ph&acirc;̉m ra tay, tạo bọt với nước rồi thoa sản ph&acirc;̉m lên mặt, tránh vùng da quanh mắt. Massage nhẹ nhàng, sau đó rửa sạch lại với nước và lau khô.<br />\r\n<b>M&aacute;ch nhỏ</b><br />\r\nSau khi rửa mặt nên cân bằng da với nước cân bằng và làm dịu da với nước khoáng.</p>\r\n', 0, 10, 0, 0, 0, 0, 0, 1, 1673, 1, 1, '2017-11-14 10:55:45', '2017-11-14 13:21:19'),
+(3, 'CSD002', 'Chăm sóc da SKY II', 'Cham soc da SKY II', 'cham-soc-da-sky-ii', 40, 0, 0, 0, 250000, 0, 250000, 1, 1, '', '', 0, 20, 0, 0, 0, 0, 0, 1, 1674, 1, 1, '2017-11-14 10:57:24', '2017-11-14 13:21:07'),
+(4, 'CSD003', 'Chăm sóc da SHEA', 'Cham soc da SHEA', 'cham-soc-da-shea', 39, 0, 0, 0, 280000, 0, 280000, 1, 1, '', '', 0, 12, 0, 0, 0, 0, 0, 1, 1675, 1, 1, '2017-11-14 10:58:08', '2017-11-14 13:20:59'),
+(5, 'CSD004', 'Bộ sản phẩm phục hồi và chăm sóc da Estee Lauder', 'Bo san pham phuc hoi va cham soc da Estee Lauder', 'bo-san-pham-phuc-hoi-va-cham-soc-da-estee-lauder', 38, 0, 0, 0, 562000, 0, 562000, 1, 1, '', '', 0, 12, 0, 0, 0, 0, 0, 1, 1676, 1, 1, '2017-11-14 10:58:41', '2017-11-14 13:20:52'),
+(6, 'CSD005', 'Bộ sản phẩm chăm sóc da mặt chuyên sâu White Label', 'Bo san pham cham soc da mat chuyen sau White Label', 'bo-san-pham-cham-soc-da-mat-chuyen-sau-white-label', 37, 0, 0, 0, 500000, 0, 500000, 1, 1, '', '', 0, 7, 0, 0, 0, 0, 0, 1, 1677, 1, 1, '2017-11-14 10:59:54', '2017-11-14 13:11:23'),
+(7, 'CSD007', 'Bộ chăm sóc da cao cấp A&Plus', 'Bo cham soc da cao cap A&Plus', 'bo-cham-soc-da-cao-cap-aplus', 36, 0, 0, 0, 150000, 0, 150000, 1, 1, '', '', 0, 2, 0, 0, 0, 0, 0, 1, 1678, 1, 1, '2017-11-14 11:02:47', '2017-11-14 13:11:11'),
+(8, 'RN001', 'Vang Tây Ban Nha Mven Grand', 'Vang Tay Ban Nha Mven Grand', 'vang-tay-ban-nha-mven-grand', 51, 0, 0, 0, 1800000, 0, 1800000, 4, 14, '', '<h2 align=\"center\">Tổng quan</h2>\r\n\r\n<p>Rượu được l&agrave;m từ những tr&aacute;i nho tươi, ngon ngọt Tempranillo,&nbsp;<strong>vang T&acirc;y Ban Nha Mven Grand</strong>mang hương vị của tr&aacute;i c&acirc;y tươi: d&acirc;u t&acirc;y, quả m&acirc;m x&ocirc;i ghi ch&uacute; hương thơm của hoa anh đ&agrave;o, hoa violet, hoa oải hương nhạt, hương vị thảo mộc&hellip;&nbsp;</p>\r\n\r\n<p style=\"text-align: center;\"><img alt=\"rượu vang grand mven \" src=\"http://khoruou.com/Uploads/products/ruou-vang-tay-ban-nha-mven-grand.jpg\" /></p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Rượu vang Grand Mven&nbsp;</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2 align=\"center\">&nbsp;</h2>\r\n\r\n<h2 align=\"center\">&nbsp;</h2>\r\n\r\n<h2 align=\"center\">&nbsp;</h2>\r\n\r\n<h2 align=\"center\">Quy tr&igrave;nh sản xuất</h2>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Giống như Bordeaux, c&aacute;c d&ograve;ng rượu vang ở&nbsp;<strong>Rioja</strong>&nbsp;l&agrave; sự pha trộn chủ yếu vẫn l&agrave; giống nho Tempranillo (60 %), tiếp theo l&agrave; Grenache, Carignan v&agrave; Graciano. Thay v&igrave; oxy h&oacute;a, nh&agrave; sản xuất họ l&agrave;m&nbsp;<a href=\"http://khoruou.com/459/2098/tay-ban-nha/vang-tay-ban-nha-mven-grand.html\" target=\"_blank\" title=\"vang tây ban nha mven grand\"><strong>Mven Grand</strong>&nbsp;</a>theo c&aacute;ch cũ: giữ chai trong hầm tại c&aacute;c nh&agrave; m&aacute;y rượu vang trong một thời gian d&agrave;i. Rượu vang T&acirc;y Ban Nha Mven Grand được ủ &iacute;t nhất 18 th&aacute;ng trong th&ugrave;ng gỗ sồi v&agrave; tiếp tục l&ecirc;n men lần 2 trong 36 th&aacute;ng trong chai trước khi ph&aacute;t h&agrave;nh.</p>\r\n\r\n<h2 align=\"center\">Phục vụ</h2>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>C&oacute; thể thưởng thức&nbsp;<strong>rượu vang&nbsp;</strong>T&acirc;y Ban Nha Mven Grand với m&igrave; ống hoặc c&aacute;c m&oacute;n thịt hầm dừ. Trước đ&oacute; h&atilde;y khuấy động vị gi&aacute;c bằng salad, rau sống hoặc tr&aacute;i c&acirc;y tươi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2 align=\"center\">Th&ocirc;ng tin nh&agrave; sản xuất</h2>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Vang T&acirc;y Ban Nha Mven Single Vineyard</strong>&nbsp;l&agrave; sản phẩm s&aacute;ng tạo của h&atilde;ng Santalba - h&atilde;ng rượu lớn tại v&ugrave;ng Rioja nổi tiếng của T&acirc;y Ban Nha. Thủa ban đầu vốn l&agrave; một trang trại gia đ&igrave;nh c&oacute; truyền thống trồng nho v&agrave; sản xuất rượu, h&atilde;ng được củng cố trong năm 1985.</p>\r\n\r\n<p style=\"text-align: center;\"><img alt=\"rượu vang tây ban nha mven grand\" src=\"http://khoruou.com/Uploads/products/ruou-vang-Mven-grand.jpg\" /></p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Rượu vang t&acirc;y ban nha Grand Mven&nbsp;</strong><br />\r\n&nbsp;</p>\r\n\r\n<p>Ng&agrave;y c&agrave;ng &nbsp;x&aacute;c định vị tr&iacute; thương hiệu tr&ecirc;n thị trường Ch&acirc;u &Acirc;u, Ch&acirc;u &Aacute; nhờ sự nỗ lực v&agrave; sự cống hiến, đầu tư c&ocirc;ng nghệ để sản xuất rượu vang theo c&aacute;ch hiện đại nhưng vẫn dựa tr&ecirc;n nền của phong c&aacute;ch rượu vang truyền&nbsp; thống.</p>\r\n', 0, 150, 0, 0, 0, 0, 0, 1, 1679, 1, 1, '2017-11-14 11:11:28', '2017-11-14 13:24:08'),
+(9, 'RN002', 'Vang Tây Ban Nha Lagranja 2005', 'Vang Tay Ban Nha Lagranja 2005', 'vang-tay-ban-nha-lagranja-2005', 50, 0, 0, 0, 1850000, 0, 1850000, 4, 14, '', 'TH&Ocirc;NG TIN CHUNG&nbsp;<br />\r\n<br />\r\nĐược l&agrave;m từ 100% nho Tempranillo,&nbsp;<a href=\"http://khoruou.com/459/2096/tay-ban-nha/vang-tay-ban-nha-lagrana-2005.html\" target=\"_blank\" title=\"ruợu vang tây ban nha lagrana\"><strong>rượu vang Lagranja&nbsp;</strong></a>c&oacute; m&agrave;u ruby đỏ đậm, tannin mạnh mẽ&nbsp; v&agrave; những hương vị phức tạp: m&ugrave;i vani, m&ugrave;i da, thuốc l&aacute; v&agrave; c&aacute;c loại thảo dược&hellip;D&ograve;ng&nbsp;<strong>vang cao cấp</strong>&nbsp;n&agrave;y được nu&ocirc;i tr&ograve;n tuổi trong th&ugrave;ng gỗ sồi Ph&aacute;p v&igrave; vậy n&oacute; trở n&ecirc;n tr&ograve;n đầy v&agrave; dẻo dai hơn tr&ecirc;n v&ograve;m họng.<br />\r\n<br />\r\n<img alt=\"rượu vang tây ban nha Lagranja\" src=\"http://khoruou.com/Uploads/products/vang-tay-ban-nha-Lagranja.jpg\" /><br />\r\n<br />\r\n<em>Rượu vang t&acirc;y ban nha Lagranja</em><br />\r\n<br />\r\n<br />\r\nGIẢI THƯỞNG&nbsp;<br />\r\n<br />\r\nVang t&acirc;y ban nha&nbsp;<strong>Lagranja&nbsp;</strong>&nbsp;đạt 92/100 điểm. Đoạt huy chương Bạc tại cuộc thi: &ldquo;The Wine Advocate quốc tế&rdquo; năm 2007.\r\n<div style=\"text-align: center;\"><img alt=\"vang tây ban nha Lagranja\" src=\"http://khoruou.com/Uploads/products/Lagranja-2005-06.jpg\" /></div>\r\n<br />\r\n<em>rượu vang t&acirc;y ban nha&nbsp;Lagranja</em><br />\r\n&nbsp;\r\n<p>PHỤC VỤ</p>\r\nUống<strong>&nbsp;rượu vang t&acirc;y ban nha</strong>&nbsp;Lagranja ở nhiệt độ giao động trong khoảng 14 &ndash; 16 độ C k&egrave;m với đồ nướng, đồ biển, c&aacute;, c&aacute;c m&oacute;n truyền thống của T&acirc;y Ban Nha như Pasta, tapas; cơm thập cẩm, x&uacute;c x&iacute;ch &hellip;Tốt cho sức khỏe v&agrave; tăng g&oacute;p phần l&agrave;m tăng hương vị của m&oacute;n ăn đồng thời mang đến những trải nghiệm th&uacute; vị.\r\n\r\n<div style=\"text-align: center;\"><img alt=\"ruou-vang-Lagranja-2005\" src=\"http://khoruou.com/Uploads/products/Lagranja-2005-07.jpg\" /></div>\r\n<br />\r\n<em>rượu vang&nbsp;Lagranja</em>\r\n\r\n<p>TH&Ocirc;NG TIN H&Atilde;NG</p>\r\n\r\n<p>&nbsp;</p>\r\n<strong>Rượu vang</strong>&nbsp;t&acirc;y ban nha Lagranja do nh&agrave; m&aacute;y rượu Dehesa La Granja sản xuất, sử dụng giống h&agrave;ng đầu nho của T&acirc;y Ban Nha l&agrave; Tempranillo. Để c&oacute; được th&agrave;nh phẩm ho&agrave;n chỉnh những tr&aacute;i nho phải trải qua qu&aacute; tr&igrave;nh l&ecirc;n men Malolactic trong gỗ sồi mới của Ph&aacute;p. Sau rượu được ủ 24 th&aacute;ng trong th&ugrave;ng gỗ sồi Nga sau đ&oacute; được chai v&agrave;o 11/2005.', 0, 22, 0, 0, 0, 0, 0, 1, 1680, 1, 1, '2017-11-14 11:13:45', '2017-11-14 13:24:01'),
+(10, 'RN003', 'Vang Pháp Les Portes De Bordeaux Sauvignon Blanc', 'Vang Phap Les Portes De Bordeaux Sauvignon Blanc', 'vang-phap-les-portes-de-bordeaux-sauvignon-blanc', 10, 0, 0, 0, 2500000, 0, 2500000, 4, 14, '', '<h2 style=\"text-align: center;\">HƯƠNG VỊ</h2>\r\n<br />\r\n<strong>Les Portes de Bordeaux Sauvignon Blanc</strong>&nbsp;đến từ một trong những v&ugrave;ng sản xuất vang lớn nhất Chateaux c&oacute; t&ecirc;n gọi Bordeaux. Rượu vang c&oacute; hương thơm v&agrave; ngọt c&ugrave;ng m&ugrave;i chanh v&agrave; bưởi ghi ch&uacute;,&nbsp; nồng độ axit c&acirc;n bằng. Thưởng thức rượu n&agrave;y với c&aacute;, s&ograve;, hoặc m&oacute;n m&igrave; ống &aacute;nh s&aacute;ng. . Đ&acirc;y l&agrave; một gi&aacute; trị tuyệt vời bạn sẽ chỉ t&igrave;m thấy tại khu phố Trader Joe của bạn.\r\n\r\n<div style=\"text-align: center;\"><img alt=\"vang Les Portes de Bordeaux Sauvignon Blanc \" src=\"http://khoruou.com/Uploads/products/vang-les-portes-de-bordeaux-sauvignon-blanc.jpg\" /></div>\r\n<br />\r\n<em>Les Portes de Bordeaux Sauvignon Blanc</em>&nbsp;<br />\r\n<br />\r\n<br />\r\n<strong><a href=\"http://khoruou.com/P441/vang-phap.html\" target=\"_blank\" title=\"Rượu vang Pháp\">Rượu vang Ph&aacute;p</a></strong>&nbsp;thường được d&aacute;n nh&atilde;n bằng t&ecirc;n gọi của họ (tức l&agrave;, Bordeaux, Burgundy), trong khi người Mỹ c&oacute; xu hướng được ph&acirc;n loại theo giống nho (tức l&agrave;, Cabernet, Chardonnay). V&igrave; vậy, khi bạn thấy &quot;Bordeaux&quot; tr&ecirc;n nh&atilde;n rượu, những g&igrave; b&ecirc;n trong c&oacute; thể bao gồm nhiều loại nho, nhưng th&ocirc;ng thường sẽ rơi v&agrave;o trong một phong c&aacute;ch nhất định của nh&agrave; sản xuất rượu vang đặc trưng cho Chateau (nh&agrave; m&aacute;y rượu vang / vườn nho) m&agrave; đ&atilde; chế ra rượu.&nbsp;<strong>Les Portes de Bordeaux Sauvignon Blanc</strong>, một loại rượu vang Ph&aacute;p về giống nho duy nhất, l&agrave; một thế giới mới đưa v&agrave;o một phong c&aacute;ch Old World.<br />\r\n&nbsp;', 0, 15, 0, 0, 0, 0, 0, 1, 1681, 1, 1, '2017-11-14 11:15:07', '2017-11-14 13:23:47'),
+(11, 'RN004', 'Vang pháp Chateau Langoa-Barton 3eme Cru Classe Bordeaux Medoc', 'Vang phap Chateau Langoa-Barton 3eme Cru Classe Bordeaux Medoc', 'vang-phap-chateau-langoa-barton-3eme-cru-classe-bordeaux-medoc', 48, 0, 0, 0, 560000, 0, 560000, 4, 14, '', '<h2 align=\"center\">GIỚI THIỆU VỀ RƯỢU VANG PH&Aacute;P</h2>\r\n<strong><a href=\"http://khoruou.com/P441/vang-phap.html\" target=\"_blank\" title=\"Rượu vang pháp\">Rượu vang ph&aacute;p</a></strong>&nbsp;một biểu tượng đẹp của thế giới trong h&agrave;ng ngh&igrave;n năm qua, một nền văn minh khiến tất cả c&aacute;c nước tr&ecirc;n thế giới đều phải ngưỡng mộ. Nước ph&aacute;p c&oacute; nhiều v&ugrave;ng l&agrave;m rượu rất ngon v&agrave; mỗi v&ugrave;ng lại c&oacute; một hương vị đặc trưng kh&ocirc;ng v&ugrave;ng n&agrave;o giống v&ugrave;ng n&agrave;o cả.<br />\r\n<br />\r\nC&aacute;c bạn nếu c&oacute; dịp đến thăm bảo t&agrave;ng về hội họa của Ph&aacute;p sẽ thấy rượu vang xuất hiện tr&ecirc;n b&agrave;n ăn của người n&ocirc;ng d&acirc;n từ những thế kỷ trước. Chỉ c&oacute; c&aacute;c l&atilde;nh ch&uacute;a hoặc nh&agrave; giầu mới c&oacute; thể uống&nbsp;<strong>rượu vang&nbsp;</strong>đều đặn trong c&aacute;c bữa ăn m&agrave; th&ocirc;i. Theo lịch sử cho biết cuối thế kỷ XIX sự ph&aacute;t triển của rượu vang gắn liền với sự ph&aacute;t triển của hệ thống đường sắt.\r\n\r\n<div style=\"text-align: center;\"><img alt=\"vang pháp Chateau Langoa-Barton 3eme Cru Classe Bordeaux Medoc\" src=\"http://khoruou.com/Uploads/products/vang-Chateau-Langoa-Barton-3eme-Cru-Classe-Bordeaux-Medoc.jpg\" /></div>\r\n<em>Vang ph&aacute;p Chateau Langoa-Barton 3eme Cru Classe Bordeaux Medoc</em><br />\r\n&nbsp;\r\n<h2 align=\"center\">ĐẶC ĐIỂM CỦA RƯỢU VANG PH&Aacute;P</h2>\r\nThực tế l&agrave;, ng&agrave;y nay, chất lượng&nbsp;<strong>rượu Ph&aacute;p đắt nhất&nbsp;</strong>đ&atilde; được cải thiện rất nhiều, c&oacute; nghĩa l&agrave; c&oacute; một phạm vi ho&agrave;n to&agrave;n mới của c&aacute;c loại rượu vang mang lại cho người uống rượu vang cảm gi&aacute;c thật tuyệt vời.<br />\r\n<br />\r\nTất cả những phẩm chất l&agrave;m cho n&oacute; đ&aacute;ng gi&aacute; dựa tr&ecirc;n nhiều kh&iacute;a cạnh của n&oacute;. Ph&aacute;p l&agrave; nước sản xuất tất cả c&aacute;c phong c&aacute;ch của rượu, từ c&aacute;c loại rượu vang m&aacute;t của Thung lũng Loire, l&ograve;ng trắng phong c&aacute;ch của Alsace, th&ocirc;ng qua c&aacute;c t&aacute;c phẩm kinh điển của Bordeaux v&agrave; Burgundy. C&aacute;c loại rượu vang ấm &aacute;p của Languedoc Roussillon v&agrave; , tr&agrave;n ngập &aacute;nh mặt trời v&agrave; độc đ&aacute;o trong fastnesses bắc của họ l&agrave; d&ograve;ng champagne hảo hạng.<br />\r\n<br />\r\nTrong một thế giới của c&aacute;c thương hiệu quốc tế, nơi m&agrave; nguồn gốc kh&ocirc;ng quan trọng, Ph&aacute;p cung cấp một đặc t&iacute;nh thay thế. Người ta n&oacute;i nhiều về terroir, của nơi n&agrave;y v&agrave; c&aacute;c nền văn h&oacute;a m&agrave; từ đ&oacute; một loại rượu đi k&egrave;m. N&oacute; l&agrave;m cho mỗi loại rượu kh&aacute;c nhau, l&agrave;m cho nhiều người trong số họ đặc biệt kh&ocirc;ng c&oacute; sự đồng nhất ở đ&acirc;y.', 0, 5, 0, 0, 0, 0, 0, 1, 1682, 1, 1, '2017-11-14 11:15:47', '2017-11-14 13:23:42'),
+(12, 'RN005', 'Rượu vang ý Luigi Guarini Primitivo di Manduria', 'Ruou vang y Luigi Guarini Primitivo di Manduria', 'ruou-vang-y-luigi-guarini-primitivo-di-manduria', 46, 0, 0, 0, 1500000, 0, 1500000, 4, 14, '', '<h2 align=\"center\">HƯƠNG VỊ</h2>\r\n<strong>Rượu vang &yacute; Luigi Guarini Primitivo di Manduria</strong>&nbsp;c&oacute; m&agrave;u ruby ​​đỏ hương thơm m&atilde;nh liệt của quả &oacute;c ch&oacute;, hạnh nh&acirc;n v&agrave; th&ocirc;ng c&aacute;c loại hạt được kết hợp với gợi &yacute; của c&aacute;c loại gia vị như hạt ti&ecirc;u đen, đinh hương, th&igrave; l&agrave;.&nbsp;<a href=\"http://khoruou.com/P367/ruou-vang.html\" target=\"_blank\" title=\"rượu vang \"><strong>Rượu vang</strong></a>cấu tr&uacute;c c&acirc;n bằng với tannin cao qu&yacute; thể hiện tất cả c&aacute;c yếu tố đặc trưng rượu đưa ra một hương vị ấm &aacute;p v&agrave; thơm.\r\n\r\n<div style=\"text-align: center;\"><img alt=\"Luigi Guarini Primitivo di Manduria \" src=\"http://khoruou.com/Uploads/products/Luigi-Guarini-Primitivo-di-Manduria-1.jpg\" /></div>\r\n<br />\r\n<em>rượu vang Luigi Guarini Primitivo di Manduria&nbsp;</em><br />\r\n&nbsp;\r\n<h2>TH&Ocirc;NG TIN H&Atilde;NG RƯỢU</h2>\r\n<strong>Losito &amp; Guarini Srl</strong>&nbsp;l&agrave; một h&atilde;ng rượu vang gia đ&igrave;nh, được th&agrave;nh lập năm 1910 bởi nh&agrave; sản xuất rượu t&agrave;i năng Domenico Losito. Trải qua hơn một thế kỷ, với bao thăng trầm của ng&agrave;nh rượu vang quốc tế nhưng Losito &amp; Guarini ng&agrave;y c&agrave;ng lớn mạnh nhờ tu&acirc;n thủ chặt chẽ c&aacute;c nguy&ecirc;n tắc v&agrave; đạo đức kinh doanh, c&ugrave;ng với tinh thần s&aacute;ng tạo kh&ocirc;ng ngừng nhằm n&acirc;ng cao chất lượng rượu vang.&nbsp;<br />\r\nLosito &amp; Guarini Srl sở hữu diện t&iacute;ch vườn nho l&ecirc;n tới hơn 8.000 m&eacute;t vu&ocirc;ng. Trong đ&oacute;, c&aacute;c giống nho được lựa chọn kỹ c&agrave;ng, c&ugrave;ng với kỹ thuật canh t&aacute;c hiện đại gi&uacute;p tạo n&ecirc;n những tr&aacute;i nho với chất lượng xuất sắc.<br />\r\n<br />\r\nTọa lạc tại v&ugrave;ng Puglia - nổi tiếng với những chai vang đỏ nổi tiếng nước &Yacute;,&nbsp;<strong>Losito &amp; Guarini</strong>&nbsp;g&oacute;p phần l&agrave;m t&ecirc;n tuổi rượu vang Puglia vang xa hơn với những d&ograve;ng vang mới mẻ m&agrave; vẫn mang đậm n&eacute;t truyền thống, v&ocirc; c&ugrave;ng độc đ&aacute;o.&nbsp;<br />\r\n&nbsp;\r\n<h2 align=\"center\">QUY TR&Igrave;NH L&Ecirc;N MEN</h2>\r\nNho &eacute;p v&agrave; xay nhuyễn l&ecirc;n men ở 25 &deg; C kiểm so&aacute;t nhiệt độ.Trong th&ugrave;ng gỗ sồi lớn &iacute;t nhất 6 th&aacute;ng v&agrave; sau đ&oacute; trong th&ugrave;ng th&eacute;p kh&ocirc;ng rỉ trong 6/8 th&aacute;ng. Trong qu&aacute; tr&igrave;nh l&atilde;o h&oacute;a,&nbsp;<a href=\"http://khoruou.com/P443/vang-y.html\" target=\"_blank\" title=\"rượu vang ý \"><strong>rượu vang &yacute;&nbsp;</strong></a>được oxy ho&aacute; v&agrave; trải qua một số kiểm so&aacute;t ph&acirc;n t&iacute;ch để đảm bảo t&iacute;nh to&agrave;n vẹn của n&oacute;\r\n\r\n<h2 align=\"center\">THƯỞNG THỨC</h2>\r\n<strong>Vang Luigi Guarini Primitivo di Manduria&nbsp;</strong>thưởng thức với m&igrave; ống, nước sốt thịt, thịt nướng, pho m&aacute;t cứng, ẩm thực đặc trưng của Puglia\r\n\r\n<div style=\"text-align: center;\"><img alt=\"thịt nướng \" src=\"http://khoruou.com/Uploads/products/thit-nuong.jpg\" /></div>\r\n<br />\r\n<em>thịt nướng</em>&nbsp;<br />\r\n&nbsp;', 0, 1, 0, 0, 0, 0, 0, 1, 1683, 1, 1, '2017-11-14 11:16:32', '2017-11-14 13:23:32'),
+(13, 'K001', 'Khô bò sợi', 'Kho bo soi', 'kho-bo-soi', 45, 0, 0, 0, 220000, 0, 220000, 2, 6, '', '', 0, 150, 0, 0, 0, 0, 0, 1, 1684, 1, 1, '2017-11-14 11:20:24', '2017-11-14 13:22:10'),
+(14, 'K002', 'Khô gà lá chanh', 'Kho ga la chanh', 'kho-ga-la-chanh', 44, 0, 0, 0, 120000, 0, 120000, 2, 6, '', '', 0, 150, 0, 0, 0, 0, 0, 1, 1685, 1, 1, '2017-11-14 11:21:27', '2017-11-14 13:22:02'),
+(15, 'K003', 'Mực chiên nước mắm', 'Muc chien nuoc mam', 'muc-chien-nuoc-mam', 43, 0, 0, 0, 500000, 0, 500000, 2, 6, '', '', 0, 123, 0, 0, 0, 0, 0, 1, 1686, 1, 1, '2017-11-14 11:22:23', '2017-11-14 13:21:46'),
+(16, 'K005', 'Cơm cháy chà bông', 'Com chay cha bong', 'com-chay-cha-bong', 42, 0, 0, 0, 50000, 0, 50000, 2, 6, '', '', 0, 12, 0, 0, 0, 0, 0, 1, 1687, 1, 1, '2017-11-14 11:23:24', '2017-11-14 13:21:39'),
+(17, 'GX001', 'Giỏ xách nữ 001', 'Gio xach nu 001', 'gio-xach-nu-001', 35, 0, 1, 0, 500000, 400000, 400000, 3, 8, '', '', 0, 5, 0, 0, 0, 20, 0, 1, 1688, 1, 1, '2017-11-14 11:26:15', '2017-11-14 13:10:40'),
+(18, 'GX002', 'Giỏ xách 002', 'Gio xach 002', 'gio-xach-002', 34, 0, 0, 0, 190000, 0, 190000, 3, 8, '', '', 0, 56, 0, 0, 0, 0, 0, 1, 1689, 1, 1, '2017-11-14 11:26:35', '2017-11-14 13:10:31'),
+(19, 'GX003', 'Giỏ xách 003', 'Gio xach 003', 'gio-xach-003', 33, 0, 0, 0, 1500000, 0, 1500000, 3, 8, '', '', 0, 52, 0, 0, 0, 0, 0, 1, 1690, 1, 1, '2017-11-14 11:26:55', '2017-11-14 13:10:23'),
+(20, 'GX004', 'Giỏ xách 004', 'Gio xach 004', 'gio-xach-004', 32, 0, 1, 0, 620000, 446400, 446400, 3, 8, '', '', 0, 25, 0, 0, 0, 28, 0, 1, 1691, 1, 1, '2017-11-14 11:27:20', '2017-11-14 13:09:48'),
+(21, 'GX005', 'Giỏ xách đen cho nữ', 'Gio xach den cho nu', 'gio-xach-den-cho-nu', 31, 0, 1, 0, 800000, 600000, 600000, 3, 8, '', '', 0, 15, 0, 0, 0, 25, 0, 1, 1692, 1, 1, '2017-11-14 11:27:50', '2017-11-14 13:07:43');
 
 -- --------------------------------------------------------
 
@@ -2973,29 +3068,27 @@ CREATE TABLE `product_img` (
 --
 
 INSERT INTO `product_img` (`id`, `product_id`, `image_url`, `display_order`) VALUES
-(1, 1, '/public/uploads/images/san-pham/22365418_2023111977922252_765974797919498460_n-1507942153.jpg', 1),
-(2, 1, '/public/uploads/images/san-pham/22405448_2023112004588916_7950849337370548935_n-1507942152.jpg', 1),
-(3, 1, '/public/uploads/images/san-pham/22406491_2023111961255587_6799800622341028839_n-1507947770.jpg', 1),
-(4, 1, '/public/uploads/images/san-pham/22489767_2023112041255579_7284430630624176661_n-1507942152.jpg', 1),
-(5, 2, '/public/uploads/images/san-pham/22366562_2023104831256300_273905841290462924_n-1507948052.jpg', 1),
-(6, 2, '/public/uploads/images/san-pham/22406233_2023105107922939_2943330039515287685_n-1507948052.jpg', 1),
-(7, 2, '/public/uploads/images/san-pham/22406339_2023105017922948_954882802212270153_n-1507948052.jpg', 1),
-(8, 2, '/public/uploads/images/san-pham/22448623_2023104921256291_3467050223958633124_n-1507948052.jpg', 1),
-(9, 3, '/public/uploads/images/san-pham/iphone-8-plus-64gb-2492572106-jpg-1507959154.jpg', 1),
-(10, 3, '/public/uploads/images/san-pham/iphone-8-plus-64gb-5711205159-jpg-1507959154.jpg', 1),
-(11, 3, '/public/uploads/images/san-pham/iphone-8-plus-64gb-6213864456-jpg-1507959154.jpg', 1),
-(12, 4, '/public/uploads/images/san-pham/22365560_921958031277108_8172276258114919247_n-1507968029.jpg', 1),
-(13, 4, '/public/uploads/images/san-pham/22365282_921958034610441_1191863774204309608_n-1507968029.jpg', 1),
-(14, 4, '/public/uploads/images/san-pham/22366595_921958027943775_3839047029976318212_n-1507968029.jpg', 1),
-(15, 8, '/public/uploads/images/san-pham/cai-toc-vuong-mien-cho-be-gai_2-1508130711.jpg', 1),
-(16, 8, '/public/uploads/images/san-pham/vuong-mien-cong-chua-cho-be-1-1508130711.jpg', 1),
-(17, 9, '/public/uploads/images/san-pham/htb1f65fjpxxxxa1xpxxq6xxfxxxi-1508130711.jpg', 1),
-(18, 10, '/public/uploads/images/san-pham/vuong-mien-cong-chua-xinh-xan-cho-be_7-1508130711.jpg', 1),
-(19, 11, '/public/uploads/images/san-pham/cai-toc-hinh-vuong-mien-dinh-hat-da_1-1508133072.jpg', 1),
-(20, 11, '/public/uploads/images/san-pham/cai-toc-hoa-cho-be-gai_3-1508133072.jpg', 1),
-(21, 12, '/public/uploads/images/san-pham/cai-toc-hoa-nhieu-mau2001-1508133072.jpg', 1),
-(22, 13, '/public/uploads/images/san-pham/cai-toc-no-dinh-vuong-mien_2-1508133072.jpg', 1),
-(23, 14, '/public/uploads/images/san-pham/cai-toc-no-dinh-vuong-mien_2-1508133072.jpg', 1);
+(10, 10, '/public/uploads/images/san-pham/ruou-nhap/newvang-phap-les-portes-de-bordeaux-sauvignon-blanc-1510632884.jpg', 1),
+(31, 21, '/public/uploads/images/san-pham/vi-nu/tui-xach-nu-cao-cap-da-that-elly-et46-20-600x600-1510633511.jpg', 1),
+(32, 20, '/public/uploads/images/san-pham/vi-nu/tb2dqcttxxxxxcbxpxxxxxxxxxx_1910593264.jpg-1510633511.jpg', 1),
+(33, 19, '/public/uploads/images/san-pham/vi-nu/htb1sx7_lxxxxxabxpxxq6xxfxxx2-1-600x600-1510633511.jpg', 1),
+(34, 18, '/public/uploads/images/san-pham/vi-nu/calvin-klein-tui-xach-nu-mau-den-nga-008-2013-05-349-0-product-1510633511.jpg', 1),
+(35, 17, '/public/uploads/images/san-pham/vi-nu/600x600_89ad5ef6a85a13fef1aa5ed3b29feb07-1510633511.jpg', 1),
+(36, 7, '/public/uploads/images/san-pham/cham-soc-da/bo-cham-soc-da-cao-cap-aplus-3-1510632163.jpg', 1),
+(37, 6, '/public/uploads/images/san-pham/cham-soc-da/bo_duong_trang_da_hoan_hao_white_label-1510631991.jpg', 1),
+(38, 5, '/public/uploads/images/san-pham/cham-soc-da/thumbnail_20141130165518_c52b752b5d0de050bf0b4677872fb18f-1510631915.jpg', 1),
+(39, 4, '/public/uploads/images/san-pham/cham-soc-da/bo-cham-soc-da-the-body-shop-good-things-inside-collection-set-2-1510631886.jpg', 1),
+(40, 3, '/public/uploads/images/san-pham/cham-soc-da/4979006069112-1-1510631842.jpg', 1),
+(41, 1, '/public/uploads/images/san-pham/cham-soc-da/bo-cham-soc-da-mat-chuyen-sau-nivea-002-2015-11-38323-0-thumb-1510631742.png', 1),
+(42, 16, '/public/uploads/images/san-pham/thuc-pham-kho/com-chay-co-do-1510633401.jpg', 1),
+(43, 15, '/public/uploads/images/san-pham/thuc-pham-kho/20170113-111924-15941400_606277029555645_4846750748323112047_n-1510633341.jpg', 1),
+(44, 14, '/public/uploads/images/san-pham/thuc-pham-kho/kho-ga-da-vao-hop-1510633284.jpg', 1),
+(45, 13, '/public/uploads/images/san-pham/thuc-pham-kho/kho-bo-soi1-1510633222.jpg', 1),
+(46, 12, '/public/uploads/images/san-pham/ruou-nhap/newvang-y-luigi-guarini-primitivo-di-manduria-1510632987.jpg', 1),
+(48, 11, '/public/uploads/images/san-pham/ruou-nhap/newvang-albert-bichot-domaine-du-clos-frantin-echezeaux-grand-cru--1510632888.jpg', 1),
+(49, 10, '/public/uploads/images/san-pham/ruou-nhap/newvang-phap-les-portes-de-bordeaux-sauvignon-blanc-1510632884.jpg', 1),
+(50, 9, '/public/uploads/images/san-pham/ruou-nhap/vang-tay-ban-nha-lagranja-1510632804.jpg', 1),
+(51, 8, '/public/uploads/images/san-pham/ruou-nhap/mven-grand-1510632685.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -3040,7 +3133,52 @@ INSERT INTO `rating` (`id`, `score`, `amount`, `object_id`, `object_type`) VALUE
 (22, 2, 0, 5, 2),
 (23, 3, 0, 5, 2),
 (24, 4, 0, 5, 2),
-(25, 5, 1, 5, 2);
+(25, 5, 1, 5, 2),
+(26, 1, 0, 6, 2),
+(27, 2, 0, 6, 2),
+(28, 3, 0, 6, 2),
+(29, 4, 0, 6, 2),
+(30, 5, 1, 6, 2),
+(31, 1, 0, 7, 2),
+(32, 2, 0, 7, 2),
+(33, 3, 0, 7, 2),
+(34, 4, 0, 7, 2),
+(35, 5, 1, 7, 2),
+(36, 1, 0, 8, 2),
+(37, 2, 0, 8, 2),
+(38, 3, 0, 8, 2),
+(39, 4, 0, 8, 2),
+(40, 5, 1, 8, 2),
+(41, 1, 0, 9, 2),
+(42, 2, 0, 9, 2),
+(43, 3, 0, 9, 2),
+(44, 4, 0, 9, 2),
+(45, 5, 1, 9, 2),
+(46, 1, 0, 10, 2),
+(47, 2, 0, 10, 2),
+(48, 3, 0, 10, 2),
+(49, 4, 0, 10, 2),
+(50, 5, 1, 10, 2),
+(51, 1, 0, 11, 2),
+(52, 2, 0, 11, 2),
+(53, 3, 0, 11, 2),
+(54, 4, 0, 11, 2),
+(55, 5, 1, 11, 2),
+(56, 1, 0, 12, 2),
+(57, 2, 0, 12, 2),
+(58, 3, 0, 12, 2),
+(59, 4, 0, 12, 2),
+(60, 5, 1, 12, 2),
+(61, 1, 0, 13, 2),
+(62, 2, 0, 13, 2),
+(63, 3, 0, 13, 2),
+(64, 4, 0, 13, 2),
+(65, 5, 1, 13, 2),
+(66, 1, 0, 14, 2),
+(67, 2, 0, 14, 2),
+(68, 3, 0, 14, 2),
+(69, 4, 0, 14, 2),
+(70, 5, 1, 14, 2);
 
 -- --------------------------------------------------------
 
@@ -3062,24 +3200,24 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUES
 (1, 'base_url', 'http://houseland.com', '2016-07-27 14:37:52', '2016-07-27 14:37:52'),
-(2, 'site_title', 'Thiết kế biệt thự, thiết kế nhà phố đẹp', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(3, 'site_description', 'Chuyên thiết kế biệt thự, thiết kế biệt thự đẹp, thiết kế biệt thự cổ điển, thiết kế biệt thự hiện đại, thiết kế biệt thự phố, thiết kế biệt thự vườn, thiết kế biệt thự phố 2 mặt tiền, thiết kế nhà phố, thiết kế resort, thiết kế chung cư mini đẹp, sang trọng giá rẻ nhất hiện nay trên thị trường', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(4, 'site_keywords', 'hiết kế biệt thự, thiết kế biệt thự đẹp, thiết kế biệt thự cổ điển, thiết kế biệt thự hiện đại, thiết kế biệt thự phố, thiết kế biệt thự vườn, thiết kế biệt thự phố 2 mặt tiền, thiết kế nhà phố, thiết kế resort, thiết kế chung cư mini đẹp, thiết kế khách sạn, thiết kế nhà hàng, thiết kế showroom, thiết kế quán cà phê, thiết kế cao ốc văn phòng', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
+(2, 'site_title', 'Mua nhanh gía tốt', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(3, 'site_description', 'Mua nhanh gía tốt', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(4, 'site_keywords', 'Mua nhanh gía tốt', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
 (5, 'admin_email', 'tungocsang88@gmail.com', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
 (22, 'mail_server', 'mail.example.com', '2016-07-27 14:37:52', '2016-07-27 14:37:52'),
 (23, 'mail_login_name', 'login@example.com', '2016-07-27 14:37:52', '2016-07-27 14:37:52'),
 (24, 'mail_password', 'password', '2016-07-27 14:37:52', '2016-07-27 14:37:52'),
-(105, 'site_name', 'houseland.com.vn', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(113, 'google_analystic', '<!-- Global Site Tag (gtag.js) - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-88738631-22\"></script>\r\n<script>\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments)};\r\n  gtag(\'js\', new Date());\r\n\r\n  gtag(\'config\', \'UA-88738631-22\');\r\n</script>', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(114, 'facebook_appid', '', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(115, 'google_fanpage', 'https://plus.google.com/u/0/+Thi%E1%BA%BFtk%E1%BA%BFnh%C3%A0%C4%91%E1%BA%B9pHouseland', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(116, 'facebook_fanpage', 'https://www.facebook.com/tuvanthietkexaydungnha/', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(117, 'twitter_fanpage', 'https://twitter.com/houseland21', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(130, 'logo', '/public/uploads/images/logo.png', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(131, 'favicon', '2017/08/29/favicon-1504021257.ico', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(141, 'banner', '/public/uploads/images/logo.png', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(142, 'custom_text', '', '2016-07-27 14:37:52', '2017-10-01 18:57:42'),
-(143, 'email_cc', '', '2016-11-11 00:00:00', '2017-08-29 13:06:32'),
+(105, 'site_name', 'Mua nhanh gía tốt', '2016-07-27 14:37:52', '2017-11-14 14:13:57'),
+(113, 'google_analystic', '', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(114, 'facebook_appid', '', '2016-07-27 14:37:52', '2017-11-14 14:13:57'),
+(115, 'google_fanpage', 'http://google.com', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(116, 'facebook_fanpage', 'http://facebook.com', '2016-07-27 14:37:52', '2017-11-14 14:13:57'),
+(117, 'twitter_fanpage', 'http://twiter.com', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(130, 'logo', '/public/uploads/images/logo-1510643635.png', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(131, 'favicon', '2017/08/29/favicon-1504021257.ico', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(141, 'banner', '/public/uploads/images/phukiencuoigiang-1510363003.png', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(142, 'custom_text', '', '2016-07-27 14:37:52', '2017-11-14 14:13:58'),
+(143, 'email_cc', '', '2016-11-11 00:00:00', '2017-11-14 14:13:58'),
 (144, 'thong_bao_chung', '\n', '2017-05-11 00:00:00', '2017-08-07 11:20:56'),
 (145, 'cty_info', '', '0000-00-00 00:00:00', '2017-08-29 13:06:32'),
 (146, 'hotline', '(08) 35 603 247 - 0909 787 111', '2017-07-27 00:00:00', '2017-10-01 18:57:42'),
@@ -3122,7 +3260,9 @@ INSERT INTO `settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUE
 (199, 'menu_border', '#cc5608', '0000-00-00 00:00:00', '2017-10-01 18:57:42'),
 (200, 'icon_mui_ten', '/public/uploads/images/banner-1-min-1506858314.png', '0000-00-00 00:00:00', '2017-10-01 18:57:42'),
 (201, 'hot_homepage', '5', '0000-00-00 00:00:00', '2017-10-01 18:57:42'),
-(202, 'product_per_page', '9', '0000-00-00 00:00:00', '2017-10-01 18:57:42');
+(202, 'product_per_page', '9', '0000-00-00 00:00:00', '2017-10-01 18:57:42'),
+(203, 'skype', '', '0000-00-00 00:00:00', '2017-11-14 14:13:58'),
+(204, 'youtube', '', '0000-00-00 00:00:00', '2017-11-14 14:13:58');
 
 -- --------------------------------------------------------
 
@@ -3172,18 +3312,23 @@ CREATE TABLE `text` (
 --
 
 INSERT INTO `text` (`id`, `content`) VALUES
-(1, 'PHỤ KIỆN ÁO CƯỚI CAO CẤP'),
-(2, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English.'),
-(3, 'TIN TỨC LÀM ĐẸP'),
-(4, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English.ss'),
-(5, 'THÔNG TIN SHOP'),
-(6, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English.'),
-(7, 'NHẬN THÔNG TIN ƯU ĐÃI'),
-(8, 'Nhập email của bạn để có thể nhận được thông tin mới nhất về các chương trình ưu đãi của chúng tôi'),
-(9, '216 Hoàng Văn Thụ, phường 4, quận Tân Bình'),
-(10, '0909 58 57 49'),
-(11, 'tungocsang88@gmail.com'),
-(12, '2017 Designed by iWeb247.vn');
+(1, 'GIỚI THIỆU'),
+(2, 'TRỢ GIÚP'),
+(3, 'HỢP TÁC'),
+(4, 'TRUNG TÂM CHĂM SÓC KHÁCH HÀNG TP.HCM'),
+(5, '70 Lữ Gia, Phường 15, Quận 11, TP.HCM'),
+(6, 'Fax: (028) 3866 6237'),
+(7, 'cs@hotdeal.vn'),
+(8, 'Đăng ký nhận bản tin khuyến mãi'),
+(9, 'KẾT NỐI VỚI SHOP'),
+(10, 'HOTLINE'),
+(11, '1900 6760'),
+(12, 'CÔNG TY CỔ PHẦN HOTDEAL - TẦNG 2, LỮ GIA PLAZA, 70 LỮ GIA, P.15, Q.11, TP HCM'),
+(13, 'Mã số thuế: 0310955176 do Sở Kế hoạch đầu tư TP HCM cấp ngày 29/06/2011'),
+(14, '028.73055707'),
+(15, '028.38666237'),
+(16, 'kinhdoanh@.vn'),
+(17, '1900 6760');
 
 -- --------------------------------------------------------
 
@@ -3213,7 +3358,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `full_name`, `display_name`, `email`, `password`, `role`, `leader_id`, `status`, `changed_password`, `remember_token`, `created_user`, `updated_user`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'Admin', 'admin@phukiencuoigiang.com', '$2y$10$7sDXZ9TpALmzuP0yvzZt7O.g/R/T7q1kZq/mzR3swNOv5kUKCN4Ry', 3, 1, 1, 0, 'JC63S3ayLxkHRXQIONeh2XY52E9USCRSz2ACigCVlE1vM2eresMXAkgwdG4E', 1, 1, '2017-06-28 00:00:00', '2017-10-02 16:24:19');
+(1, 'Admin', 'Admin', 'admin@muanhanhgiatot.vn', '$2y$10$7sDXZ9TpALmzuP0yvzZt7O.g/R/T7q1kZq/mzR3swNOv5kUKCN4Ry', 3, 1, 1, 0, '7MstuwYLTW6Xuqs7B21KEnT37zIw2qrRvw4aB7BKSe6wpvr0mm8ddOx0QwAn', 1, 1, '2017-06-28 00:00:00', '2017-11-10 21:35:39'),
+(2, 'hoangnhonline', 'hoangnhonline', 'hoangnhonline', '$2y$10$7sDXZ9TpALmzuP0yvzZt7O.g/R/T7q1kZq/mzR3swNOv5kUKCN4Ry', 3, NULL, 1, 0, '', 1, 1, '2017-10-26 10:50:06', '2017-10-26 10:50:06');
 
 -- --------------------------------------------------------
 
@@ -14618,22 +14764,22 @@ ALTER TABLE `ward`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `articles_cate`
 --
 ALTER TABLE `articles_cate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `banner`
 --
 ALTER TABLE `banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `cate`
 --
 ALTER TABLE `cate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `cate_parent`
 --
@@ -14648,17 +14794,17 @@ ALTER TABLE `city`
 -- AUTO_INCREMENT for table `color`
 --
 ALTER TABLE `color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `counter_values`
 --
 ALTER TABLE `counter_values`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `customers`
 --
@@ -14678,12 +14824,12 @@ ALTER TABLE `info_seo`
 -- AUTO_INCREMENT for table `meta_data`
 --
 ALTER TABLE `meta_data`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1617;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1693;
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -14708,22 +14854,22 @@ ALTER TABLE `price_range`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `product_img`
 --
 ALTER TABLE `product_img`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 --
 -- AUTO_INCREMENT for table `tag`
 --
@@ -14733,17 +14879,18 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `text`
 --
 ALTER TABLE `text`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ward`
 --
 ALTER TABLE `ward`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11605;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11605;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

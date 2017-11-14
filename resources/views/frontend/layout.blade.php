@@ -111,6 +111,30 @@
 	@yield('content')
 
 	@include('frontend.partials.footer')
+	<div id="editContentModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Cập nhật nội dung</h4>
+	      </div>
+	      <form method="POST" action="{{ route('save-content') }}">
+	      {{ csrf_field() }}
+	      <input type="hidden" name="id" id="txtId" value="">
+	      <div class="modal-body">
+	        <textarea rows="5" class="form-control" name="content" id="txtContent"></textarea>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" id="btnSaveContent">Save</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	      </form>
+	    </div>
+
+	  </div>
+	</div>
 	<input type="hidden" id="route-add-to-cart" value="{{ route('add-product') }}" />
 	<input type="hidden" id="route-short-cart" value="{{ route('short-cart') }}" />
 	<input type="hidden" id="route-update-product" value="{{ route('update-product') }}" />	
