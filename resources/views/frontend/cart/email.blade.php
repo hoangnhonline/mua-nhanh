@@ -6,7 +6,7 @@
 <title>Mail</title>
 </head>
 <body>
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#dcf0f8" style="margin:0;padding:0;background-color:#f2f2f2;width:100%!important;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#dcf0f8" style="margin:0;padding:0;background-color:#0088cc;width:100%!important;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px">
   <tbody>
     <tr>
       <td align="center" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px;font-weight:normal"><table border="0" cellpadding="0" cellspacing="0" width="600" style="margin-top:15px">
@@ -19,9 +19,9 @@
                       
                       <h1 style="font-size:17px;font-weight:bold;color:#444;padding:0 0 5px 0;margin:0"> Cảm ơn
                           quý khách {{ $orderDetail->fullname }}
-                          đã đặt hàng tại phukiencuoigiang.com,</h1>                    
-                        <p style="margin:4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px;font-weight:normal"> phukiencuoigiang.com rất vui thông báo đơn hàng #{{ $order_id }} của quý khách đã
-                          được tiếp nhận và đang trong quá trình xử lý. phukiencuoigiang.com sẽ thông báo đến quý khách
+                          đã đặt hàng tại muanhanhgiatot.vn,</h1>                    
+                        <p style="margin:4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px;font-weight:normal"> muanhanhgiatot.vn rất vui thông báo đơn hàng #{{ $order_id }} của quý khách đã
+                          được tiếp nhận và đang trong quá trình xử lý. muanhanhgiatot.vn sẽ thông báo đến quý khách
                           ngay khi hàng chuẩn bị được giao. </p>
                         <h3 style="font-size:13px;font-weight:bold;color:#056839;text-transform:uppercase;margin:20px 0 0 0;border-bottom:1px solid #ddd"> Thông tin đơn hàng #{{ $order_id }} <span style="font-size:12px;color:#777;text-transform:none;font-weight:normal">(Ngày {{ date('d') }} Tháng {{ date('m') }} Năm {{ date('Y') }} {{ date('H:i:s') }})</span> </h3></td>
                     </tr>
