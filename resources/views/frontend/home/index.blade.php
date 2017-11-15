@@ -1,17 +1,34 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')  
 @section('content')
+<?php 
+$bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])->orderBy('display_order', 'asc')->get();   
+?>
+@if($bannerArr)
 <div id="home-slider">
-    <div class="container">
-      <div class="header-top-right-wapper">
-        <div class="homeslider">
-          <ul id="contenhomeslider">
-            <li><img alt="Funky roots" src="{{ URL::asset('public/assets/images/slider/slider1.jpg') }}" title="Funky roots" /></li>            
-          </ul>
-        </div>
+  <div class="container">
+    <div class="header-top-right-wapper">
+      <div class="homeslider">
+        <ul id="contenhomeslider">
+          <?php $i = 0; ?>
+          @foreach($bannerArr as $banner)
+          <?php $i++; ?>
+          <li>
+            @if($banner->ads_url !='')
+            <a href="{{ $banner->ads_url }}" title="banner slide {{ $i }}">
+            @endif
+            <img src="{{ Helper::showImage($banner->image_url) }}" alt="banner slide {{ $i }}">
+            @if($banner->ads_url !='')
+            </a>
+            @endif
+          </li>
+          @endforeach            
+        </ul>
       </div>
     </div>
-  </div><!-- /#home-slider -->
+  </div>
+</div><!-- /#home-slider -->
+@endif
   <?php 
   $j = 0;
   ?>
@@ -19,8 +36,8 @@
 <?php $j++; ?>
   <div class="box-products cosmetic">
     <div class="container">
-      <div class="box-product-head">
-        <a href="{{ route('cate-parent', $parent->slug) }}"  title="{!! $parent->name !!}"><span class="box-title"><img src="{{ URL::asset('public/assets/images/food.png') }}" style="display: inline-block; vertical-align: middle;" alt=""> {!! $parent->name !!}</span></a>
+      <div class="box-product-head" style="border-top: 1px solid {{ $parent->color_code }};">
+        <a href="{{ route('cate-parent', $parent->slug) }}"  title="{!! $parent->name !!}"><span class="box-title" style="background: {{ $parent->color_code }}; border-color: {{ $parent->color_code }}"><img src="{{ Helper::showImage($parent->icon_url) }}" style="display: inline-block; vertical-align: middle;margin-top: -4px;" alt="{!! $parent->name !!}"> {!! $parent->name !!}</span></a>
         <ul class="box-tabs nav-tab">
             <?php 
             $i = 0;
@@ -105,74 +122,24 @@
               </h2>
               <div class="blog-list-wapper">
                 <ul class="owl-carousel" data-dots="false" data-loop="true" data-nav = "true" data-margin = "30" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                      @foreach($articlesHotList as $obj)
                       <li>
                           <div class="post-thumb image-hover2">
-                              <a href="#"><img src="{{ URL::asset('public/assets/images/news/blog1.jpg') }}" alt="Blog"></a>
+                              <a href="{{ route('news-detail', [$obj->cate->slug, $obj->slug, $obj->id]) }}" title="{!! $obj->title !!}"><img src="{{ Helper::showImageThumb($obj->image_url, 2) }}" alt="{!! $obj->title !!}"></a>
                           </div>
                           <div class="post-desc">
                               <h5 class="post-title">
-                                  <a href="#">Đầm Vintage Mùa Thu Cirino Đầm Vintage Mùa Thu Cirino Đầm Vintage Mùa Thu Cirino Đầm Vintage Mùa Thu Cirino</a>
+                                  <a href="{{ route('news-detail', [$obj->cate->slug, $obj->slug, $obj->id]) }}" title="{!! $obj->title !!}">{!! $obj->title !!}</a>
                               </h5>
                               <div class="post-meta">
-                                  <span class="date">February 27, 2015</span>
-                                  <span class="comment">27 comment</span>
+                                  <span class="date">{{ date('d/m/Y', strtotime($obj->created_at)) }}</span>                                  
                               </div>
                               <div class="readmore">
-                                  <a href="#">Readmore</a>
+                                  <a href="{{ route('news-detail', [$obj->cate->slug, $obj->slug, $obj->id]) }}" title="{!! $obj->title !!}">Chi tiết</a>
                               </div>
                           </div>
                       </li>
-                      <li>
-                          <div class="post-thumb image-hover2">
-                              <a href="#"><img src="{{ URL::asset('public/assets/images/news//blog2.jpg') }}" alt="Blog"></a>
-                          </div>
-                          <div class="post-desc">
-                              <h5 class="post-title">
-                                  <a href="#">Đầm Vintage Mùa Thu Cirino</a>
-                              </h5>
-                              <div class="post-meta">
-                                  <span class="date">February 27, 2015</span>
-                                  <span class="comment">27 comment</span>
-                              </div>
-                              <div class="readmore">
-                                  <a href="#">Readmore</a>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="post-thumb image-hover2">
-                              <a href="#"><img src="{{ URL::asset('public/assets/images/news//blog3.jpg') }}" alt="Blog"></a>
-                          </div>
-                          <div class="post-desc">
-                              <h5 class="post-title">
-                                  <a href="#">Big sales this summer</a>
-                              </h5>
-                              <div class="post-meta">
-                                  <span class="date">February 27, 2015</span>
-                                  <span class="comment">27 comment</span>
-                              </div>
-                              <div class="readmore">
-                                  <a href="#">Readmore</a>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="post-thumb image-hover2">
-                              <a href="#"><img src="{{ URL::asset('public/assets/images/news//blog4.jpg') }}" alt="Blog"></a>
-                          </div>
-                          <div class="post-desc">
-                              <h5 class="post-title">
-                                  <a href="#">How to shop with us</a>
-                              </h5>
-                              <div class="post-meta">
-                                  <span class="date">February 27, 2015</span>
-                                  <span class="comment">27 comment</span>
-                              </div>
-                              <div class="readmore">
-                                  <a href="#">Readmore</a>
-                              </div>
-                          </div>
-                      </li>
+                      @endforeach
                   </ul>
               </div>
       </div>

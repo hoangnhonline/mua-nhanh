@@ -120,7 +120,7 @@ class CartController extends Controller
     public function addProduct(Request $request)
     {
         $id = $request->id;
-        $quantity = $request->quantity;
+        $quantity = 1;
         if($id > 0){
             $listProduct = Session::get('products');
             

@@ -72,7 +72,7 @@ class DetailController extends Controller
                             $query->where('price_sale', '<=', $price_to)->where('price_sale', '>=', $price_fm)->where('is_sale', 1);
                         });
                     });
-                    $otherList = $query->orderBy('product.id', 'desc')->limit(6)->get();
+                    $otherList = $query->orderBy('product.id', 'desc')->limit(3)->get();
         $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5]);
         $colorList = Color::all(); 
         $priceList = PriceRange::all();

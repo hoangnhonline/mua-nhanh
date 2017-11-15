@@ -61,7 +61,7 @@
 							</div>
 							<div class="form-group">
 								<div class="input-group">
-									<button type="submit" class="btn btn-success newsletter_button">Đăng ký
+									<button type="submit" class="btn btn-primary newsletter_button">Đăng ký
 									</button>
 								</div>
 							</div>

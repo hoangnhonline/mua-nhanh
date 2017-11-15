@@ -2,7 +2,13 @@
 		<div class="header_top top-bar clearfix">
 			<div class="container">
 				<div class="row">					
+					<nav class="top-bar_item top-bar_item-nav navigation navigation-inline pull-right">
+						<ul id="user_info_header" class="navbar-right">
+							<li><a class="user-name-loginfb" href="#" title="Đăng nhập với Facebook">Đăng nhập Facebook</a></li>
+						</ul>
+					</nav>
 					<nav class="top-bar_item top-bar_item-nav navigation navigation-inline pull-right" style="border-right: 1px solid #fff;">
+
 					    <ul id="user_support" class="navbar-right">
 					        <li><a href="callto:19006760">
 					            <i class="hd hd-phone"></i> Hotline:&nbsp;<span class="hotline_number @if($isEdit) edit @endif" data-text="17">{!! $textList[17] !!}</span></a>
@@ -27,27 +33,24 @@
 					    </a>
 					</div><!-- /.logo-wrapper -->
 					<div class="search-area col-md-6" id="main-search">
-						<form action="/tim-kiem" method="get" class="">
+						<form action="{{ route('search') }}" method="GET">
 							<div class="search-box form-inline clearfix">
 								<div class="search-box_category">
 									<select class="selectpicker" id="category_search" name="category">
 										<option value="0">Tất cả danh mục</option>
-										<option value="557">- Ẩm thực</option>
-										<option value="579">- Spa &apm; Làm đẹp</option>
-										<option value="555">- Giải trí</option>
-										<option value="581">- Du Lịch</option>
-										<option value="571">- Sản Phẩm</option>
-										<option value="593">- Thời Trang &apm; Phụ Kiện</option>
+										@foreach($cateParentList as $parent)
+										<option value="{!! $parent->id !!}">{!! $parent->name !!}</option>
+										@endforeach
 									</select>
 								</div>
 								<div class="search-box_input">
 									<span class="twitter-typeahead">
-										<input type="text" class="form-control input-search tt-hint" value="" autocomplete="off" placeholder="Tìm kiếm sản phẩm / khuyến mãi">
+										<input type="text" class="form-control input-search tt-hint txtSearch" value="" autocomplete="off" name="keyword" placeholder="Tìm kiếm sản phẩm...">
 									</span>
 									<button class="btn btn-primary">
-                    <i class="hd hd-search"></i>
-                    <span class="sr-only">Tìm kiếm</span>
-                  </button>
+					                    <i class="hd hd-search"></i>
+					                    <span class="sr-only">Tìm kiếm</span>
+					                  </button>
 								</div>
 							</div>
 						</form>
@@ -55,36 +58,11 @@
 					<div class="col-md-2 header-cart-wrapper">
 						<ul class="header-cart">
 							<li class="nav-cart">
-								<a href="#" data-toggle="dropdown">
-									<span class="icon-cart"><img src="{{ URL::asset('public/assets/images/cart.jpg') }}" alt=""></span>
-									<span class="circle">1</span>
+								<a href="{{ route('cart') }}">
+									<span class="icon-cart"><img src="{{ URL::asset('public/assets/images/cart.jpg') }}" alt="Giỏ hàng"></span>
+									<span class="circle">{{ Session::get('products') ? array_sum(Session::get('products')) : 0 }}</span>
 									<span class="hidden-xs hidden-sm">Giỏ hàng</span>
-								</a>
-								<div class="dropdown-menu dropdown-cart">
-									<div class="minicart_wrapper">
-									    <div class="minicart_item">
-									        <div class="minicart_item_info">
-									            <img src="{{ URL::asset('public/assets/images/cart/338333-buffet-trua-bbq-bo-my-hai-san-lau-gan-50-mon-tai-nha-hang-yaki-3.jpg') }}" alt="">
-									            <div class="minicart_item_name">
-									                <div><a href="/ho-chi-minh/buffet-viet-nhat-han/buffet-trua-bbq-bo-my-hai-san-lau-gan-50-mon-tai-nha-hang-yaki-3-338333.html">Buffet Trưa BBQ Bò Mỹ - Hải Sản - Lẩu Gần 50 Món Tại Nhà Hàng Yaki 3 - <span style="color: #999;">Mã SP: 338333</span></a></div>
-									                <span class="minicart_item_price price"><span class="price_value">150,000</span><span class="price_symbol">đ</span></span> x 1
-									            </div>
-									        </div>
-									        <div class="minicart_item_actions"><a href="#" rel="nofollow" data-product="338333" title="Xóa khỏi giỏ hàng" class="btn-close show-on-hover">x</a></div>
-									    </div>
-									</div><!-- /.minicart_wrapper -->
-									<div class="minicart_summary">
-									    Tổng cộng: <strong>
-									    <span class="price price-highlight">
-									    <span class="price_value">150,000</span>
-									    <span class="price_symbol">đ</span>
-									    </span></strong>
-									</div><!-- /.minicart_summary -->
-									<div class="minicart_actions">
-									    <a class="btn btn-view-cart" href="/checkout-step-1" rel="nofollow">Xem giỏ hàng</a>
-									    <a class="btn btn-success btn-buy-now btn-buy-now-new" href="/checkout-step-2" rel="nofollow">Đặt hàng</a>
-									</div><!-- /.minicart_actions -->
-								</div><!-- /.dropdown-menu dropdown-cart -->
+								</a>								
 							</li>
 						</ul><!-- /.header-cart -->
 					</div><!-- /.header-cart-wrapper -->
@@ -183,3 +161,20 @@
 	        </div>
     	</nav><!-- END NAVIGATION -->
 	</header><!-- /.header -->
+	<style type="text/css">
+		.user-name-loginfb {
+		    background-image: -webkit-linear-gradient(top, #5972a5 0, #3e578b 100%);
+		    background-image: linear-gradient(to bottom, #5972a5 0, #3e578b 100%);
+		    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5972a5', endColorstr='#ff3e578b', GradientType=0);
+		    -webkit-border-radius: 5px;
+		    -moz-border-radius: 5px;
+		    border-radius: 5px;
+		    -webkit-box-shadow: 0 -2px 0 #112d6c inset;
+		    box-shadow: 0 -2px 0 #112d6c inset;
+		    background-repeat: repeat-x;
+		    border: none;
+		    color: #fff;
+		    cursor: pointer;
+		    font-size: 12px;
+		}
+	</style>

@@ -1,95 +1,78 @@
-<div class="col-sm-3 col-xs-12 block-col-sidebar">
-    <div class="block-sidebar">
-        <div class="block-module block-search-sidebar">
-            <div class="block-title">
-                <h2>
-                    <i class="fa fa-search"></i>
-                    TÌM KIẾM SẢN PHẨM
-                </h2>
-            </div>
-            <div class="block-content">
-                <form action="{!! route('search') !!}" method="GET" id="searchForm" class="frm-search">
-                    <div class="form-group">
-                    <input type="text" class="form-control txtSearch" id="keyword" name="keyword" value="{{ isset($tu_khoa) ? $tu_khoa : "" }}" placeholder="Từ khóa tìm kiếm...">
-                  </div>
-                    <div class="form-group">
-                    <input type="text" class="form-control" id="code" name="code" value="{{ isset($code) ? $code : "" }}" placeholder="Mã sản phẩm">
-                  </div>
-                    <div class="form-group">
-                        <select class="form-control" id="price_range" name="p">
-                        <option value="">--Chọn mức giá--</option>
-                        @foreach( $priceList as $price)
-                        <option value="{!! $price->id !!}" {{ isset($p) && $p == $price->id ? "selected" : "" }}>{!! $price->name !!}</option>
-                        @endforeach
-                      </select>
-                  </div>
-                    <div class="form-group">
-                        <select class="form-control" id="parent_id" name="pid">
-                        <option value="">--Chọn danh mục--</option>
-                        @foreach( $cateParentList as $parent )
-                        <option value="{{ $parent->id }}" {{ isset($parent_id) && $parent_id == $parent->id ? "selected" : "" }}>{!! $parent->name !!}</option>
-                        @endforeach
-                      </select>
-                  </div>
-                    <div class="form-group">
-                        <div class="choose-prod-color-list">
-                            @foreach( $colorList as $color )
-                            <a href="javascript:;"  data-id="{{ $color->id }}" class="choose-color {{ isset($colorArr) && in_array($color->id, $colorArr) ? "active" : "" }}" style="background-color:{{ $color->color_code  }}"></a>
-                            <input type="hidden" name="color[]" value="{{ isset($colorArr) && in_array($color->id, $colorArr) ? $color->id : "" }}">
+<div class="col-md-3 category-sidebar" id="category_sidebar">
+    
+        <div class="product-filters box box-shadow box-no-padding">
+            <div class="filter filter-listing">
+                <div class="filter_title">
+                    <i class="filter_icon fa fa-bars"></i> DANH MỤC
+                </div>
+                <div class="filter_body">
+                    <label class="filter_button">
+                        <a href="{!! route('cate-parent', $parentDetail->slug) !!}" title="{!! $parentDetail->name !!}">{!! $parentDetail->name !!} <span>165</span></a>
+                        <ul>
+                            @foreach($cateArrByLoai[$parentDetail->id] as $obj)
+                            <li><a href="{!! route('cate', [$parentDetail->slug, $obj->slug]) !!}" title="{!! $obj->name !!}">{!! $obj->name !!} <span>74</span></a></li>
+                            @endforeach
+                        </ul>
+                    </label>
+                </div>
+            </div><!-- /.filter -->                        
+        </div>
+        <div class="product-filters box box-shadow box-no-padding">
+            <div class="filter filter-listing">
+                <div class="filter_title">
+                    <i class="filter_icon fa fa-bars"></i> SẢN PHẨM NỔI BẬT
+                </div>
+                <div class="filter_body">
+                    <div class="block_content clearfix">
+                        <div class="products products-list">
+                            <?php $i = 0;?>
+                            @foreach($hotProductList as $obj)
+                            <?php $i++; ?>
+                            <div class="product-wrapper product-auto-resize product-image-padding">
+                                
+                                <div class="product">
+                                    <div class="product_image">
+                                        <a href="#" title="">
+                                            <img class="img-responsive" alt="product" src="{!! Helper::showImageThumb($obj->image_url) !!}" />
+                                        </a>
+                                    </div>
+                                    <div class="product_header">
+                                        <h3 class="product_title">
+                                            <a href="#" title="">{!! $obj->name !!}</a>
+                                        </h3>
+                                    </div>
+                                    <div class="product_info">
+                                        <div class="product_price _product_price">
+                                            <span class="price">
+                                                <span class="price_value" itemprop="price">
+                                                    @if($obj->is_sale == 1 && $obj->price_sale > 0)
+                                                    {{ number_format($obj->price_sale) }}
+                                                    @else
+                                                        {{ number_format($obj->price) }}
+                                                    @endif
+                                                </span><span class="price_symbol">đ</span>
+                                                @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )                                                        
+                                                <span class="price_discount">-{{ $obj->sale_percent }}%</span>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )
+                                        <div class="product_price product_price-list-price _product_price_old " style="display: inline-block;">
+                                            <span class="price price-list-price">
+                                            <span class="price_value">{{ number_format($obj->price) }}</span><span class="price_symbol">đ</span>
+                                            </span>
+                                        </div>
+                                        @endif
+                                        <div class="product_views">
+                                            <i class="fa fa-user-o"></i> 161
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
-                    <div class="form-group">
-                    <button type="submit"  class="btn btn-main show btnSearch">Tìm kiếm</button>
-                  </div>
-                </form>
-            </div>
+                </div>
+            </div><!-- /.filter -->                        
         </div>
-        <div class="block-module block-links-sidebar">
-            <div class="block-title">
-                <h2>
-                    <i class="fa fa-gift"></i>
-                    Khuyến mãi hot
-                </h2>
-            </div>
-            <div class="block-content">
-                <ul class="list">
-                    @if($kmHot)
-                    @foreach( $kmHot as $obj )
-                    <li>
-                        <a href="{!! route('news-detail', [ $obj->cate->slug, $obj->slug, $obj->id ] ) !!}" title="{!! $obj->title !!}">
-                            <p class="thumb"><img src="{!! Helper::showImage( $obj->image_url ) !!}" alt="{!! $obj->title !!}"></p>
-                            <h3>{!! $obj->title !!}</h3>
-                        </a>
-                    </li>
-                    @endforeach
-                    @endif
-                </ul>
-            </div>
-        </div>
-
-        <div class="block-module block-statistics-sidebar">
-            <div class="block-title">
-                <h2>
-                    <i class="fa fa-bar-chart"></i>
-                    THỐNG KÊ TRUY CẬP
-                </h2>
-            </div>
-            <div class="block-content">
-                <ul class="list">                    
-                    <li>
-                        <span class="icon"><i class="fa fa-user"></i></span>
-                        <span class="text">Hôm nay:</span>
-                        <span class="number">{{ Helper::view(1, 3, 1) }}</span>
-                    </li>
-                    
-                    <li>
-                        <span class="icon"><i class="fa fa-user"></i></span>
-                        <span class="text">Tổng truy cập:</span>
-                        <span class="number">{{ Helper::view(1, 3) }}</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div><!-- /block-col-left -->
+</div><!-- /.col-md-3 -->

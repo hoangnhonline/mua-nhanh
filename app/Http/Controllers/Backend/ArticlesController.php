@@ -99,12 +99,35 @@ class ArticlesController extends Controller
         $rs = Articles::create($dataArr);
 
         $object_id = $rs->id;
+        $image_url = $dataArr['image_url'];
+        if( $image_url ){
+            $origin_img = base_path().$image_url;
+
+            $img = Image::make($origin_img);
+            $w_img = $img->width();
+            $h_img = $img->height();
+
+            $tmpArrImg = explode('/', $origin_img);
+            
+            $new_img = config('phukien.upload_thumbs_path_articles').end($tmpArrImg);
+           
+            if($w_img > $h_img){
+
+                Image::make($origin_img)->resize(null, 275, function ($constraint) {
+                        $constraint->aspectRatio();
+                })->crop(275, 275)->save($new_img);
+            }else{
+                Image::make($origin_img)->resize( 275, null,function ($constraint) {
+                        $constraint->aspectRatio();
+                })->crop(275, 275)->save($new_img);
+            }
+        }
+
 
         $this->storeMeta( $object_id, 0, $dataArr);
 
         // xu ly tags
         if( !empty( $dataArr['tags'] ) && $object_id ){
-            
 
             foreach ($dataArr['tags'] as $tag_id) {
                 $model = new TagObjects;
@@ -115,11 +138,11 @@ class ArticlesController extends Controller
             }
         }
 
-        // store Rating
-        for($i = 1; $i <= 5 ; $i++ ){
-            $amount = $i == 5 ? 1 : 0;
-            Rating::create(['score' => $i, 'object_id' => $object_id, 'object_type' => 2, 'amount' => $amount]);
-        }
+        // // store Rating
+        // for($i = 1; $i <= 5 ; $i++ ){
+        //     $amount = $i == 5 ? 1 : 0;
+        //     Rating::create(['score' => $i, 'object_id' => $object_id, 'object_type' => 2, 'amount' => $amount]);
+        // }
 
         Session::flash('message', 'Tạo mới thành công');
 
@@ -216,7 +239,29 @@ class ArticlesController extends Controller
         $dataArr['type'] = 1;
         $dataArr['updated_user'] = Auth::user()->id;
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;  
-         
+        $image_url = $dataArr['image_url'];
+        if( $image_url ){
+            $origin_img = base_path().$image_url;
+
+            $img = Image::make($origin_img);
+            $w_img = $img->width();
+            $h_img = $img->height();
+
+            $tmpArrImg = explode('/', $origin_img);
+            
+            $new_img = config('phukien.upload_thumbs_path_articles').end($tmpArrImg);
+           
+            if($w_img > $h_img){
+
+                Image::make($origin_img)->resize(null, 275, function ($constraint) {
+                        $constraint->aspectRatio();
+                })->crop(275, 275)->save($new_img);
+            }else{
+                Image::make($origin_img)->resize(275, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                })->crop(275, 275)->save($new_img);
+            }
+        } 
         $model = Articles::find($dataArr['id']);
 
         $model->update($dataArr);

@@ -39,18 +39,11 @@
            
               <tr>
                 <td><span class="order">1</span></td>                                                                           
-                <td><a href="{{ route( 'banner.index', [ 'object_id' => 1, 'object_type' => 3 ]) }}" class="link_edit">Banner slide trang chủ <span style="color:red">( 1349 x 400 px) </span></a></td>
+                <td><a href="{{ route( 'banner.index', [ 'object_id' => 1, 'object_type' => 3 ]) }}" class="link_edit">Banner slide trang chủ <span style="color:red">( 1200 x 325 px) </span></a></td>
                 <td style="white-space:nowrap; text-align:right">                 
                   <a href="{{ route( 'banner.index', [ 'object_id' => 1, 'object_type' => 3 ]) }}" class="btn-sm btn btn-primary">Banner</a>
                 </td>
-              </tr> 
-              <tr>
-                <td><span class="order">2</span></td>                                                                           
-                <td><a href="{{ route( 'banner.index', [ 'object_id' => 2, 'object_type' => 3 ]) }}" class="link_edit">Banner giữa trang chủ <span style="color:red">( 1349 x 400 px)</span></a></td>
-                <td style="white-space:nowrap; text-align:right">                 
-                  <a href="{{ route( 'banner.index', [ 'object_id' => 2, 'object_type' => 3 ]) }}" class="btn-sm btn btn-primary">Banner</a>
-                </td>
-              </tr> 
+              </tr>              
 
           </tbody>
           </table>

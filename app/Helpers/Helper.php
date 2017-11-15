@@ -30,14 +30,15 @@ class Helper
     public static function showImageThumb($image_url, $object_type = 1, $folder = ''){             
         // type = 1 : original 2 : thumbs
         //object_type = 1 : product, 2 :article  3: project          
-        $tmpArrImg = explode('/', $image_url);
-                        
-        $image_url = config('phukien.upload_url_thumbs').end($tmpArrImg);           
+        $tmpArrImg = explode('/', $image_url);                       
+        
         if(strpos($image_url, 'http') === false){
             if($object_type == 1){
-                return env('APP_URL') . $folder. $image_url;
+                $image_url = config('phukien.upload_url_thumbs').end($tmpArrImg);   
+                return $image_url;
             }elseif($object_type == 2){
-                return env('APP_URL') . $folder. $image_url;
+                $image_url = config('phukien.upload_url_thumbs').'articles/'.end($tmpArrImg);   
+                return $image_url;
             }else{
                 return env('APP_URL') . $folder. $image_url;
             }    

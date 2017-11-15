@@ -14,27 +14,7 @@
 <main class="main-content clearfix">
     <div class="container">
         <div class="row" id="block-main-container">
-            <div class="col-md-3 category-sidebar" id="category_sidebar">
-                <form action="" method="post" id="filter_page_category">
-                    <div class="product-filters box box-shadow box-no-padding">
-                        <div class="filter filter-listing">
-                            <div class="filter_title">
-                                <i class="filter_icon fa fa-bars"></i> DANH MỤC
-                            </div>
-                            <div class="filter_body">
-                                <label class="filter_button">
-                                    <a href="{!! route('cate-parent', $parentDetail->slug) !!}" title="{!! $parentDetail->name !!}">{!! $parentDetail->name !!} <span>165</span></a>
-                                    <ul>
-                                        @foreach($cateArrByLoai[$parentDetail->id] as $obj)
-                                        <li><a href="{!! route('cate', [$parentDetail->slug, $obj->slug]) !!}" title="{!! $obj->name !!}">{!! $obj->name !!} <span>74</span></a></li>
-                                        @endforeach
-                                    </ul>
-                                </label>
-                            </div>
-                        </div><!-- /.filter -->                        
-                    </div>
-                </form>
-            </div><!-- /.col-md-3 -->
+            @include('frontend.cate.sidebar')
             <div class="col-md-9 category-content">
                 <!--<div class="cate-on-slide">
                     <ul class="owl-carousel nav-center" data-items="1" data-dots="false" data-autoplay="true" data-loop="true" data-nav="true">
@@ -48,7 +28,7 @@
                 <div class="block branding category-header">
                     <div class="block_header has-branding">
                         <h1 class="block_title category-header-heading" style="text-transform: uppercase;">
-                            <span class="block_branding"><i class="fa fa-cutlery"></i></span>{!! $cateDetail->name !!}</h1>
+                            <span class="block_branding" style="background-color: {{ $parentDetail->color_code }}"><img src="{{ Helper::showImage($parentDetail->icon_url) }}" style="display: inline-block; vertical-align: middle;margin-top: -4px;" alt="{!! $parentDetail->name !!}"></span>{!! $cateDetail->name !!}</h1>
                     </div>
                 </div><!-- /.header -->
                 <!--<div class="filter-inline current-filter">
@@ -62,7 +42,7 @@
                     </div>
                 </div><!-- /.current-filter -->
                 <div id="category_content">
-                    <div class="row products">
+                    <div class="row products products-cate">
                         @if($productList)
                             @foreach($productList as $obj)
                             <div class="col-md-4 product-item">

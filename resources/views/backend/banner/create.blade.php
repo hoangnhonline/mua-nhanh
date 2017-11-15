@@ -43,7 +43,7 @@
                   <label class="col-md-3 row">Banner 
                   <?php 
                   if($object_id == 1){
-                    echo "( 1349 x 400 px)";
+                    echo "( 1200 x 325 px)";
                   }elseif($object_id == 2){
                     echo "( 1349 x 200 px)";
                   }elseif($object_id == 3){

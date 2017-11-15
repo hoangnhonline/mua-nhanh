@@ -52,7 +52,7 @@ class HomeController extends Controller
             $productArr[$parent->id] = Product::getList(['parent_id' => $parent->id, 'limit' => 10]);
         }
 
-        $articlesHotList = Articles::where(['cate_id' => 4, 'status' => 1])->orderBy('id', 'desc')->limit(4)->get();
+        $articlesHotList = Articles::where(['cate_id' => 1, 'status' => 1])->orderBy('id', 'desc')->limit(4)->get();
                 
         return view('frontend.home.index', compact(                                                                
                                 'articlesList', 

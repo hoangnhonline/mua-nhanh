@@ -42,7 +42,7 @@
                  <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
                   <label class="col-md-3 row">Banner <?php 
                   if($object_id == 1){
-                    echo "( 870 x 448 px)";
+                    echo "( 1200 x 325 px)";
                   }elseif($object_id == 2){
                     echo "( 570 x 102 px)";
                   }elseif($object_id == 3){

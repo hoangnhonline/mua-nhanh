@@ -62,6 +62,20 @@
                   </div>
                    <input type="hidden" name="image_url" id="image_url" value="{{ old('image_url') }}"/>
                 </div>
+                <div class="form-group" style="margin-top:10px;margin-bottom:10px">  
+                  <label class="col-md-3 row">Icon ( 18 x 18 px)</label>    
+                  <div class="col-md-9">
+                    <div style="background-color: #000;width: 40px;text-align: center;"><img id="thumbnail_icon_url" src="{{ old('icon_url') ? Helper::showImage(old('icon_url') ) : URL::asset('public/admin/dist/img/img.png') }}" class="img-thumbnail" width="30" height="30">
+                    </div>
+                 
+                    <button class="btn btn-default btn-sm btnSingleUpload" data-set="icon_url" data-image="thumbnail_image" type="button"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload</button>
+                  </div>
+                   <input type="hidden" name="icon_url" id="icon_url" value="{{ old('icon_url') }}"/>
+                </div>
+                <div class="form-group">
+                  <label>Màu sắc <span class="red-star">*</span></label>
+                  <input type="text" class="form-control" name="color_code" id="color_code" value="{{ old('color_code') }}">
+                </div>
                 <div class="form-group">
                   <label>Ẩn/hiện</label>
                   <select class="form-control" name="status" id="status">                  

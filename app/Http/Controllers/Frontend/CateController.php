@@ -48,7 +48,7 @@ class CateController extends Controller
                 $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
             }  
             
-            $hotProductList = Product::getList(['is_hot' => 1, 'parent_id' => $parent_id, 'limit' => 10, 'status' => 1]);			
+            $hotProductList = Product::getList(['is_hot' => 1, 'parent_id' => $parent_id, 'limit' => 5, 'status' => 1]);			
             return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo', 'hotProductList'));
 
         }else{
@@ -77,12 +77,10 @@ class CateController extends Controller
             }else{
                 $seo['title'] = $seo['description'] = $seo['keywords'] = $cateDetail->name;
             }  
-            $page = $request->page ? $request->page : 1;    
-            $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5, 'status' => 1]);   
-            $colorList = Color::all(); 
-            $priceList = PriceRange::all();
+            $page = $request->page ? $request->page : 1;                             
             $parentDetail = CateParent::find($cateDetail->parent_id);
-            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page', 'kmHot', 'colorList', 'priceList', 'parentDetail'));
+            $hotProductList = Product::getList(['is_hot' => 1, 'cate_id' => $cate_id, 'limit' => 5, 'status' => 1]);    
+            return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page', 'hotProductList', 'priceList', 'parentDetail'));
             
         }else{
             return redirect()->route('home');   

@@ -2,136 +2,127 @@
 @include('frontend.partials.meta')
 @section('content')
 <?php $total = 0; ?>
-<div class="block block-breadcrumb">
-    <div class="container">
-      <ul class="breadcrumb">
-        <li><a class="home" href="{{ route('home') }}" title="Trở về trang chủ">Trang chủ</a></li>
-        <li class="active">Giỏ hàng</li>
-      </ul>
+<div class="container">
+    <div class="block-breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="{{ route('home') }}" title="Trang chủ">Trang chủ</a></li>           
+            <li class="active">Giỏ hàng</li>
+        </ol>
     </div>
-  </div><!-- /block-breadcrumb -->
-  <div class="block block-two-col container">
-    <div class="block-page-common">
-      <div class="block block-title">
-        <h1 class="title-main">
-          <i class="fa fa-cart-arrow-down"></i>
-          GIỎ HÀNG
-        </h1>
-      </div>
-    </div><!-- /block-page-common -->
-    <div class="row">
-      <div class="col-sm-8 col-xs-12 block-col-sidebar">
-        <div class="block-cart">
-          <div class="shopcart-ct">
-            <form action="#" method="POST" class="form-cart">
-              <div class="table cart-tbl">
-                <div class="table-row thead">
-                  <div class="table-cell product-col t-c">Sản phẩm</div>
-                  <div class="table-cell numb-col">Giá</div>
-                  <div class="table-cell total-col t-c">Số lượng</div>
-                </div><!-- table-row thead -->
-                <div class="tr-wrap">
-                  @if(!empty(Session::get('products')))
-                 <?php $total = 0; ?>
-                  @if( $arrProductInfo->count() > 0)
-                      <?php $i = 0; ?>
-                    @foreach($arrProductInfo as $product)
-                    <?php 
-                    $i++;
-                    $price = $product->is_sale ? $product->price_sale : $product->price; 
+</div><!-- /.breadcrumb -->
+<div id="main" class="main-content clearfix page-checkout">
+    <div class="container">      
+      <div class="content-sidebar-2">
+        <div class="content">
+          <form id="checkout-step-1" class="form form-blocking" action="#" method="post">
+            <div class="box box-no-padding">
+              <div class="box_header">
+                              <h2 class="box_title">Thông tin sản phẩm</h2>
+                          </div><!-- /.block-progress-steps -->
+                          <div class="box_body">
+                            <table class="table table-listing table-checkout">
+                              <thead>
+                                <tr>
+                                    <th class="items0count" colspan="2">Sản phẩm trong giỏ hàng: <span class="badge">{{ Session::get('products') ? array_sum(Session::get('products')) : 0 }}</span></th>
+                                    <th width="16%">Đơn giá</th>
+                                    <th width="16%">Số lượng</th>
+                                    <!-- <th width="16%">Giảm giá</th> -->
+                                    <th width="16%">Thành tiền</th>
+                                    <th class="action" width="1%">&nbsp;</th>
+                                </tr>
+                              </thead>
+                              <tbody>   
+                                @if(!empty(Session::get('products')))
+                               <?php $total = 0; ?>
+                                @if( $arrProductInfo->count() > 0)
+                                    <?php $i = 0; ?>
+                                  @foreach($arrProductInfo as $product)
+                                  <?php 
+                                  $i++;
+                                  $price = $product->is_sale ? $product->price_sale : $product->price; 
 
-                    $total += $total_per_product = ($getlistProduct[$product->id]*$price);
-                    
-                    ?>
-                  <div class="table-row clearfix">
-                    <div class="table-cell product-col">
-                      <figure class="img-prod">
-                        <img alt="{!! $product->name !!}" src="{{ $product->image_url ? Helper::showImage($product->image_url) : URL::asset('public/assets/images/no-img.png') }}">
-                      </figure>
-                      <a href="{{ route('product', [ $product->slug ]) }}" class="prod-tit" target="_blank" title="{!! $product->name !!}">{!! $product->name !!}</a>
-                      
-                      <p>
-                        <span>Mã sản phẩm:</span>
-                        <span class="p-code">{!! $product->code !!}</span>
-                      </p>
-                      <p>
-                        <a href="javascript:void(0);" title="Xóa sản phẩm" data-id="{{ $product->id }}" class="p-del del_item">Xóa</a>
-                      </p>
-                    </div>
-                    <div class="table-cell total-col">                     
-                      @if( $product->is_sale == 1)
-                      <p class="p-price"><b>{!! number_format( $product->price_sale ) !!}đ</b></p>
-                      <p class="p-price-old">{!! number_format( $product->price ) !!}đ</p>
-                      <p class="p-price-dis"><span>-{!! number_format( $product->sale_percent ) !!}%</span></p>
-                      @else
-                      <p class="p-price"><b>{!! number_format( $product->price ) !!}đ</b></p>
-                      @endif
-                    </div><!-- /table-cell total-col t-r -->
-                    <div class="table-cell numb-col t-c">
-                      <select data-id="{{ $product->id }}" size="1" class="change_quantity">
-                        @for($i = 1; $i <= $product->inventory ; $i ++) 
-                        <option value="{{ $i }}" @if( $getlistProduct[$product->id] == $i ) selected @endif>{{ $i }}</option>                 
-                        @endfor      
-                      </select>
-                    </div>
-                  </div><!-- table-row clearfix -->
-                  
-                
+                                  $total += $total_per_product = ($getlistProduct[$product->id]*$price);
+                                  
+                                  ?>                                 
+                                <tr>
+                                  <td class="image" width="20%">
+                                      <img alt="{!! $product->name !!}" src="{{ $product->image_url ? Helper::showImage($product->image_url) : URL::asset('public/assets/images/no-img.png') }}">
+                                  </td>
+                                  <td class="name">
+                                      <a href="{{ route('product', [ $product->slug ]) }}" class="prod-tit" target="_blank" title="{!! $product->name !!}">{!! $product->name !!}</a>
+                                      <div style="color: #999;">Mã SP : {!! $product->code !!}</div>
+                                  </td>
+                                  <td class="unit">
+                                    @if( $product->is_sale == 1)
+                                    <p class="p-price"><b>{!! number_format( $product->price_sale ) !!}đ</b></p>
+                                    <p class="p-price-old">{!! number_format( $product->price ) !!}đ</p>
+                                    <p class="p-price-dis"><span>-{!! number_format( $product->sale_percent ) !!}%</span></p>
+                                    @else
+                                    <p class="p-price"><b>{!! number_format( $product->price ) !!}đ</b></p>
+                                    @endif                                    
+                                  </td>
+                                  <td class="quantity">                                         
+                                        <select data-id="{{ $product->id }}" size="1" class="quantity_modifier quantity-modifier quantity-modifier-select change_quantity">
+                                          @for($i = 1; $i <= $product->inventory ; $i ++) 
+                                          <option value="{{ $i }}" @if( $getlistProduct[$product->id] == $i ) selected @endif>{{ $i }}</option>                 
+                                          @endfor      
+                                        </select>
+                                    </td>
+                                    <!-- <td class="discount"> đ</td> -->
+                                    <td id="" class="total"><p class="p-price"><b>{{ number_format($total_per_product) }}đ</b></p></td>
+                                    <td class="action"><a class="btn btn-xs p-del del_item" href="javascript:;" data-id="{{ $product->id }}"><i class="fa fa-trash"></i></a></td>
+                                  </tr>
+                                                   
+                                  </tbody>
+
               
-              @endforeach
+                                @endforeach
 
-              @endif  
+                                @endif  
 
-              @endif
-              </div><!-- tr-wrap -->
-              </div><!-- table cart-tbl --> 
-              <div class="block-btn text-right">
-                <a href="{{ route('home') }}" title="Tiếp tục mua hàng" class="btn btn-main"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
-                @if(!empty(Session::get('products')))
-               <a href="{{ route('empty-cart') }}" onclick="return confirm('Quý khách có chắc chắn bỏ hết hàng ra khỏi giỏ?'); " class="btn btn-default"><i class="fa fa-trash-o"></i> Xóa tất cả</a>
-               @endif
-              </div>
-            </form>
-          </div>
+                                @endif
+                            </table>
+                          </div><!-- /.block-progress-steps -->
+                          <div class="box_footer hidden-xs hidden-sm">
+                              <a href="{{ route('home') }}" title="Tiếp tục mua hàng" class="btn btn-main btn-default"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>                              
+                              @if(!empty(Session::get('products')))
+                              <a href="{{ route('address-info') }}" style="color: #FFF;text-transform: uppercase;" title="Tiến hành đặt hàng" class="btn btn-primary pull-right">Đặt hàng</a>
+                              @endif
+                          </div>
+            </div><!-- /.block-progress-steps -->
+          </form>
         </div>
-      </div><!-- /block-col-left -->
-      <div class="col-sm-4 col-xs-12 block-col-right">
-        <div class="block-billing-product">
-          <div class="block block-content">
-            <table class="table-billing-product">
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>Tạm tính</strong>
-                  </td>
-                  <td>
-                    <p class="text-right">{{ number_format($total) }}đ</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <strong>Tổng cộng</strong>
-                  </td>
-                  <td>
-                    <p class="cl-red text-right">{{ number_format($total) }}đ</p>
-                    <p class="text-small text-right">(Đã bao gồm VAT)</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2" class="text-center text-small text-italic fs12">
-                    (Chưa bao gồm phí vận chuyển nếu có)
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          @if(!empty(Session::get('products')))
-          <a href="{{ route('address-info') }}" title="Tiến hành đặt hàng" class="btn btn-main btn-pay">Tiến hành đặt hàng</a>
-          @endif
+        <div class="sidebar sidebar-checkout sidebar-checkout-1">
+            <div class="box">
+                <div class="box_header">
+                    <h2 class="box_title">THÔNG TIN CHUNG</h2>
+                </div>
+                <div class="box_body">
+                    <ul class="order-summary">
+                        <li>
+                            <span class="k">Tổng sản phẩm</span>
+                            <span id="order-quantity" class="v">{{ Session::get('products') ? array_sum(Session::get('products')) : 0 }}</span>
+                        </li>
+                        <li>
+                            <span class="k">Tổng tạm tính</span>
+                            <span id="order-subtotal" class="v">{{ number_format($total) }} đ</span>
+                        </li>
+                        <li>
+                            <span class="k">Phí giao hàng (<a target="_blank" href="/chinh-sach-giao-hang.html" title="Chi tiết chính sách giao hàng">?</a>)</span>
+                            <span class="v"></span>
+                        </li>
+                        <li class="sep"></li>
+                        <li class="total">
+                            <span class="k">Tổng cộng</span>
+                            <span id="order-total" class="v">{{ number_format($total) }} đ</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div><!-- /block-col-right -->
+      </div><!-- /.content-sidebar-2 -->
     </div>
-  </div><!-- /block_big-title -->
+</div>
 @stop
 @section('js')
    <script type="text/javascript">
