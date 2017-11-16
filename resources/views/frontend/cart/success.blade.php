@@ -15,9 +15,9 @@
       <div class="box-text-thank">
           <div class="text-thank">Đơn hàng của bạn đã đặt thành công</div>
           <div class="icon-thank">
-              <i class="fa fa-check" aria-hidden="true"></i>
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
-           <b>Cảm ơn quý khách đã mua hàng !</b> Chúng tôi liên hệ xác nhận đến số điện thoại của quý khách và sẽ giao hàng đến cho quý khách trong thời gian từ 2-3 ngày sau khi xác nhận.<br /><br />
+           <p style="font-size: 18px"><b>Cảm ơn quý khách đã mua hàng !</b> Chúng tôi liên hệ xác nhận đến số điện thoại của quý khách và sẽ giao hàng đến cho quý khách trong thời gian từ 2-3 ngày sau khi xác nhận.<br /><br /></p>
           <!--<p class="box-text-thankp">&nbsp;
               Xin vui lòng tham khảo<br>
               <a href="#" target="_blank"> Thời gian nhận hàng
@@ -30,7 +30,7 @@
           </p>-->
           <p><b>Chân thành cảm ơn quý khách.</b></p>
       </div>
-      <div class="box-bt-dk">
+      <div class="box-bt-dk" style="margin-bottom: 30px">
           <a class="bt-tt-mua btn-primary" href="{{ route('home') }}">Trở về trang chủ</a>            
       </div>
     </div><!-- /.box box-thank -->
@@ -41,7 +41,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     setTimeout(function(){
-      location.href="{{ route('home') }}";
+      //location.href="{{ route('home') }}";
     }, 4000);
   });
 </script>

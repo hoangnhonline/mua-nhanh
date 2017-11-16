@@ -212,17 +212,17 @@ class CartController extends Controller
                 function($message) use ($emailArr, $order_id) {
                     $message->subject('Xác nhận đơn hàng hàng #'.$order_id);
                     $message->to($emailArr);
-                    $message->from('phukiencuoigiang@gmail.com', 'Phụ kiện cưới Giang');
-                    $message->sender('phukiencuoigiang@gmail.com', 'Phụ kiện cưới Giang');
+                    $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
+                    $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
             });
         }
-        Session::put('baokim', 0);
-        if( $request->method_id == 3){
+        //Session::put('baokim', 0);
+        /*if( $request->method_id == 3){
             Session::put('baokim', 1);
             $modelBaoKim = new BaoKimPayment();
             $url = $modelBaoKim->createRequestUrl($order_id, "hoangnhonline@gmail.com", $dataArr['total_payment'], 0, 0, "Đơn hàng $order_id của khách hàng ".$dataArr['fullname'], route('success'), route('success', ['cancel' => 1]), route('home'));
             return redirect($url);
-        }
+        }*/
         return redirect()->route('success');
         
     }    
@@ -231,10 +231,10 @@ class CartController extends Controller
             return redirect()->route('home');
         }
         $order_id = Session::get('order_id');
-        $order_id = Session::get('baokim');
+        //$order_id = Session::get('baokim');
         
         $orderDetail = Orders::find($order_id);
-
+        /*
         $isCancel = $request->cancel ? 1 : 0;
         if( Session::get('baokim') == 1 && $isCancel == 0 ){
             $modelBaoKim = new BaoKimPayment();
@@ -243,11 +243,11 @@ class CartController extends Controller
                 Orders::where('id', $order_id)->update('payment_status', $transaction_status);
             }
         }
-        
+        */
         $seo['title'] = $seo['description'] = $seo['keywords'] = "Mua hàng thành công";
         Session::put('products', []);
         Session::put('address_info', []);
-        Session::put('baokim', 0);        
+        //Session::put('baokim', 0);        
 
         return view('frontend.cart.success', compact('order_id', 'seo', 'orderDetail'));
     }

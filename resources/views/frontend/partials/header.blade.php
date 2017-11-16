@@ -4,7 +4,9 @@
 				<div class="row">					
 					<nav class="top-bar_item top-bar_item-nav navigation navigation-inline pull-right">
 						<ul id="user_info_header" class="navbar-right">
-							<li><a class="user-name-loginfb" href="#" title="Đăng nhập với Facebook">Đăng nhập Facebook</a></li>
+							<li>
+								<a data-url="#" title="Đăng nhập bằng Facebook" class="user-name-loginfb"><i class="fa fa-facebook-square"></i>Đăng nhập bằng Facebook</a>
+							</li>
 						</ul>
 					</nav>
 					<nav class="top-bar_item top-bar_item-nav navigation navigation-inline pull-right" style="border-right: 1px solid #fff;">
