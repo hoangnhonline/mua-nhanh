@@ -33,7 +33,7 @@
 				</div>
 			</div>
 		</div><!-- /.header -->
-		<div class="fix-header">
+
 		<div class="header_main  clearfix">
 			<div class="container">
 				<div class="row">
@@ -85,6 +85,7 @@
 				</div>
 			</div>
 		</div><!-- /.header_main -->
+		<div class="fix-header">
 		<nav id="mainNav" class="navbar navbar-default navbar-custom nav-top-menu1 mid-header">
       <div class="container" id="main-menu">
         <div class="navbar-header">
