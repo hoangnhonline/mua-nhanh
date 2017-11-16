@@ -33,6 +33,7 @@
 				</div>
 			</div>
 		</div><!-- /.header -->
+		<div class="fix-header">
 		<div class="header_main  clearfix">
 			<div class="container">
 				<div class="row">
@@ -74,7 +75,7 @@
 						<ul class="header-cart">
 							<li class="nav-cart">
 								<a href="{{ route('cart') }}">
-									<span class="icon-cart"><img src="{{ URL::asset('public/assets/images/cart.jpg') }}" alt="Giỏ hàng"></span>
+									<i class="hd hd-cart"></i>
 									<span class="circle">{{ Session::get('products') ? array_sum(Session::get('products')) : 0 }}</span>
 									<span class="hidden-xs hidden-sm">Giỏ hàng</span>
 								</a>								
@@ -115,4 +116,5 @@
 				</div><!-- /.navbar-collapse -->
 	        </div>
     	</nav><!-- END NAVIGATION -->
+    	</div>
 	</header><!-- /.header -->	
