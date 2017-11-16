@@ -226,8 +226,8 @@ class CartController extends Controller
         return redirect()->route('success');
         
     }    
-    public function success(Request $request){        
-        if(!Session::has('products')) {
+    public function success(Request $request){           
+        if(empty(Session::get('products'))) {
             return redirect()->route('home');
         }
         $order_id = Session::get('order_id');

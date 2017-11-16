@@ -128,7 +128,8 @@ class HomeController extends Controller
         $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5]);   
         $colorList = Color::all(); 
         $priceList = PriceRange::all();
-        return view('frontend.search.index', compact('productList', 'tu_khoa', 'seo', 'cateDetail','price_id', 'colorArr', 'parent_id', 'kmHot', 'colorList', 'priceList', 'code'));
+        $hotProductList = Product::getList(['is_hot' => 1, 'limit' => 5]);
+        return view('frontend.search.index', compact('productList', 'tu_khoa', 'seo', 'cateDetail','price_id', 'colorArr', 'parent_id', 'kmHot', 'colorList', 'priceList', 'code', 'hotProductList'));
     }
     public function ajaxTab(Request $request){
         $table = $request->type ? $request->type : 'category';

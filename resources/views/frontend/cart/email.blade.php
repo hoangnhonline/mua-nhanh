@@ -23,7 +23,7 @@
                         <p style="margin:4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px;font-weight:normal"> muanhanhgiatot.vn rất vui thông báo đơn hàng #{{ $order_id }} của quý khách đã
                           được tiếp nhận và đang trong quá trình xử lý. muanhanhgiatot.vn sẽ thông báo đến quý khách
                           ngay khi hàng chuẩn bị được giao. </p>
-                        <h3 style="font-size:13px;font-weight:bold;color:#056839;text-transform:uppercase;margin:20px 0 0 0;border-bottom:1px solid #ddd"> Thông tin đơn hàng #{{ $order_id }} <span style="font-size:12px;color:#777;text-transform:none;font-weight:normal">(Ngày {{ date('d') }} Tháng {{ date('m') }} Năm {{ date('Y') }} {{ date('H:i:s') }})</span> </h3></td>
+                        <h3 style="font-size:13px;font-weight:bold;color:#0088cc;text-transform:uppercase;margin:20px 0 0 0;border-bottom:1px solid #ddd"> Thông tin đơn hàng #{{ $order_id }} <span style="font-size:12px;color:#777;text-transform:none;font-weight:normal">(Ngày {{ date('d') }} Tháng {{ date('m') }} Năm {{ date('Y') }} {{ date('H:i:s') }})</span> </h3></td>
                     </tr>
                     <tr>
                       <td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px"><table cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -66,14 +66,14 @@
                       <td><p style="margin:4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px;font-weight:normal"><i>Lưu ý: Với những đơn hàng thanh toán trả trước, xin vui lòng đảm bảo người nhận hàng đúng thông tin đã đăng ký trong đơn hàng, và chuẩn bị giấy tờ tùy thân để đơn vị giao nhận có thể xác thực thông tin khi giao hàng.</i></p></td>
                     </tr>
                     <tr>
-                      <td><h2 style="text-align:left;margin:10px 0;border-bottom:1px solid #ddd;padding-bottom:5px;font-size:13px;color:#056839"> CHI TIẾT ĐƠN HÀNG</h2>
+                      <td><h2 style="text-align:left;margin:10px 0;border-bottom:1px solid #ddd;padding-bottom:5px;font-size:13px;color:#0088cc"> CHI TIẾT ĐƠN HÀNG</h2>
                         <table cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#f5f5f5">
                           <thead>
                             <tr>
-                              <th align="left" bgcolor="#056839" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px">Sản phẩm</th>
-                              <th align="left" bgcolor="#056839" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px"> Đơn giá</th>
-                              <th align="left" bgcolor="#056839" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px">Số lượng</th>                              
-                              <th align="right" bgcolor="#056839" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px">Tổng tạm</th>
+                              <th align="left" bgcolor="#0088cc" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px">Sản phẩm</th>
+                              <th align="left" bgcolor="#0088cc" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px"> Đơn giá</th>
+                              <th align="left" bgcolor="#0088cc" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px">Số lượng</th>                              
+                              <th align="right" bgcolor="#0088cc" style="padding:6px 9px;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:14px">Tổng tạm</th>
                             </tr>
                           </thead>
                           <tbody bgcolor="#eee" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#444;line-height:18px">

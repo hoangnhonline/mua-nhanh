@@ -166,6 +166,8 @@
 	<input type="hidden" id="route-cart" value="{{ route('cart') }}" />	
 	<input type="hidden" id="route-save-content" value="{{ route('save-content') }}" />	
 	<input type="hidden" id="route-newsletter" value="{{ route('newsletter') }}" />
+	<input type="hidden" id="route-ajax-login-fb" value="{{route('ajax-login-by-fb')}}">
+	<input type="hidden" id="fb-app-id" value="{{ env('FACEBOOK_APP_ID') }}">
 	<a id="return-to-top" class="td-scroll-up" href="javascript:void(0)">
   		<i class="fa fa-angle-up" aria-hidden="true"></i>
 	</a><!-- return to top -->

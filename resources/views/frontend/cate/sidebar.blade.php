@@ -7,12 +7,14 @@
                 </div>
                 <div class="filter_body">
                     <label class="filter_button">
+                        @if(isset($parentDetail))
                         <a href="{!! route('cate-parent', $parentDetail->slug) !!}" title="{!! $parentDetail->name !!}">{!! $parentDetail->name !!} <span>165</span></a>
                         <ul>
                             @foreach($cateArrByLoai[$parentDetail->id] as $obj)
                             <li><a href="{!! route('cate', [$parentDetail->slug, $obj->slug]) !!}" title="{!! $obj->name !!}">{!! $obj->name !!} <span>74</span></a></li>
                             @endforeach
                         </ul>
+                        @endif
                     </label>
                 </div>
             </div><!-- /.filter -->                        

@@ -34,7 +34,7 @@ $_CONFIG = array(
         'images'  =>  "*img ico",
 
     // TinyMCE types
-        'file'    =>  "",
+        'file'    =>  "doc pdf zip docx",
         'media'   =>  "swf flv avi mpg mpeg qt mov wmv asf rm",
         'image'   =>  "*img",
     ),

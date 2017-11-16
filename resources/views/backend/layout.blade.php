@@ -74,6 +74,7 @@
 <input type="hidden" id="route_update_order" value="{{ route('update-order') }}">
 <input type="hidden" id="route_get_slug" value="{{ route('get-slug') }}">
 <input type="hidden" id="url_open_kc_finder" value="{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=images') }}">
+<input type="hidden" id="url_open_kc_finder_files" value="{{ URL::asset('public/admin/dist/js/kcfinder/browse.php?type=files') }}">
   <div class="control-sidebar-bg"></div>
 </div>
 <input type="hidden" id="upload_url" value="{{ config('phukien.upload_url') }}">

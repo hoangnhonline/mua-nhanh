@@ -18,6 +18,12 @@ function singleUpload(obj) {
     };
     window.open($('#url_open_kc_finder').val(), 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
 }
+function singleUploadFile() {
+    window.KCFinder = {};
+    window.KCFinder.callBack = function(url) {
+    };
+    window.open($('#url_open_kc_finder_files').val(), 'kcfinder_single','scrollbars=1,menubar=no,width='+ (w-300) +',height=' + (h-300) +',top=' + top+',left=' + left);
+}
 function multiUpload() {
     window.KCFinder = {};
     window.KCFinder.callBackMultiple = function(files) {
@@ -53,7 +59,9 @@ $(document).ready(function(){
       $('#price_sale, #sale_percent').val('').removeClass('req');
     }
   });
-
+  $('.btnSingleUploadFile').click(function(){
+    singleUploadFile();
+  });
   if( $('form.productForm').length == 1 ){
     $('#btnSave').click(function(){
         var errReq = 0;

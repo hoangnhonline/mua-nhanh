@@ -50,23 +50,21 @@
 		</div>
 		<div class="footer_middle">
 			<div class="container">
-				<div class="col-fter-1 col-xs-0">
-					<form action="#" class="fv-form fv-form-bootstrap">
-						<p style="margin-bottom: 10px;"><strong data-text="8" @if($isEdit) class="edit" @endif>{!! $textList[8] !!}</strong></p>
-						<div class="newsletter form-inline">
-							<div class="form-group has-feedback">
-								<div class="input-group">
-									<input type="text" class="form-control newsletter_input" name="" placeholder="Nhập email của bạn" value="">
-								</div>
+				<div class="col-fter-1 col-xs-0">					
+					<p style="margin-bottom: 10px;"><strong data-text="8" @if($isEdit) class="edit" @endif>{!! $textList[8] !!}</strong></p>
+					<div class="newsletter form-inline">
+						<div class="form-group has-feedback">
+							<div class="input-group">
+								<input type="text" class="form-control newsletter_input" id="txtNewsletter" placeholder="Nhập email của bạn" value="">
 							</div>
-							<div class="form-group">
-								<div class="input-group">
-									<button type="submit" class="btn btn-primary newsletter_button">Đăng ký
-									</button>
-								</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<button type="button" id="btnNewsletter" class="btn btn-primary newsletter_button">Đăng ký
+								</button>
 							</div>
-						</div>						
-					</form>
+						</div>
+					</div>					
 				</div>
 				<div class="col-fter-3">
 					<div class="social">

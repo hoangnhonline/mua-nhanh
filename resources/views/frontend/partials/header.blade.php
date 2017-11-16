@@ -4,9 +4,22 @@
 				<div class="row">					
 					<nav class="top-bar_item top-bar_item-nav navigation navigation-inline pull-right">
 						<ul id="user_info_header" class="navbar-right">
+							@if(!Session::get('username'))
 							<li>
-								<a data-url="#" title="Đăng nhập bằng Facebook" class="user-name-loginfb"><i class="fa fa-facebook-square"></i>Đăng nhập bằng Facebook</a>
+								<a data-url="javascript:;" title="Đăng nhập bằng Facebook" class="user-name-loginfb login-by-facebook-popup"><i class="fa fa-facebook-square"></i>Đăng nhập bằng Facebook</a>
 							</li>
+							@else
+							<li class="dropdown dropdown-arrow">
+								<a href="/thong-tin-tai-khoan.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+		                            <i class="hd hd-user"></i> {{ Session::get('username') }} <i class="fa fa-caret-down"></i>
+		                        </a>
+		                        <ul class="dropdown-menu" role="menu"><li><a href="/thong-tin-tai-khoan.html" rel="nofollow" class="underlined">Thông tin tài khoản</a></li>
+		                            <li><a href="/thong-tin-don-hang.html" rel="nofollow" class="underlined">Thông tin đơn hàng</a></li>
+		                            <li><a href="/diem-tich-luy.html" rel="nofollow">Điểm tích lũy <span style="color:red;">(0)</span></a></li>
+		                            <li><a href="/quan-ly-e-voucher.html" rel="nofollow">Quản lý E-voucher</a></li><li class="show-in-checkout"><a href="{{ route('logout') }}" rel="nofollow" class="underlined">Đăng xuất</a></li>
+		                        </ul>
+							</li>
+							@endif
 						</ul>
 					</nav>
 					<nav class="top-bar_item top-bar_item-nav navigation navigation-inline pull-right" style="border-right: 1px solid #fff;">
@@ -38,16 +51,16 @@
 						<form action="{{ route('search') }}" method="GET">
 							<div class="search-box form-inline clearfix">
 								<div class="search-box_category">
-									<select class="selectpicker" id="category_search" name="category">
-										<option value="0">Tất cả danh mục</option>
+									<select class="selectpicker" id="pid" name="pid">
+										<option value="">Tất cả danh mục</option>
 										@foreach($cateParentList as $parent)
-										<option value="{!! $parent->id !!}">{!! $parent->name !!}</option>
+										<option value="{!! $parent->id !!}" {{ isset($parent_id) && $parent_id == $parent->id ? "selected" : "" }}>{!! $parent->name !!}</option>
 										@endforeach
 									</select>
 								</div>
 								<div class="search-box_input">
 									<span class="twitter-typeahead">
-										<input type="text" class="form-control input-search tt-hint txtSearch" value="" autocomplete="off" name="keyword" placeholder="Tìm kiếm sản phẩm...">
+										<input type="text" class="form-control input-search tt-hint txtSearch" value="{{ isset($tu_khoa) ? $tu_khoa : "" }}" autocomplete="off" name="keyword" placeholder="Tìm kiếm sản phẩm...">
 									</span>
 									<button class="btn btn-primary">
 					                    <i class="hd hd-search"></i>

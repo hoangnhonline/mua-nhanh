@@ -28,9 +28,9 @@
               7h - 19h, thứ 2 đến thứ 7<br>
               cs@hotdeal.vn
           </p>-->
-          <p><b>Chân thành cảm ơn quý khách.</b></p>
+          <p><b style="font-size: 18px">Chân thành cảm ơn quý khách.</b></p>
       </div>
-      <div class="box-bt-dk" style="margin-bottom: 30px">
+      <div class="box-bt-dk" style="margin-top: 30px">
           <a class="bt-tt-mua btn-primary" href="{{ route('home') }}">Trở về trang chủ</a>            
       </div>
     </div><!-- /.box box-thank -->
