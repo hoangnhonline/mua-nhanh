@@ -20,7 +20,7 @@
           </div><!-- /.block-progress-steps -->
           <div class="box_body address-container">                        
             <div class="form form-blocking form-general check-out-step-2">
-              <div class="address-edit editable-section editing col-md-6">
+              <div class="address-edit editable-section editing @if(Session::get('userId')) col-md-12 @else col-md-6 @endif">
                 <div class="row form">
                   <div class="col-md-12">
                     <form id="addressForm" action="{{ route('store-address') }}" method="POST" class="form-billing">
@@ -56,9 +56,12 @@
           
       </div><!-- /.row -->
               </div>
+              @if(!Session::get('userId')))
               <div class="col-md-6">
-                
+                <p>Đăng nhập để nhận nhiều ưu đãi từ <strong>muanhanhgiatot.vn</strong></p>
+                <div><a style="    height: 40px;   padding-top: 10px;    font-size: 15px !important;" data-url="javascript:;" title="Đăng nhập bằng Facebook" class="user-name-loginfb login-by-facebook-popup"><i class="fa fa-facebook-square"></i>Đăng nhập bằng Facebook</a></div>
               </div>
+              @endif
             </div>
             <div class="clearfix"></div>
           </div><!-- /.block-progress-steps -->                      

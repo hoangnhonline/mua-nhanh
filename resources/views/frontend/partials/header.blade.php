@@ -115,21 +115,4 @@
 				</div><!-- /.navbar-collapse -->
 	        </div>
     	</nav><!-- END NAVIGATION -->
-	</header><!-- /.header -->
-	<style type="text/css">
-		.user-name-loginfb {
-		    background-image: -webkit-linear-gradient(top, #5972a5 0, #3e578b 100%);
-		    background-image: linear-gradient(to bottom, #5972a5 0, #3e578b 100%);
-		    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5972a5', endColorstr='#ff3e578b', GradientType=0);
-		    -webkit-border-radius: 5px;
-		    -moz-border-radius: 5px;
-		    border-radius: 5px;
-		    -webkit-box-shadow: 0 -2px 0 #112d6c inset;
-		    box-shadow: 0 -2px 0 #112d6c inset;
-		    background-repeat: repeat-x;
-		    border: none;
-		    color: #fff;
-		    cursor: pointer;
-		    font-size: 12px;
-		}
-	</style>
+	</header><!-- /.header -->	

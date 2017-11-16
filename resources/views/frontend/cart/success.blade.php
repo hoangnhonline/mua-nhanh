@@ -13,7 +13,7 @@
   <div class="container">
     <div class="box box-thank">
       <div class="box-text-thank">
-          <div class="text-thank">Đơn hàng của bạn đã đặt thành công</div>
+          <div class="text-thank">Đặt hàng thành công</div>
           <div class="icon-thank">
               <i class="fa fa-check-circle" aria-hidden="true"></i>
           </div>
@@ -41,8 +41,8 @@
 <script type="text/javascript">
   $(document).ready(function(){
     setTimeout(function(){
-      //location.href="{{ route('home') }}";
-    }, 4000);
+      location.href="{{ route('home') }}";
+    }, 5000);
   });
 </script>
 @stop
