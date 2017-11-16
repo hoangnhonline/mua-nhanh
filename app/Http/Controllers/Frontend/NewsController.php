@@ -39,15 +39,15 @@ class NewsController extends Controller
             $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5]);   
             $colorList = Color::all(); 
             $priceList = PriceRange::all();
-
-            return view('frontend.news.index', compact('title', 'hotArr', 'articlesList', 'cateDetail', 'seo', 'socialImage', 'page', 'kmHot', 'colorList', 'priceList'));
+            $hotProductList = Product::getList(['is_hot' => 1, 'limit' => 5]);
+            return view('frontend.news.index', compact('title', 'hotArr', 'articlesList', 'cateDetail', 'seo', 'socialImage', 'page', 'kmHot', 'colorList', 'priceList', 'hotProductList'));
         }else{
             return redirect()->route('home');
         }
     }      
 
      public function newsDetail(Request $request)
-    { 
+    {         
         Helper::counter(1, 3);
         $id = $request->id;
 
@@ -76,8 +76,9 @@ class NewsController extends Controller
             $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5]);   
             $colorList = Color::all(); 
             $priceList = PriceRange::all();
+            $hotProductList = Product::getList(['is_hot' => 1, 'limit' => 5]);
 
-            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail',  'kmHot', 'colorList', 'priceList'));
+            return view('frontend.news.news-detail', compact('title',  'hotArr', 'detail', 'otherArr', 'seo', 'socialImage', 'tagSelected', 'cateDetail',  'kmHot', 'colorList', 'priceList', 'hotProductList'));
         }else{
             return redirect()->route('home');
         }

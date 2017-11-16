@@ -6,16 +6,33 @@
                     <i class="filter_icon fa fa-bars"></i> DANH MỤC
                 </div>
                 <div class="filter_body">
+                    @if(isset($parentDetail))
                     <label class="filter_button">
-                        @if(isset($parentDetail))
-                        <a href="{!! route('cate-parent', $parentDetail->slug) !!}" title="{!! $parentDetail->name !!}">{!! $parentDetail->name !!} <span>165</span></a>
+                        
+                        <a href="{!! route('cate-parent', $parentDetail->slug) !!}" title="{!! $parentDetail->name !!}">{!! $parentDetail->name !!} </a>
                         <ul>
                             @foreach($cateArrByLoai[$parentDetail->id] as $obj)
-                            <li><a href="{!! route('cate', [$parentDetail->slug, $obj->slug]) !!}" title="{!! $obj->name !!}">{!! $obj->name !!} <span>74</span></a></li>
+                            <li><a href="{!! route('cate', [$parentDetail->slug, $obj->slug]) !!}" title="{!! $obj->name !!}">{!! $obj->name !!} </a></li>
+                            @endforeach
+                        </ul>                        
+                        
+                        
+                    </label>
+                    @else
+                    @foreach($cateParentList as $parent)
+                     <label class="filter_button">                                                                      
+                        
+                        <a href="{!! route('cate-parent', $parent->slug) !!}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
+                        <ul>
+                            @foreach($cateArrByLoai[$parent->id] as $obj)
+                            <li><a href="{!! route('cate', [$parent->slug, $obj->slug]) !!}" title="{!! $obj->name !!}">{!! $obj->name !!} </a></li>
                             @endforeach
                         </ul>
-                        @endif
+                        
+                        
                     </label>
+                    @endforeach
+                    @endif
                 </div>
             </div><!-- /.filter -->                        
         </div>

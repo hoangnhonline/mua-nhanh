@@ -94,83 +94,23 @@
 				<div class="collapse navbar-collapse menu" id="menu-navbar-collapse">
 					<ul class="nav navbar-nav navbar-left">
 						<li class="level0 parent"><a class="active" href="{{ route('home') }}" title="Trang chủ">Trang chủ</a></li>
+						@foreach($cateParentList as $parent)
 						<li class="level0 parent">
-							<a href="#" title="">Mỹ Phẩm</a>
+							<a href="{{ route('cate-parent', $parent->slug ) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
+							@if(!empty($cateArrByLoai[$parent->id]))
 							<ul class="level0 submenu">
-								<li class="level1 parent">
-									<a href="#" title="">Kem</a>
-									<ul class="level1 submenu">
-										<li><a href="#" title="">Sữa rửa mặt</a></li>
-										<li><a href="#" title="">Bột rửa mặt</a></li>
-										<li><a href="#" title="">Dung dịch hoa hồng</a></li>
-										<li><a href="#" title="">Các loại sản phẩm đi kèm chăm sóc da</a></li>
-									</ul>
-								</li>								
+								@foreach($cateArrByLoai[$parent->id] as $cate)
+								<li class="level1">
+									<a href="{{ route('cate', [$parent->slug, $cate->slug]) }}" title="{!! $cate->name !!}">{!! $cate->name !!}</a>					
+								</li>	
+								@endforeach
 							</ul>
+							@endif
 						</li>
-						<li class="level0 parent">
-							<a href="#" title="">Dòng thức ăn homemade</a>
-							<ul class="level0 submenu">
-								<li class="level1">
-									<a href="#" title="">Bánh sản xuất theo lịch hàng ngày</a>
-								</li>
-								<li class="level1 parent">
-									<a href="#" title="">Các thực phẩm khô</a>
-									<ul class="level1 submenu">
-										<li><a href="#" title="">Khô bò</a></li>
-										<li><a href="#" title="">Khô gà</a></li>
-									</ul>
-								</li>
-								<li class="level1 parent">
-									<a href="#" title="">Thực phẩm dùng trong thời gian cố định</a>
-									<ul class="level1 submenu">
-										<li><a href="#" title="">Lạp xưởng tươi - khô</a></li>
-										<li><a href="#" title="">Sản phẩm sấy khô</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="level0 parent">
-							<a href="#" title="">Dòng sản phẩm family</a>
-							<ul class="level0 submenu">
-								<li class="level1">
-									<a href="#" title="">Phụ kiện nữ</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Phụ kiện nam</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Dụng cụ dành cho trẻ em, sơ sinh</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Bedroom</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Kitchen</a>
-								</li>
-							</ul>
-						</li>
-						<li class="level0 parent">
-							<a href="#" title="">Quà tặng cao cấp</a>
-							<ul class="level0 submenu">
-								<li class="level1">
-									<a href="#" title="">Sâm, linhc chi, tổ yến</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Rượu nhập các loại</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Bánh nguyên hôp thiếc nhập Nhật</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Thực phẩm chức năng từ Nhật - Mỹ - Úc - Hà Lan</a>
-								</li>
-								<li class="level1">
-									<a href="#" title="">Kitchen</a>
-								</li>
-							</ul>
-						</li>
-						<li><a href="contact.html" title="">Liên hệ</a></li>
+						@endforeach
+						<li><a href="{!! route('news-list', 'tin-tuc') !!}" title="Tin tức">Tin tức</a></li>
+						
+						<li><a href="{{ route('contact') }}" title="Liên hệ">Liên hệ</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 	        </div>

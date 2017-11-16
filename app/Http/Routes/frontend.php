@@ -77,7 +77,7 @@ Route::group(['namespace' => 'Frontend'], function()
         Route::post('save-order', ['as' => 'payment', 'uses' => 'CartController@saveOrder']);        
     });
     Route::get('tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
-    Route::get('tin-tuc/{slug}', ['as' => 'news-list', 'uses' => 'NewsController@newsList']);
+    Route::get('danh-muc/{slug}', ['as' => 'news-list', 'uses' => 'NewsController@newsList']);
     Route::get('lien-he.html', ['as' => 'contact', 'uses' => 'HomeController@contact']);
     Route::get('{slug}.html', ['as' => 'pages', 'uses' => 'HomeController@pages']);    
     Route::get('{slugCateParent}', ['as' => 'cate-parent', 'uses' => 'CateController@cateParent']);    

@@ -105,7 +105,7 @@
 	</style>
 </head>
 <body class="home">
-@if($routeName == "product")
+@if($routeName == "product" || $routeName == "news-detail")
 <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
