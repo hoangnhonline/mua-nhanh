@@ -12,6 +12,7 @@ use App\Models\ProductImg;
 use App\Models\Orders;
 use App\Models\OrderDetail;
 use App\Models\Settings;
+use App\Models\Customer;
 use App\Models\BaoKimPayment;
 
 use Helper, File, Session, Auth;
@@ -54,6 +55,13 @@ class CartController extends Controller
             return redirect()->route('home');
         }
         $addressInfo = Session::get('address_info'); 
+        if(empty($addressInfo) && Session::get('userId') > 0){
+            $detailCustomer = Customer::find(Session::get('userId'));
+            $addressInfo['fullname'] = $detailCustomer->full_name;
+            $addressInfo['email'] = $detailCustomer->email;
+            $addressInfo['address'] = $detailCustomer->address;
+            $addressInfo['phone'] = $detailCustomer->phone;
+        }
         $getlistProduct = Session::get('products');
         
         $listProductId = array_keys($getlistProduct);
@@ -150,6 +158,7 @@ class CartController extends Controller
         $arrProductInfo = Product::whereIn('product.id', $listProductId)
                             ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                             ->select('product_img.image_url', 'product.*')->get();
+        $user_id = !Session::get('userId') ? null : Session::get('userId');
         $dataArr['total_bill'] = 0;
         $dataArr['total_product'] = array_sum($getlistProduct);
         $dataArr['address']  = $addressInfo['address'];        
@@ -157,6 +166,7 @@ class CartController extends Controller
         $dataArr['email']  = $email = $addressInfo['email'];
         $dataArr['phone']  = $addressInfo['phone'];
         $dataArr['method_id'] = $request->method_id;
+        $dataArr['customer_id'] = $user_id;
         if( isset($addressInfo['choose_other_address']) && $addressInfo['choose_other_address'] == 1 ){
             $dataArr['is_other_address']  = 1;
             $dataArr['other_address']  = $addressInfo['other_address'];            
@@ -172,7 +182,13 @@ class CartController extends Controller
         $dataArr['total_payment'] = $dataArr['total_bill'];
 
         $rs = Orders::create($dataArr);
-        
+        if($user_id){
+            $detailCustomer = Customer::find($user_id);
+            $detailCustomer->full_name = $addressInfo['fullname'];
+            $detailCustomer->phone = $addressInfo['phone'];
+            $detailCustomer->address = $addressInfo['address'];
+            $detailCustomer->save();
+        }
         $order_id = $rs->id;
         $orderDetail = Orders::find($order_id);
         Session::put('order_id', $order_id);   

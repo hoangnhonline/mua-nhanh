@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                       <span class="input-addon">Email</span>
-                      <input type="email" class="form-control req" id="email" name="email" placeholder="Email" value="{!! isset($addressInfo['email']) ? $addressInfo['email'] : "" !!}">
+                      <input type="email" class="form-control req" id="email" name="email" placeholder="Email" value="{!! isset($addressInfo['email']) ? $addressInfo['email'] : "" !!}" @if(Session::get('userId')) readonly="readonly" @endif>
                     </div>
                     <div class="form-group">
                       <span class="input-addon">Điện thoại</span>
