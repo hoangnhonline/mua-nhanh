@@ -79,8 +79,8 @@ class HomeController extends Controller
         $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5]);   
         $colorList = Color::all(); 
         $priceList = PriceRange::all();
-       
-        return view('frontend.pages.index', compact('detailPage', 'seo', 'slug', 'kmHot', 'colorList', 'priceList'));    
+        $hotProductList = Product::getList(['is_hot' => 1, 'limit' => 5]);
+        return view('frontend.pages.index', compact('detailPage', 'seo', 'slug', 'kmHot', 'colorList', 'priceList', 'hotProductList'));    
     }
     public function getNoti(){
         $countMess = 0;
