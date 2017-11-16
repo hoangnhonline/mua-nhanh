@@ -4,35 +4,25 @@
 		        <div class="row">
 		            <div class="col-md-8">
 		                <div class="row footer-menu">
-		                    <div class="col-md-4 footer-menu_column menu">
+		                    <div class="col-md-6 footer-menu_column menu">
 		                        <h3 class="menu_heading @if($isEdit) edit @endif" data-text="1">{!! $textList[1] !!}</h3>
 		                        <ul class="menu_listing">
-		                            <li><a href="#">Về Chúng Tôi</a></li>
-		                            <li><a href="#">Quy chế hoạt động</a></li>
-		                            <li><a href="#">Chính sách bảo mật thông tin</a></li>
-		                            <li><a href="#">Cơ chế giải quyết tranh chấp</a></li>
-		                            <li><a href="#">Liên Hệ</a></li>
+		                            <li><a href="{{ route('pages', 've-chung-toi') }}">Về chúng tôi</a></li>
+		                            <li><a href="{{ route('pages', 'cach-thuc-thanh-toan') }}">Cách thức thanh toán</a></li>
+		                            <li><a href="{{ route('pages', 'chinh-sach-bao-mat-thong-tin') }}">Chính sách bảo mật thông tin</a></li>		                            
+		                            <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
 		                        </ul>
 		                    </div>
-		                    <div class="col-md-4 footer-menu_column menu">
+		                    <div class="col-md-6 footer-menu_column menu">
 		                        <h3 class="menu_heading @if($isEdit) edit @endif" data-text="2">{!! $textList[2] !!}</h3>
 		                        <ul class="menu_listing">
-		                            <li><a href="#">Quy trình xử lý khi phát hiện hành vi kinh doanh vi phạm </a></li>
-		                            <li><a href="#">Biện pháp xử lý khi phát hiện hành vi kinh doanh vi phạm </a></li>
-		                            <li><a href="#">Cơ chế kiểm soát các nhà cung cấp</a></li>
-		                            <li><a href="#">Hotdeal E-voucher</a></li>
-		                            <li><a href="#">Chính sách giao hàng</a></li>
-		                            <li><a href="#">Chính sách đổi trả hàng</a></li>
-		                            <li><a href="#">Cách thức thanh toán</a></li>
+		                            <li><a href="{{ route('pages', 'chinh-sach-giao-hang') }}">Chính sách giao hàng</a></li>
+		                            <li><a href="{{ route('pages', 'chinh-sach-doi-tra-hang') }}">Chính sách đổi trả hàng</a></li>
+		                            <li><a href="{{ route('pages', 'co-che-cong-doanh-so-va-ap-dung-chiet-khau-cho-thanh-vien') }}">Cơ chế cộng doanh số và áp dụng chiết khấu cho thành viên</a></li>
+		                            <li><a href="{{ route('pages', 'co-che-giai-quyet-tranh-chap-khieu-nai') }}">Cơ chế giải quyết tranh chấp, khiếu nại</a></li>		                           
 		                        </ul>
 		                    </div>
-		                    <div class="col-md-4 footer-menu_column menu">
-		                        <h3 class="menu_heading @if($isEdit) edit @endif" data-text="3">{!! $textList[3] !!}</h3>
-		                        <ul class="menu_listing">
-		                            <li><a href="#">Hợp tác kinh doanh</a></li>
-		                            <li><a href="#">Liên hệ hợp tác</a></li>
-		                        </ul>
-		                    </div>
+		                    
 		                </div>
 		            </div>
 		            <div class="col-md-4 support-info">
