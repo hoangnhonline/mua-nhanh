@@ -103,7 +103,11 @@
                             </tr>                           
                             <tr>
                               <td colspan="3" align="right" style="padding:5px 9px">Chi phí vận chuyển</td>
-                              <td align="right" style="padding:5px 9px"><span>0&nbsp;₫</span></td>
+                              <td align="right" style="padding:5px 9px"><span>Chưa bao gồm</span></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" align="right" style="padding:5px 9px">Chiết khấu</td>
+                              <td align="right" style="padding:5px 9px"><span>{!! number_format($orderDetail->discount) !!}&nbsp;₫&nbsp;₫</span></td>
                             </tr>
                             <tr bgcolor="#eee">
                               <td colspan="3" align="right" style="padding:7px 9px"><strong><big>Tổng đơn hàng</big></strong></td>

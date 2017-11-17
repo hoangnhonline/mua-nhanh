@@ -109,10 +109,27 @@
                             <span class="k">Phí giao hàng (<a target="_blank" href="/chinh-sach-giao-hang.html" title="Chi tiết chính sách giao hàng">?</a>)</span>
                             <span class="v"></span>
                         </li>
-                        <li class="sep"></li>
+                        <li class="sep"></li>    
+                        <?php $totalCk = 0; ?>                    
+                        @if(Session::get('cap_bac') > 0)
+                        <?php $cap_bac = Session::get('cap_bac'); 
+                        if($cap_bac == 1){
+                          $ck = 3;
+                        }elseif($cap_bac == 2){
+                          $ck = 4;
+                        }elseif($cap_bac == 3){
+                          $ck = 5;
+                        }
+                        $totalCk = $total*$ck/100;
+                        ?>
+                        <li>
+                            <span class="k">Chiết khấu <strong style="color:#0088cc">({{ $ck }}%)</strong></span>
+                            <span id="order-subtotal" class="v"><strong style="color:#0088cc">{{ number_format($total*$ck/100) }} đ</strong></span>
+                        </li>
+                        @endif
                         <li class="total">
                             <span class="k">Tổng cộng</span>
-                            <span id="order-total" class="v">{{ number_format($total) }} đ</span>
+                            <span id="order-total" class="v">{{ number_format($total-$totalCk) }} đ</span>
                         </li>
                     </ul>
                 </div>

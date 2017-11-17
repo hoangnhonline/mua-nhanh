@@ -67,6 +67,7 @@ class CustomerController extends Controller
         //set Session user for login here
         Session::put('login', true);
         Session::put('userId', $customer->id);
+        Session::put('cap_bac', $customer->cap_bac);
         Session::put('username', $customer->full_name);
         Session::put('new-register', true);
         Session::forget('vanglai');
@@ -126,6 +127,7 @@ class CustomerController extends Controller
         //set Session user for login here
         Session::put('login', true);
         Session::put('userId', $customer->id);
+        Session::put('cap_bac', $customer->cap_bac);
         Session::put('new-register', true);
         Session::put('username', $customer->full_name);
         Session::forget('vanglai');

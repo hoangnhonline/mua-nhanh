@@ -45,7 +45,9 @@ class Orders extends Model  {
       'phone',
       'email',
       'payment_status',
-      'customer_id'
+      'customer_id',
+      'cap_bac',
+      'date_apply'
     ];
 
     public function order_detail()

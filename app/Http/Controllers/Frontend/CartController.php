@@ -188,6 +188,23 @@ class CartController extends Controller
 
         $dataArr['total_payment'] = $dataArr['total_bill'];
 
+        // tinh chiet khau
+        $totalCk = 0;                 
+        if(Session::get('cap_bac') > 0){
+              $cap_bac = Session::get('cap_bac'); 
+              if($cap_bac == 1){
+                $ck = 3;
+              }elseif($cap_bac == 2){
+                $ck = 4;
+              }elseif($cap_bac == 3){
+                $ck = 5;
+              }
+              $totalCk = $dataArr['total_bill']*$ck/100;
+
+              $dataArr['total_payment'] = $dataArr['total_bill'] - $totalCk;
+              $dataArr['discount'] = $totalCk;
+        }
+
         $rs = Orders::create($dataArr);
         if($user_id){
             $detailCustomer = Customer::find($user_id);

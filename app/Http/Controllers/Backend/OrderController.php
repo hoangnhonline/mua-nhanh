@@ -11,6 +11,8 @@ use App\Models\Orders;
 use App\Models\OrderDetail;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Settings;
+
 use DB;
 use Mail;
 class OrderController extends Controller
@@ -103,7 +105,79 @@ class OrderController extends Controller
                     $inventory =  $modelProduct->inventory - $so_luong;
                     $inventory  = $inventory > 0 ? $inventory : 0;
                     $modelProduct->update(['inventory' => $inventory]);
-                }               
+                }   
+                if($customer_id > 0){
+                    // check thứ hạng thành viên
+                    $totalDoanhThu =  Orders::where(['customer_id' => $customer_id, 'status' => 3])->whereRaw("YEAR(created_at)=".date('Y'))->sum('total_payment');
+
+                    $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+                    $adminMailArr = explode(',', $settingArr['email_cc']);
+                    $email = $customer->email;
+                    if($email != ''){
+                        $emailArr = array_merge([$email], $adminMailArr);
+                    }else{
+                        $emailArr = $adminMailArr;
+                    }
+                
+                    $date_apply = date("Y-m-d", strtotime("+1 day"));
+                    if( $totalDoanhThu >= 10000000){
+                        $customer->cap_bac = 3;
+                        $customer->date_apply = $date_apply;
+                        $customer->save();
+                        Mail::send('frontend.cart.mail_member',
+                        [                    
+                            'cus'             => $customer,
+                            'ck'    => 5,
+                            'hang'    => "Platinum",
+                            'total' => $totalDoanhThu,
+                            'date_apply' => $date_apply
+                        ],
+                        function($message) use ($emailArr) {
+                            $message->subject('Cập nhật thứ hạng thành viên');
+                            $message->to($emailArr);
+                            $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
+                            $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
+                        });
+                    }elseif( $totalDoanhThu >= 5000000){
+                        $customer->cap_bac = 2;
+                        $customer->date_apply = $date_apply;
+                        $customer->save();
+                        Mail::send('frontend.cart.mail_member',
+                        [                    
+                            'cus'             => $customer,
+                            'ck'    => 4,
+                            'hang'    => "Vàng",
+                            'total' => $totalDoanhThu,
+                            'date_apply' => $date_apply
+                        ],
+                        function($message) use ($emailArr) {
+                            $message->subject('Cập nhật thứ hạng thành viên');
+                            $message->to($emailArr);
+                            $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
+                            $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
+                        });
+
+                    }elseif( $totalDoanhThu >= 3000000){
+                        $customer->cap_bac = 1;
+                        $customer->date_apply = $date_apply;
+                        $customer->save();
+                        Mail::send('frontend.cart.mail_member',
+                        [                    
+                            'cus'             => $customer,
+                            'ck'    => 3,
+                            'hang'    => "Bạc",
+                            'total' => $totalDoanhThu,
+                            'date_apply' => $date_apply
+                        ],
+                        function($message) use ($emailArr) {
+                            $message->subject('Cập nhật thứ hạng thành viên');
+                            $message->to($emailArr);
+                            $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
+                            $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
+                        });
+                    }
+                }
+
                 break;            
             case "4":
 

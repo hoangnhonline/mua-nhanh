@@ -19,6 +19,7 @@ use App\Models\Settings;
 use App\Models\Color;
 use App\Models\UserShare;
 use App\Models\PriceRange;
+use App\Models\Orders;
 
 use Helper, File, Session, Auth, Hash;
 

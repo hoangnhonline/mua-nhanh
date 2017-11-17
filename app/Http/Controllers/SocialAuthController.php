@@ -45,6 +45,7 @@ class SocialAuthController extends Controller
             Session::flash('register', 'true');
             Session::put('login', true);
             Session::put('userId', $customer->id);
+            Session::put('cap_bac', $customer->cap_bac);
             Session::put('facebook_id', $customer->facebook_id);
             Session::put('username', $customer->full_name);
             Session::put('avatar', $customer->image_url);
@@ -57,6 +58,7 @@ class SocialAuthController extends Controller
         } else {
             Session::put('login', true);
             Session::put('userId', $getCustomer->id);
+            Session::put('cap_bac', $getCustomer->cap_bac);
             Session::put('username', $getCustomer->full_name);
             Session::put('facebook_id', $customer->facebook_id);
             Session::put('avatar', $getCustomer->image_url);
@@ -102,6 +104,7 @@ class SocialAuthController extends Controller
         } else {
             Session::put('login', true);
             Session::put('userId', $getCustomer->id);
+            Session::put('cap_bac', $getCustomer->cap_bac);
 
             return redirect()->route('shipping-step-2');
         }
@@ -143,6 +146,7 @@ class SocialAuthController extends Controller
             Session::flash('register', 'true');
             Session::put('login', true);
             Session::put('userId', $customer->id);
+            Session::put('cap_bac', $customer->cap_bac);
             Session::put('facebook_id', $customer->facebook_id);
             Session::put('username', $customer->full_name);
             Session::put('new-register', true);
@@ -161,6 +165,7 @@ class SocialAuthController extends Controller
 
             Session::put('login', true);
             Session::put('userId', $getCustomer->id);
+            Session::put('cap_bac', $getCustomer->cap_bac);
             Session::put('facebook_id', $getCustomer->facebook_id);
             Session::put('username', $getCustomer->full_name);
             Session::put('avatar', $getCustomer->image_url);
