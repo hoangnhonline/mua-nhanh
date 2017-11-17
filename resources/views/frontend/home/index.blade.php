@@ -82,7 +82,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
                             @endif
                             @endif
                             <div class="product_views">
-                              <i class="hd hd-user"></i> 161
+                              <i class="hd hd-user"></i> {{ number_format(Helper::slm($obj->id)) }}
                             </div>
                         </div>
                       </div>
@@ -168,7 +168,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
                             @endif
                             @endif
                             <div class="product_views">
-                              <i class="hd hd-user"></i> 161
+                              <i class="hd hd-user"></i> {{ number_format(Helper::slm($obj->id)) }}
                             </div>
                         </div>
                       </div>

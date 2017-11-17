@@ -88,7 +88,7 @@
                                         @endif
                                         @endif
                                         <div class="product_views">
-                                            <i class="fa fa-user-o"></i> 161
+                                            <i class="fa fa-user-o"></i> {{ number_format(Helper::slm($obj->id)) }}
                                         </div>
                                     </div>
                                 </div>
