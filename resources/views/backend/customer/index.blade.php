@@ -56,7 +56,9 @@
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">#</th>                            
-              <th>Thông tin liên hệ</th>              
+              <th>Thông tin liên hệ</th>
+              <th>Cấp bậc</th>              
+              <th class="text-right">Tổng tiền đã mua</th>              
               <th width="10%">Thời gian tạo</th>
               <th width="1%;white-space:nowrap">Thao tác</th>
             </tr>
@@ -77,8 +79,25 @@
                   @if($item->phone != '')
                   {{ $item->phone }}</br>
                   @endif
-                </td>              
-                <td>{{ date('d-m-Y H:i', strtotime($item->created_at)) }}</td>
+                </td>     
+                <td>
+                  @if( $item->cap_bac == 1)
+                  Hạng Bạc
+                  @elseif( $item->cap_bac == 2)
+                  Hạng vàng
+                  @elseif( $item->cap_bac == 3)
+                  Hạng Platinium
+                  @else
+                  Thành viên thường
+                  @endif
+                </td>
+                <td class="text-right">
+                  <?php 
+                  $total = DB::table('orders')->where(['customer_id' => $item->id, 'status' => 3])->whereRaw("YEAR(created_at)=".date('Y'))->sum('total_payment');
+                  ?>
+                  <strong>{{ number_format($total) }}</strong>
+                </td>         
+                <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                 <td style="white-space:nowrap">                                  
                   
                   <a onclick="return callDelete('{{ $item->email }}','{{ route( 'customer.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger">Xóa</a>

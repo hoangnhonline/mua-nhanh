@@ -38,6 +38,13 @@
           <span>Đơn hàng</span>
           
         </a>       
+      </li> 
+      <li {{ in_array(\Request::route()->getName(), ['customer.index', 'customer.edit', 'customer.create']) ? "class=active" : "" }}>
+        <a href="{{ route('customer.index') }}">
+          <i class="fa fa-file-image-o"></i> 
+          <span>Thành viên</span>
+          
+        </a>       
       </li>  
       <li class="treeview {{ in_array(\Request::route()->getName(), ['pages.index', 'pages.create', 'pages.edit']) ? 'active' : '' }}">
         <a href="#">

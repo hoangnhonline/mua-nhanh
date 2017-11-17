@@ -13,7 +13,7 @@
 								<a href="/thong-tin-tai-khoan.html" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 		                            <i class="hd hd-user"></i> {{ Session::get('username') }} <i class="fa fa-caret-down"></i>
 		                        </a>
-		                        <ul class="dropdown-menu" role="menu"><li><a href="/thong-tin-tai-khoan.html" rel="nofollow" class="underlined">Thông tin tài khoản</a></li>
+		                        <ul class="dropdown-menu" role="menu">
 		                            <li class="show-in-checkout"><a href="{{ route('logout') }}" rel="nofollow" class="underlined">Đăng xuất</a></li>
 		                        </ul>
 							</li>
