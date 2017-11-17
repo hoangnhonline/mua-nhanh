@@ -72,12 +72,20 @@
                                                 
                                             </span>
                                         </div>
+                                        @if($obj->is_fbshare == 1)
+                                        <div class="product_price">
+                                        <span class="price price_fb" style="font-size: 15px;color:red">
+                                            <span class="price_value" title="Giá sau khi share Facebook" itemprop="price"><i class="fa-facebook-official fa" style="color:#1f6284" title="Giá sau khi share Facebook"></i> {!! number_format($obj->price_share) !!}</span><span class="price_symbol">đ</span>
+                                        </span>      
+                                        </div>                          
+                                        @else
                                         @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )
                                         <div class="product_price product_price-list-price _product_price_old " style="display: inline-block;">
                                             <span class="price price-list-price">
                                             <span class="price_value">{{ number_format($obj->price) }}</span><span class="price_symbol">đ</span>
                                             </span>
                                         </div>
+                                        @endif
                                         @endif
                                         <div class="product_views">
                                             <i class="fa fa-user-o"></i> 161

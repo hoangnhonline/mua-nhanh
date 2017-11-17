@@ -270,6 +270,11 @@ class ProductController extends Controller
         $dataArr['created_user'] = Auth::user()->id;
 
         $dataArr['updated_user'] = Auth::user()->id;
+
+        if($dataArr['is_fbshare'] == 1){
+            $dataArr['is_sale'] = $dataArr['price_sale'] = 0;
+
+        }
         //luu display order
         if($dataArr['is_hot'] == 1){
             $dataArr['display_order'] = Helper::getNextOrder('product', 
@@ -496,7 +501,11 @@ class ProductController extends Controller
         $dataArr['updated_user'] = Auth::user()->id;    
 
         $dataArr['price_sell'] = $dataArr['is_sale'] == 1 ? $dataArr['price_sale'] : $dataArr['price'];
-            
+        
+        if($dataArr['is_fbshare'] == 1){
+            $dataArr['is_sale'] = $dataArr['price_sale'] = 0;
+        }
+
         $model = Product::find($dataArr['id']);
 
         $model->update($dataArr);
