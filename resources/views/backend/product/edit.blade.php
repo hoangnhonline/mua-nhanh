@@ -112,6 +112,7 @@
                               <label><input type="checkbox" name="is_sale" id="is_sale" value="1" {{ old('is_sale', $detail->is_sale) == 1 ? "checked" : "" }}> SALE </label>
                           </div>
                         </div>
+                        <div style="margin-bottom: 15px">
                         <div class="form-group col-md-4 none-padding" >                  
                             <label>Giá<span class="red-star">*</span></label>
                             <input type="text" class="form-control number" name="price" id="price" value="{{ old('price', $detail->price) }}">
@@ -124,6 +125,21 @@
                             <label>% SALE</label>
                             <input type="text" class="form-control number {{ old('is_sale', $detail->is_sale) == 1  ? "req" : "" }}" name="sale_percent" id="sale_percent" value="{{ old('sale_percent', $detail->sale_percent) }}">
                         </div>
+                        <div class="clearfix"></div> 
+                      </div>
+                        <div style="margin-bottom: 15px">
+                        <div class="col-md-3 none-padding">
+                          <div class="checkbox">
+                              <label><input type="checkbox" name="is_fbshare" value="1" {{ old('is_fbshare', $detail->is_fbshare) == 1 ? "checked" : "" }}> Share FB giảm giá </label>
+                          </div>                          
+                        </div>
+                        <div class="col-md-9">                          
+                          <label>Giá sau share FB</label>                  
+                          <input type="text" class="form-control number" name="price_share" id="price_share" value="{{ old('price_share', $detail->price_share) }}">                                                                     
+                        </div>    
+                        <div class="clearfix"></div>                    
+                      </div>
+                      <div style="margin-bottom: 15px">
                          <div class="col-md-6 none-padding">
                           <label>Số lượng tồn<span class="red-star">*</span></label>                  
                           <input type="text" class="form-control req number" name="inventory" id="inventory" value="{{ old('inventory', $detail->inventory) }}">                        
@@ -139,6 +155,8 @@
                               @endif
                           </select>
                       </div>
+                      <div class="clearfix"></div>
+                    </div>
 					  <div class="clearfix"></div>
 					  <div class="form-group">
 						<label>Ẩn/hiện</label>
@@ -313,7 +331,31 @@ $(document).ready(function(){
           price_sale = Math.ceil((100-sale_percent)*price/100);
           $('#price_sale').val(price_sale);
         }
-      });  
+      }); 
+      $('#is_sale').change(function(){
+        if($(this).prop('checked') == true){
+          $('#price_sale, #sale_percent').addClass('req');          
+        }else{
+          $('#price_sale, #sale_percent').val('').removeClass('req');
+        }
+      });
+      $('#is_fbshare').change(function(){
+        if($(this).prop('checked') == true){
+          $('#price_share').addClass('req');          
+        }else{
+          $('#price_share').val('').removeClass('req');
+        }
+      });
+      @if($detail->is_sale == 1)
+        $('#price_sale, #sale_percent').addClass('req');          
+      @else
+        $('#price_sale, #sale_percent').val('').removeClass('req');     
+      @endif
+      @if($detail->is_fbshare == 1)
+        $('#price_share').addClass('req');            
+      @else
+        $('#price_share').val('').removeClass('req');    
+      @endif
     });
     
 </script>

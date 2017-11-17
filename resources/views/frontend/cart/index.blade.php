@@ -39,7 +39,11 @@
                                   @foreach($arrProductInfo as $product)
                                   <?php 
                                   $i++;
-                                  $price = $product->is_sale ? $product->price_sale : $product->price; 
+                                  if(Helper::isShared(Session::get('userId'), $product->id)){
+                                    $price = $product->price_share;
+                                  }else{
+                                    $price = $product->is_sale ? $product->price_sale : $product->price; 
+                                  }
 
                                   $total += $total_per_product = ($getlistProduct[$product->id]*$price);
                                   
@@ -52,14 +56,8 @@
                                       <a href="{{ route('product', [ $product->slug ]) }}" class="prod-tit" target="_blank" title="{!! $product->name !!}">{!! $product->name !!}</a>
                                       <div style="color: #999;">Mã SP : {!! $product->code !!}</div>
                                   </td>
-                                  <td class="unit">
-                                    @if( $product->is_sale == 1)
-                                    <p class="p-price"><b>{!! number_format( $product->price_sale ) !!}đ</b></p>
-                                    <p class="p-price-old">{!! number_format( $product->price ) !!}đ</p>
-                                    <p class="p-price-dis"><span>-{!! number_format( $product->sale_percent ) !!}%</span></p>
-                                    @else
-                                    <p class="p-price"><b>{!! number_format( $product->price ) !!}đ</b></p>
-                                    @endif                                    
+                                  <td class="unit">                                    
+                                    <p class="p-price"><b>{!! number_format( $price ) !!}đ</b></p>      
                                   </td>
                                   <td class="quantity">                                         
                                         <select data-id="{{ $product->id }}" size="1" class="quantity_modifier quantity-modifier quantity-modifier-select change_quantity">

@@ -102,6 +102,7 @@
                               <label><input type="checkbox" name="is_sale" id="is_sale" value="1" {{ old('is_sale') == 1 ? "checked" : "" }}> SALE </label>
                           </div>
                         </div>
+                        <div style="margin-bottom: 15px">
                         <div class="form-group col-md-4 none-padding" >                  
                             <label>Giá<span class="red-star">*</span></label>
                             <input type="text" class="form-control number" name="price" id="price" value="{{ old('price') }}">
@@ -113,11 +114,27 @@
                         <div class="form-group col-md-4 pleft-5" >                  
                             <label>% SALE</label>
                             <input type="text" class="form-control number" name="sale_percent" id="sale_percent" value="{{ old('sale_percent') }}">
-                        </div>                      
+                        </div>
+                         <div class="clearfix"></div>   
+                      </div>
+                      <div style="margin-bottom: 15px">
+                        <div class="col-md-3 none-padding">
+                          <div class="checkbox">
+                              <label><input type="checkbox" name="is_fbshare" value="1" {{ old('is_fbshare') == 1 ? "checked" : "" }}> Share FB giảm giá </label>
+                          </div>                          
+                        </div>
+                        <div class="col-md-9">                          
+                          <label>Giá sau share FB</label>                  
+                          <input type="text" class="form-control number" name="price_share" id="price_share" value="{{ old('price_share') }}">                                                                     
+                        </div>  
+                        <div class="clearfix"></div>
+          </div>
+                         <div style="margin-bottom: 15px">                 
                          <div class="col-md-6 none-padding">
                           <label>Số lượng tồn<span class="red-star">*</span></label>                  
                           <input type="text" class="form-control req number" name="inventory" id="inventory" value="{{ old('inventory') }}">                        
                         </div>
+
                         <div class="col-md-6">
                             <label>Màu sắc</label>
                             <select name="color_id" id="color_id" class="form-control">
@@ -130,6 +147,7 @@
                             </select>
                         </div>
 						<div class="clearfix"></div>
+          </div>
 						<div class="form-group">
 						  <label>Ẩn/hiện</label>
 						  <select class="form-control" name="status" id="status">                  
@@ -256,6 +274,20 @@ $(document).ready(function(){
         $('#btnSave').hide();
         $('#btnLoading').show();
       });    
+       $('#is_sale').change(function(){
+        if($(this).prop('checked') == true){
+          $('#price_sale, #sale_percent').addClass('req');          
+        }else{
+          $('#price_sale, #sale_percent').val('').removeClass('req');
+        }
+      });
+       $('#is_fbshare').change(function(){
+        if($(this).prop('checked') == true){
+          $('#price_share').addClass('req');          
+        }else{
+          $('#price_share').val('').removeClass('req');
+        }
+      });
       $('#price_sale').blur(function(){
 
         var sale_percent = 0;

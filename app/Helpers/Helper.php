@@ -4,6 +4,7 @@ use App\Models\City;
 use App\Models\CounterValues;
 use App\Models\CounterIps;
 use App\Models\Settings;
+use App\Models\UserShare;
 
 use DB;
 
@@ -14,6 +15,10 @@ class Helper
     public static function shout(string $string)
     {
         return strtoupper($string);
+    }
+    public static function isShared($user_id, $product_id){
+        $rs = UserShare::where(['user_id' => $user_id, 'product_id' => $product_id, 'date_share' => date('Y-m-d')])->first();
+        return $rs ? true : false;
     }
     public static function getNextOrder($table, $where = []){
         return DB::table($table)->where($where)->max('display_order') + 1;

@@ -174,9 +174,16 @@ class CartController extends Controller
             $dataArr['other_email']  = $addressInfo['other_email'];
             $dataArr['other_phone']  = $addressInfo['other_phone'];
         }
+        $arrPrice = [];
         foreach ($arrProductInfo as $product) {
-            $price = $product->is_sale ? $product->price_sale : $product->price;        
+            if(Helper::isShared(Session::get('userId'), $product->id)){
+                $price = $product->price_share;
+            }else{
+            $price = $product->is_sale ? $product->price_sale : $product->price; 
+            }
+
             $dataArr['total_bill'] += $price * $getlistProduct[$product->id];
+            $arrPrice[$product->id] = $price;
         }
 
         $dataArr['total_payment'] = $dataArr['total_bill'];
@@ -197,9 +204,9 @@ class CartController extends Controller
             # code...
             $dataDetail['product_id']        = $product->id;
             $dataDetail['amount']     = $getlistProduct[$product->id];
-            $dataDetail['price']      = $product->price;
+            $dataDetail['price']      = $arrPrice[$product->id];
             $dataDetail['order_id']     = $order_id;
-            $dataDetail['total']    = $getlistProduct[$product->id]*$product->price;
+            $dataDetail['total']    = $getlistProduct[$product->id]*$arrPrice[$product->id];
 
             OrderDetail::create($dataDetail); 
         }

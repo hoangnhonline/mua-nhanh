@@ -33,7 +33,7 @@ class DetailController extends Controller
     * @return Response
     */
     public function index(Request $request)
-    {   
+    {           
         Helper::counter(1, 3);
         
         $productArr = [];

@@ -96,7 +96,11 @@
                     @foreach($arrProductInfo as $product)
                     <?php 
                     $i++;
-                    $price = $product->is_sale ? $product->price_sale : $product->price; 
+                    if(Helper::isShared(Session::get('userId'), $product->id)){
+                      $price = $product->price_share;
+                    }else{
+                      $price = $product->is_sale ? $product->price_sale : $product->price; 
+                    } 
 
                     $total += $total_per_product = ($getlistProduct[$product->id]*$price);
                     

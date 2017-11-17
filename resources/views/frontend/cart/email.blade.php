@@ -80,7 +80,11 @@
                               <?php $total = 0 ?>
                               @foreach($arrProductInfo as $product)
                                 <?php
-                                  $price = $product->is_sale ? $product->price_sale : $product->price;
+                                  if(Helper::isShared(Session::get('userId'), $product->id)){
+                                    $price = $product->price_share;
+                                  }else{
+                                    $price = $product->is_sale ? $product->price_sale : $product->price; 
+                                  }
                                 ?>
                               <tr>
                               <td align="left" valign="top" style="padding:3px 9px"><span>{!! $product->name !!}</span><br>

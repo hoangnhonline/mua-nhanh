@@ -82,11 +82,24 @@
                         </div>
                         @else
                         <div class="product_price _product_price">
+                            
                             <span class="price">
-                                <span class="price_value" itemprop="price">{!! number_format($detail->price) !!}</span><span class="price_symbol">đ</span>
+                                <span class="price_value" itemprop="price"><span class="price_txt">Giá :</span> {!! number_format($detail->price) !!}</span><span class="price_symbol">đ</span>
                             </span>
+
+                            <div class="clearfix"></div>
+                            @if($detail->is_fbshare == 1)
+                            <span class="price">
+                                <span class="price_value" itemprop="price"><span class="price_txt">Giá share FB:</span> {!! number_format($detail->price_share) !!}</span><span class="price_symbol">đ</span>
+                            </span>
+                                @if(Helper::isShared(Session::get('userId'), $detail->id) == false)
+                                <a id="btnShare" href="javascript:;"><img src="{{ URL::asset('public/assets/images/fbshare.png') }}" align="left" width="100"></a>
+                                @endif
+                            @endif
                         </div>
+
                         @endif
+
                     </div>
                 </div>
                 <div class="product_add-to-cart border-top clearfix">
@@ -224,6 +237,38 @@ $(document).ready(function () {
             $(this).zoom();
         });
     });
-
+    @if(!Session::get('userId'))
+        $('#btnShare').click(function(){
+            alert('Vui lòng Đăng nhập website bằng Facebook trước khi thao tác.');
+        });
+    @else
+        $('#btnShare').click(function(){
+            FB.ui(
+               {
+                 method: 'feed',
+                 name: 'Facebook Dialogs',
+                 link: '{!! url()->current() !!}',          
+               },
+               function(response) {            
+                 
+                   $.ajax({
+                    url : "{{ route('share-success') }}",
+                    type  : "POST",
+                    data : {
+                        mod : 'courses',
+                        product_id : {{ $detail->id }}  
+                    },
+                    success : function(data){
+                            alert('Cảm ơn bạn đã chia sẻ. Bạn sẽ được mua sản phẩm với giá ưu đãi là : ' + '{{ number_format($detail->price_share) }}' + ' trong HÔM NAY.');
+                            window.location.reload();
+                        }
+                        
+                    
+                   });
+                 
+               }
+             );
+        });
+    @endif
 </script>
 @stop

@@ -30,6 +30,7 @@ class ProductController extends Controller
         $arrSearch['is_hot'] = $is_hot = isset($request->is_hot) ? $request->is_hot : null;
         $arrSearch['is_sale'] = $is_sale = isset($request->is_sale) ? $request->is_sale : null;
         $arrSearch['is_new'] = $is_new = isset($request->is_new) ? $request->is_new : null;
+        $arrSearch['is_fbshare'] = $is_fbshare = isset($request->is_fbshare) ? $request->is_fbshare : null;
         $arrSearch['parent_id'] = $parent_id = isset($request->parent_id) ? $request->parent_id : 0;
         $arrSearch['cate_id'] = $cate_id = isset($request->cate_id) ? $request->cate_id : null;
        
@@ -42,7 +43,9 @@ class ProductController extends Controller
         if( $is_new ){
             $query->where('product.is_new', $is_new);
         }
-       
+        if( $is_fbshare ){
+            $query->where('product.is_fbshare', $is_fbshare);
+        }
         if( $is_sale ){
             $query->where('product.is_sale', $is_sale);
         }
@@ -249,6 +252,7 @@ class ProductController extends Controller
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;
         $dataArr['is_sale'] = isset($dataArr['is_sale']) ? 1 : 0;         
         $dataArr['is_new'] = isset($dataArr['is_new']) ? 1 : 0;
+        $dataArr['is_fbshare'] = isset($dataArr['is_fbshare']) ? 1 : 0;
         
         $dataArr['alias'] = Helper::stripUnicode($dataArr['name']);
         $dataArr['slug'] = str_replace(".", "-", $dataArr['slug']);
@@ -257,6 +261,7 @@ class ProductController extends Controller
         
         $dataArr['price'] = str_replace(',', '', $request->price);
         $dataArr['price_sale'] = str_replace(',', '', $request->price_sale);
+        $dataArr['price_share'] = str_replace(',', '', $request->price_share);
         
         $dataArr['inventory'] = str_replace(',', '', $request->inventory);
 
@@ -474,6 +479,8 @@ class ProductController extends Controller
         $dataArr['is_hot'] = isset($dataArr['is_hot']) ? 1 : 0;
         $dataArr['is_sale'] = isset($dataArr['is_sale']) ? 1 : 0;          
         $dataArr['is_new'] = isset($dataArr['is_new']) ? 1 : 0;
+        $dataArr['is_fbshare'] = isset($dataArr['is_fbshare']) ? 1 : 0;
+
         $dataArr['slug'] = str_replace(".", "-", $dataArr['slug']);
         $dataArr['slug'] = str_replace("(", "-", $dataArr['slug']);
         $dataArr['slug'] = str_replace(")", "", $dataArr['slug']);
@@ -481,6 +488,8 @@ class ProductController extends Controller
 
         $dataArr['price'] = str_replace(',', '', $request->price);
         $dataArr['price_sale'] = str_replace(',', '', $request->price_sale);
+        $dataArr['price_share'] = str_replace(',', '', $request->price_share);
+
         
         $dataArr['inventory'] = str_replace(',', '', $request->inventory);
 

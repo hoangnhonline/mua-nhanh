@@ -17,6 +17,7 @@ use App\Models\Customer;
 use App\Models\Newsletter;
 use App\Models\Settings;
 use App\Models\Color;
+use App\Models\UserShare;
 use App\Models\PriceRange;
 
 use Helper, File, Session, Auth, Hash;
@@ -63,7 +64,11 @@ class HomeController extends Controller
                                 'productArr'
                             ));
     }
-
+    public function shareSuccess(Request $request){
+        $user_id = Session::get('userId');        
+        $product_id = $request->product_id;   
+        UserShare::create(['user_id' => $user_id, 'product_id' => $product_id, 'date_share' => date('Y-m-d')]);
+    }
     public function pages(Request $request){
         $slug = $request->slug;
 

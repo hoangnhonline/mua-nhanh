@@ -88,7 +88,7 @@ Route::group(['namespace' => 'Frontend'], function()
     
     Route::post('/get-district', ['as' => 'get-district', 'uses' => 'DistrictController@getDistrict']);
     Route::post('/get-ward', ['as' => 'get-ward', 'uses' => 'WardController@getWard']);
-    
+    Route::post('share-success', ['as' => 'share-success', 'uses' => 'HomeController@shareSuccess']);    
 
 });
 
