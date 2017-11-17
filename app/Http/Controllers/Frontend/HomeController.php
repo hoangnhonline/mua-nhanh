@@ -52,7 +52,7 @@ class HomeController extends Controller
         foreach($cateParentHot as $parent){
             $productArr[$parent->id] = Product::getList(['parent_id' => $parent->id, 'limit' => 10]);
         }
-
+        $hotProduct = Product::getList(['is_hot' => 1, 'limit' => 10]);
         $articlesHotList = Articles::where(['cate_id' => 1, 'status' => 1])->orderBy('id', 'desc')->limit(4)->get();
                 
         return view('frontend.home.index', compact(                                                                
@@ -61,7 +61,8 @@ class HomeController extends Controller
                                 'seo', 
                                 'cateParentHot',
                                 'articlesHotList',
-                                'productArr'
+                                'productArr',
+                                'hotProduct'
                             ));
     }
     public function shareSuccess(Request $request){

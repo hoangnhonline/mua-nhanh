@@ -29,6 +29,69 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
   </div>
 </div><!-- /#home-slider -->
 @endif
+
+<div class="box-products products-hot">
+    <div class="container">
+      <div class="box-product-head">
+        <span class="box-title" style="color: red"> sản phẩm HOT</span>
+      </div>
+      <div class="box-product-content">
+              <ul class="products owl-carousel nav-center" data-dots="false" data-loop="true" data-nav = "true" data-margin = "10" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":5}}'>
+                    @foreach($hotProduct as $obj)                     
+                    <li>
+                      <div class="product product-kind-1">
+                        <div class="product_image">
+                          <a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">
+                            <img class="img-responsive" alt="product" src="{{ Helper::showImageThumb($obj->image_url) }}" />
+                          </a>
+                        </div>
+                        <div class="product_header">
+                          <h3 class="product_title">
+                            <a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">{!! $obj->name !!}</a>
+                          </h3>
+                        </div>
+                        <div class="product_info">
+                            <div class="product_price _product_price">
+                              <span class="price">
+                                <span class="price_value" itemprop="price">
+                                  @if($obj->is_sale == 1 && $obj->price_sale > 0)
+                                  {{ number_format($obj->price_sale) }}
+                                  @else
+                                      {{ number_format($obj->price) }}
+                                  @endif
+                                </span><span class="price_symbol">đ</span>
+                                @if( $obj->is_sale == 1 && $obj->sale_percent > 0 ) 
+                                <span class="price_discount">-{{ $obj->sale_percent }}%</span>
+                                @endif
+                              </span>
+                            </div>
+                            <div class="clearfix"></div>
+                            @if($obj->is_fbshare == 1)
+                            <div class="product_price">
+                            <span class="price price_fb" style="font-size: 15px;color:red">
+                                <span class="price_value" title="Giá sau khi share Facebook" itemprop="price"><i class="fa-facebook-official fa" style="color:#1f6284" title="Giá sau khi share Facebook"></i> {!! number_format($obj->price_share) !!}</span><span class="price_symbol">đ</span>
+                            </span>      
+                            </div>                          
+                            @else
+                            @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )
+                            <div class="product_price product_price-list-price _product_price_old " style="display: inline-block;">
+                                <span class="price price-list-price">
+                                <span class="price_value">{{ number_format($obj->price) }}</span><span class="price_symbol">đ</span>
+                                </span>
+                            </div>
+                            @endif
+                            @endif
+                            <div class="product_views">
+                              <i class="hd hd-user"></i> 161
+                            </div>
+                        </div>
+                      </div>
+                    </li> 
+                    @endforeach
+              </ul>
+      </div>
+    </div>
+  </div><!-- /.cosmetic -->
   <?php 
   $j = 0;
   ?>
