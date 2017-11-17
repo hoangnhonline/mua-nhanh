@@ -14,9 +14,7 @@
 		                            <i class="hd hd-user"></i> {{ Session::get('username') }} <i class="fa fa-caret-down"></i>
 		                        </a>
 		                        <ul class="dropdown-menu" role="menu"><li><a href="/thong-tin-tai-khoan.html" rel="nofollow" class="underlined">Thông tin tài khoản</a></li>
-		                            <li><a href="/thong-tin-don-hang.html" rel="nofollow" class="underlined">Thông tin đơn hàng</a></li>
-		                            <li><a href="/diem-tich-luy.html" rel="nofollow">Điểm tích lũy <span style="color:red;">(0)</span></a></li>
-		                            <li><a href="/quan-ly-e-voucher.html" rel="nofollow">Quản lý E-voucher</a></li><li class="show-in-checkout"><a href="{{ route('logout') }}" rel="nofollow" class="underlined">Đăng xuất</a></li>
+		                            <li class="show-in-checkout"><a href="{{ route('logout') }}" rel="nofollow" class="underlined">Đăng xuất</a></li>
 		                        </ul>
 							</li>
 							@endif
