@@ -82,6 +82,10 @@
                 <input type="text" class="form-control" name="color_code" id="color_code" value="{{ $detail->color_code }}">
               </div>
               <div class="form-group">
+                <label>Màu active <span class="red-star">*</span></label>
+                <input type="text" class="form-control" name="color_active" id="color_active" value="{{ $detail->color_active }}">
+              </div>
+              <div class="form-group">
                 <label>Ẩn/hiện</label>
                 <select class="form-control" name="status" id="status">                  
                   <option value="0" {{ $detail->status == 0 ? "selected" : "" }}>Ẩn</option>

@@ -37,6 +37,7 @@ class CateParent extends Model  {
                             'created_user',
                             'updated_user',
                             'color_code',
+                            'color_active',
                             'icon_url'
                         ];
     public static function getList($params = []){

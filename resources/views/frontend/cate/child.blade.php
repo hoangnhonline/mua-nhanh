@@ -1,6 +1,28 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')
 @section('content')
+<style type="text/css">
+    .nav-top-menu1, .btn-primary, .header-cart .circle{
+            background: {{ $parentDetail->color_code }};
+
+    }
+    .menu .navbar-nav>li> a:hover, .menu .navbar-nav>li>a.active{
+        background: {{ $parentDetail->color_active }};
+    }
+    .filter_title i.filter_icon, .filter .filter_button> a, .product_price, .hotline_number, .block-breadcrumb .breadcrumb li.active,.contact_email a,.contact_email{
+        color: {{ $parentDetail->color_code }};
+    }
+    .filter {
+        border-top: 2px solid {{ $parentDetail->color_code }};
+    }
+    .td-scroll-up:hover, .td-scroll-up{
+        background: {{ $parentDetail->color_code }};
+    }
+    .btn-primary:hover{
+        background-color: #17a7ef;
+    border-color: #10a0e8;
+    }
+</style>
 <div class="container">
     <div class="block-breadcrumb">
         <ol class="breadcrumb">
