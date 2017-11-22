@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/skins/_all-skins.min.css') }}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ URL::asset('public/admin/plugins/iCheck/flat/blue.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('public/admin/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ URL::asset('public/admin/dist/css/sweetalert2.min.css') }}">  
 
@@ -110,6 +111,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ URL::asset('public/admin/dist/js/demo.js') }}"></script>
 <script src="{{ URL::asset('public/admin/dist/js/lazy.js') }}"></script>
+<script src="{{ URL::asset('public/admin/plugins/colorpicker/bootstrap-colorpicker.min.js') }}"></script>
 <script src="{{ URL::asset('public/admin/dist/js/jquery.number.min.js') }}"></script>
 <script src="{{ URL::asset('public/admin/dist/js/ckeditor/ckeditor.js') }}"></script>
 
@@ -117,6 +119,7 @@
 
 $(document).ready(function(){
   $('img.lazy').lazyload();
+        $('.mau').colorpicker();
   $('input.number').number( true, 0 );
   $.ajaxSetup({
       headers: {

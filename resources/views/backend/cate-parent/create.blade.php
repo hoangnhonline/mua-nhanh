@@ -74,11 +74,11 @@
                 </div>
                 <div class="form-group">
                   <label>Màu sắc <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="color_code" id="color_code" value="{{ old('color_code') }}">
+                  <input type="text" class="form-control  mau" name="color_code" id="color_code" value="{{ old('color_code') }}">
                 </div>
                  <div class="form-group">
                   <label>Màu active <span class="red-star">*</span></label>
-                  <input type="text" class="form-control" name="color_active" id="color_active" value="{{ old('color_active') }}">
+                  <input type="text" class="form-control mau" name="color_active" id="color_active" value="{{ old('color_active') }}">
                 </div>
                 <div class="form-group">
                   <label>Ẩn/hiện</label>
