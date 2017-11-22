@@ -136,11 +136,11 @@
     border-color: #10a0e8;
     }
      .btn-primary:hover{
-        background-color: {{ $loaiDetail->color_active }};
-        border-color: {{ $loaiDetail->color_active }};
+        background-color: {{ $parentDetail->color_active }};
+        border-color: {{ $parentDetail->color_active }};
     }
     .btn-primary{
-        border-color: {{ $loaiDetail->color_active }};
+        border-color: {{ $parentDetail->color_active }};
     }
 </style>
 @stop
