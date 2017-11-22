@@ -22,6 +22,10 @@
         background-color: {{ $loaiDetail->color_active }};
         border-color: {{ $loaiDetail->color_active }};
     }
+.btn-primary{
+    border-color: {{ $loaiDetail->color_active }};
+}
+
 </style>
 <div class="container">
     <div class="block-breadcrumb">

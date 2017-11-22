@@ -135,5 +135,12 @@
         background-color: #17a7ef;
     border-color: #10a0e8;
     }
+     .btn-primary:hover{
+        background-color: {{ $loaiDetail->color_active }};
+        border-color: {{ $loaiDetail->color_active }};
+    }
+    .btn-primary{
+        border-color: {{ $loaiDetail->color_active }};
+    }
 </style>
 @stop
