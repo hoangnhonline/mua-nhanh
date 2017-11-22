@@ -119,7 +119,7 @@
     .menu .navbar-nav>li> a:hover, .menu .navbar-nav>li>a.active{
         background: {{ $parentDetail->color_active }};
     }
-    .filter_title i.filter_icon, .filter .filter_button> a, .product_price, .hotline_number, .block-breadcrumb .breadcrumb li.active,.contact_email a,.contact_email{
+    .filter_title i.filter_icon, .filter .filter_button> a, .product_price, .hotline_number, .block-breadcrumb .breadcrumb li.active,.contact_email a,.contact_email, .block-breadcrumb .breadcrumb li a:hover{
         color: {{ $parentDetail->color_code }};
     }
     .filter {
@@ -139,5 +139,6 @@
 .btn-primary{
     border-color: {{ $parentDetail->color_active }};
 }
+
 </style>
 @stop
