@@ -1,32 +1,6 @@
 @extends('frontend.layout')
 @include('frontend.partials.meta')
 @section('content')
-<style type="text/css">
-    .nav-top-menu1, .btn-primary, .header-cart .circle{
-            background: {{ $loaiDetail->color_code }};
-
-    }
-    .menu .navbar-nav>li> a:hover, .menu .navbar-nav>li>a.active{
-        background: {{ $loaiDetail->color_active }};
-    }
-    .filter_title i.filter_icon, .filter .filter_button> a, .product_price, .hotline_number, .block-breadcrumb .breadcrumb li.active,.contact_email a,.contact_email, .block-breadcrumb .breadcrumb li a:hover{
-        color: {{ $loaiDetail->color_code }};
-    }
-    .filter {
-        border-top: 2px solid {{ $loaiDetail->color_code }};
-    }
-    .td-scroll-up:hover, .td-scroll-up{
-        background: {{ $loaiDetail->color_code }};
-    }
-    .btn-primary:hover{
-        background-color: {{ $loaiDetail->color_active }};
-        border-color: {{ $loaiDetail->color_active }};
-    }
-.btn-primary{
-    border-color: {{ $loaiDetail->color_active }};
-}
-
-</style>
 <div class="container">
     <div class="block-breadcrumb">
         <ol class="breadcrumb">
@@ -225,6 +199,32 @@
         </div><!-- /.content-sidebar -->
     </div>
 </main><!-- /.main -->
+<style type="text/css">
+    .nav-top-menu1, .btn-primary, .header-cart .circle{
+            background: {{ $loaiDetail->color_code }};
+
+    }
+    .menu .navbar-nav>li> a:hover, .menu .navbar-nav>li>a.active{
+        background: {{ $loaiDetail->color_active }};
+    }
+    .filter_title i.filter_icon, .filter .filter_button> a, .product_price, .hotline_number, .block-breadcrumb .breadcrumb li.active,.contact_email a,.contact_email, .block-breadcrumb .breadcrumb li a:hover{
+        color: {{ $loaiDetail->color_code }};
+    }
+    .filter {
+        border-top: 2px solid {{ $loaiDetail->color_code }};
+    }
+    .td-scroll-up:hover, .td-scroll-up{
+        background: {{ $loaiDetail->color_code }};
+    }
+    .btn-primary:hover{
+        background-color: {{ $loaiDetail->color_active }};
+        border-color: {{ $loaiDetail->color_active }};
+    }
+.btn-primary{
+    border-color: {{ $loaiDetail->color_active }};
+}
+
+</style>
 @stop
 @section('js')
 
