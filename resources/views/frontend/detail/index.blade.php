@@ -19,8 +19,8 @@
         background: {{ $loaiDetail->color_code }};
     }
     .btn-primary:hover{
-        background-color: #17a7ef;
-    border-color: #10a0e8;
+        background-color: {{ $loaiDetail->color_active }};
+        border-color: {{ $loaiDetail->color_active }};
     }
 </style>
 <div class="container">

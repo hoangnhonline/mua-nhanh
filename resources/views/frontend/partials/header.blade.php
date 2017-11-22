@@ -93,10 +93,10 @@
 				</div>
 				<div class="collapse navbar-collapse menu" id="menu-navbar-collapse">
 					<ul class="nav navbar-nav navbar-left">
-						<li class="level0 parent"><a class="active" href="{{ route('home') }}" title="Trang chủ">Trang chủ</a></li>
+						<li class="level0 parent"><a @if($routeName=="home") class="active" @endif href="{{ route('home') }}" title="Trang chủ">Trang chủ</a></li>
 						@foreach($cateParentList as $parent)
 						<li class="level0 parent">
-							<a href="{{ route('cate-parent', $parent->slug ) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
+							<a @if( (isset($parentDetail) && $parentDetail->id == $parent->id) || (isset($loaiDetail) && $loaiDetail->id == $parent->id)   ) class="active" @endif href="{{ route('cate-parent', $parent->slug ) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
 							@if(!empty($cateArrByLoai[$parent->id]))
 							<ul class="level0 submenu">
 								@foreach($cateArrByLoai[$parent->id] as $cate)
@@ -108,9 +108,9 @@
 							@endif
 						</li>
 						@endforeach
-						<li><a href="{!! route('news-list', 'tin-tuc') !!}" title="Tin tức">Tin tức</a></li>
+						<li><a @if($routeName == "news-list" || $routeName == "news-detail") class="active" @endif href="{!! route('news-list', 'tin-tuc') !!}" title="Tin tức">Tin tức</a></li>
 						
-						<li><a href="{{ route('contact') }}" title="Liên hệ">Liên hệ</a></li>
+						<li><a @if($routeName == "contact" ) class="active" @endif href="{{ route('contact') }}" title="Liên hệ">Liên hệ</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 	        </div>
