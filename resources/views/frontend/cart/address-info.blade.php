@@ -56,7 +56,7 @@
           
       </div><!-- /.row -->
               </div>
-              @if(!Session::get('userId')))
+              @if(!Session::get('userId'))
               <div class="col-md-6">
                 <p>Đăng nhập để nhận nhiều ưu đãi từ <strong>muanhanhgiatot.vn</strong></p>
                 <div><a style="    height: 40px;   padding-top: 10px;    font-size: 15px !important;" data-url="javascript:;" title="Đăng nhập bằng Facebook" class="user-name-loginfb login-by-facebook-popup"><i class="fa fa-facebook-square"></i>Đăng nhập bằng Facebook</a></div>
@@ -190,6 +190,7 @@
           obj.addClass('error');
           obj.prev().addClass('error');
         }
+        $('span').removeClass('error');
       });
   });
 </script>
