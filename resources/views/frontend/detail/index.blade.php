@@ -84,7 +84,7 @@
                         <div class="product_price _product_price">
                             
                             <span class="price">
-                                <span class="price_value" itemprop="price">{!! Helper::isShared(Session::get('userId'), $detail->id) == true ? number_format($detail->price_share) : number_format($detail->price) !!}</span><span class="price_symbol">đ</span>
+                                <span class="price_value" itemprop="price"><span class="price_txt">@if(Helper::isShared(Session::get('userId'), $detail->id) == true) Giá ưu đãi: @else Giá: @endif </span> {!! Helper::isShared(Session::get('userId'), $detail->id) == true ? number_format($detail->price_share) : number_format($detail->price) !!}</span><span class="price_symbol">đ</span>
                             </span>
 
                             <div class="clearfix"></div>
