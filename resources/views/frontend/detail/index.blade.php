@@ -92,8 +92,10 @@
                             <span class="price">
                                 <span class="price_value" itemprop="price"><span class="price_txt">Giá share FB:</span> {!! number_format($detail->price_share) !!}</span><span class="price_symbol">đ</span>
                             </span>
+                            <br>
                                 @if(Helper::isShared(Session::get('userId'), $detail->id) == false)
-                                <a id="btnShare" href="javascript:;"><img src="{{ URL::asset('public/assets/images/fbshare.png') }}" align="left" width="100"></a>
+                                <a id="btnShare" class="save-price" href="javascript:;"><i class="fa fa-facebook" aria-hidden="true"></i> Share để giảm {{ number_format($detail->price - $detail->price_share) }}</a>
+
                                 @endif
                             @endif
                         </div>
@@ -223,7 +225,18 @@
 .btn-primary{
     border-color: {{ $loaiDetail->color_active }};
 }
-
+.save-price {
+font-size: 15px;    
+   
+    color: white;
+    background: #006fba;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin: 0;
+}
+.save-price:hover{
+    color:#FFF;
+}
 </style>
 @stop
 @section('js')
