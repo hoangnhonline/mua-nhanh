@@ -89,10 +89,6 @@
 
                             <div class="clearfix"></div>
                             @if($detail->is_fbshare == 1)
-                            <span class="price">
-                                <span class="price_value" itemprop="price"><span class="price_txt">Giá share FB:</span> {!! number_format($detail->price_share) !!}</span><span class="price_symbol">đ</span>
-                            </span>
-                            <br>
                                 @if(Helper::isShared(Session::get('userId'), $detail->id) == false)
                                 <a id="btnShare" class="save-price" href="javascript:;"><i class="fa fa-facebook" aria-hidden="true"></i> Share để giảm {{ number_format($detail->price - $detail->price_share) }}</a>
 
@@ -234,8 +230,8 @@ font-size: 15px;
     border-radius: 3px;
     margin: 0;
 }
-.save-price:hover{
-    color:#FFF;
+a.save-price:hover, a.save-price:focus{
+    color:#FFF !important;
 }
 </style>
 @stop
