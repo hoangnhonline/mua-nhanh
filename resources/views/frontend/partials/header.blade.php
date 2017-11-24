@@ -86,11 +86,11 @@
 		<div class="fix-header">
 		<nav id="mainNav" class="navbar navbar-default navbar-custom nav-top-menu1 mid-header">
       <div class="container" id="main-menu">
-        <div class="navbar-header">
+        
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navbar-collapse">
             <span class="sr-only">Toggle navigation</span><i class="hd hd-bars"></i>
           </button>
-				</div>
+		
 				<div class="collapse navbar-collapse menu" id="menu-navbar-collapse">
 					<ul class="nav navbar-nav navbar-left">
 						<li class="level0 parent"><a @if($routeName=="home") class="active" @endif href="{{ route('home') }}" title="Trang chủ">Trang chủ</a></li>
