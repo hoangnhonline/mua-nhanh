@@ -89,7 +89,7 @@
 		
 				<div class="collapse navbar-collapse menu" id="menu-navbar-collapse">
 					<ul class="nav navbar-nav navbar-left">
-						<li class="level0 parent"><a @if($routeName=="home") class="active" @endif href="{{ route('home') }}" title="Trang chủ">Trang chủ</a></li>
+						<li class="level0"><a @if($routeName=="home") class="active" @endif href="{{ route('home') }}" title="Trang chủ">Trang chủ</a></li>
 						@foreach($cateParentList as $parent)
 						<li class="level0 parent">
 							<a @if( (isset($parentDetail) && $parentDetail->id == $parent->id) || (isset($loaiDetail) && $loaiDetail->id == $parent->id)   ) class="active" @endif href="{{ route('cate-parent', $parent->slug ) }}" title="{!! $parent->name !!}">{!! $parent->name !!}</a>
