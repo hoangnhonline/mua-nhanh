@@ -273,8 +273,51 @@ $(document).ready(function () {
         });
     });
     @if(!Session::get('userId'))
-        $('#btnShare').click(function(){
-            alert('Vui lòng Đăng nhập website bằng Facebook trước khi thao tác.');
+        $('#btnShare').click(function(){            
+            if(confirm("Bạn muốn đăng nhập website bằng tài khoản Facebook ?")){
+                FB.login(function(response){
+                  if(response.status == "connected")
+                  {
+                     // call ajax to send data to server and do process login
+                    var token = response.authResponse.accessToken;
+                    $.ajax({
+                      url: $('#route-ajax-login-fb').val(),
+                      method: "POST",
+                      data : {
+                        token : token
+                      },
+                      success : function(data){                                    
+                        FB.ui(
+                           {
+                             method: 'feed',
+                             name: 'Facebook Dialogs',
+                             link: '{!! url()->current() !!}',          
+                           },
+                           function(response) {            
+                             
+                               $.ajax({
+                                url : "{{ route('share-success') }}",
+                                type  : "POST",
+                                data : {
+                                    mod : 'courses',
+                                    product_id : {{ $detail->id }}  
+                                },
+                                success : function(data){
+                                        alert('Cảm ơn bạn đã chia sẻ. Bạn sẽ được mua sản phẩm với giá ưu đãi là : ' + '{{ number_format($detail->price_share) }}' + ' trong HÔM NAY.');
+                                        window.location.reload();
+                                    }
+                                    
+                                
+                               });
+                             
+                           }
+                         );
+                      }
+                    });
+
+                  }
+                }, {scope: 'public_profile,email,user_friends'});
+            }
         });
     @else
         $('#btnShare').click(function(){
