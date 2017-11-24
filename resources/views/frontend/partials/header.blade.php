@@ -35,9 +35,9 @@
 		<div class="header_main  clearfix">
 			<div class="container">
 				<div class="row">
-					<a class="toggle-nav visible-xs visible-sm" data-target="#hd-container" data-effect="hd-effect-4">
-						<i class="hd hd-bars"></i>
-					</a><!-- /.toggle-nav -->
+					<a class="toggle-nav visible-xs visible-sm">
+							<i class="hd hd-nav"></i>
+						</a><!-- /.toggle-nav -->
 					<a class="toggle-search visible-xs visible-sm" data-target="#main-search">
 						<i class="hd hd-search"></i>
 					</a><!-- /.toggle-search -->
