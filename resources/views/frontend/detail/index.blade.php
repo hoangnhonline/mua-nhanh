@@ -328,21 +328,25 @@ $(document).ready(function () {
                  link: '{!! url()->current() !!}',          
                },
                function(response) {            
-                 
-                   $.ajax({
-                    url : "{{ route('share-success') }}",
-                    type  : "POST",
-                    data : {
-                        mod : 'courses',
-                        product_id : {{ $detail->id }}  
-                    },
-                    success : function(data){
-                            alert('Cảm ơn bạn đã chia sẻ. Bạn sẽ được mua sản phẩm với giá ưu đãi là : ' + '{{ number_format($detail->price_share) }}' + ' trong HÔM NAY.');
-                            window.location.reload();
-                        }
-                        
-                    
-                   });
+                    if(response){
+                        $.ajax({
+                            url : "{{ route('share-success') }}",
+                            type  : "POST",
+                            data : {
+                                mod : 'courses',
+                                product_id : {{ $detail->id }}  
+                            },
+                            success : function(data){
+                                    alert('Cảm ơn bạn đã chia sẻ. Bạn sẽ được mua sản phẩm với giá ưu đãi là : ' + '{{ number_format($detail->price_share) }}' + ' trong HÔM NAY.');
+                                    window.location.reload();
+                                }
+                                
+                            
+                           });    
+                    }else{
+                        alert('Share không thành công!!!')
+                    }
+                   
                  
                }
              );
