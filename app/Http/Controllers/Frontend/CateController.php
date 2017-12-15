@@ -33,7 +33,7 @@ class CateController extends Controller
         }
 
         $parentDetail = CateParent::where('slug', $slugCateParent)->first();
-
+        $settingArr = Helper::setting();
         if($parentDetail){
             $parent_id = $parentDetail->id;
             $cateList = Cate::getList(['parent_id' => $parent_id, 'limit' => 20, 'status' => 1]);           
@@ -47,9 +47,9 @@ class CateController extends Controller
             }else{
                 $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
             }  
-            
+            $productList = Product::getList( ['parent_id' => $parent_id, 'pagination' => $settingArr['product_per_page'], 'status' => 1] );
             $hotProductList = Product::getList(['is_hot' => 1, 'parent_id' => $parent_id, 'limit' => 5, 'status' => 1]);			
-            return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo', 'hotProductList'));
+            return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo', 'hotProductList', 'productList'));
 
         }else{
             return redirect()->route('home');       

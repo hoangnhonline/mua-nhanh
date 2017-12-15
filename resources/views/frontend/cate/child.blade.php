@@ -98,6 +98,9 @@
                         
                     </div>
                 </div><!-- /.category_content -->
+                <div style="text-align:center">
+                    {{ $productList->links() }}
+                  </div>  
                 <!--<div class="block-pagination pull-right">
                     <span class="pagination_text mmm">Trang 1/2</span>
                     <ul class="pagination">
