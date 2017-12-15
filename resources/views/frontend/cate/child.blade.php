@@ -49,7 +49,7 @@
                                 <div class="product product-kind-1">
                                     <div class="product_image">
                                         <a href="{{ route('product', [$obj->slug]) }}" title="{!! $obj->name !!}">
-                                            <img class="img-responsive" alt="{!! $obj->name !!}" src="{{ Helper::showImage($obj->image_url) }}" />
+                                            <img class="img-responsive" alt="{!! $obj->name !!}" src="{{ Helper::showImageThumb($obj->image_url) }}" />
                                         </a>
                                     </div>
                                     <div class="product_header">
