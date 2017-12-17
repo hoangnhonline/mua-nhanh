@@ -12,7 +12,7 @@ use App\Models\OrderDetail;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Settings;
-
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 use Mail;
 class OrderController extends Controller
@@ -50,7 +50,47 @@ class OrderController extends Controller
         return view('backend.order.index', compact('orders', 'list_status','s'));
     }
 
+    public function download()
+    {
+        $s['status'] = $status = isset($request->status) ? $request->status : -1;
+        $s['date_from'] = $date_from = isset($request->date_from) && $request->date_from !='' ? $request->date_from : date('d-m-Y');
+        $s['date_to'] = $date_to = isset($request->date_to) && $request->date_to !='' ? $request->date_to : date('d-m-Y');
+        $s['name'] = $name = isset($request->name) && trim($request->name) != '' ? trim($request->name) : '';       
 
+        $query = Orders::whereRaw('1');
+        if( $status > -1){
+            $query->where('status', $status);
+        }
+        if( $date_from ){
+            $dateFromFormat = date('Y-m-d', strtotime($date_from));
+            $query->whereRaw("DATE(created_at) >= '".$dateFromFormat."'");
+        }
+        if( $date_to ){
+            $dateToFormat = date('Y-m-d', strtotime($date_to));
+            $query->whereRaw("DATE(created_at) <= '".$dateToFormat."'");
+        }
+        if( $name != '' ){            
+            $query->whereRaw(" ( email LIKE '%".$name."%' ) OR ( fullname LIKE '%".$name."%' )");
+        }
+        $orders = $query->orderBy('orders.id', 'DESC')->get();
+        $contents = [];        
+        $i = 0;
+        foreach ($orders as $data) {
+            $i++;
+            $contents[] = [
+                'STT' => $i,
+                'Email' => $data->email,
+                'Ngày ĐK' => date('d-m-Y H:i', strtotime($data->created_at))
+            ];
+        }        
+
+        Excel::create('orders_' . date('YmdHi'), function ($excel) use ($contents) {
+            // Set sheets
+            $excel->sheet('Đơn hàng', function ($sheet) use ($contents) {
+                $sheet->fromArray($contents, null, 'A1', false, true);
+            });
+        })->download('csv');
+    }
     public function orderDetail(Request $request, $order_id)
     {
         $order = Orders::find($order_id);

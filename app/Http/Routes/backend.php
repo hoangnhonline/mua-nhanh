@@ -131,6 +131,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'orders.update', 'uses' => 'OrderController@update']);
         Route::get('/{order_id}/chi-tiet', ['as' => 'order.detail', 'uses' => 'OrderController@orderDetail']);
         Route::post('/delete-order-detail', ['as' => 'order.detail.delete', 'uses' => 'OrderController@orderDetailDelete']);
+        Route::get('/export',   ['as' => 'orders.export', 'uses' => 'OrderController@download']);
     });
 
      Route::group(['prefix' => 'articles-cate'], function () {
