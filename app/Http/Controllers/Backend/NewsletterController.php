@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Newsletter;
 use Helper, File, Session, Auth;
 use Maatwebsite\Excel\Facades\Excel;
+
 class NewsletterController extends Controller
 {
     /**
@@ -50,13 +50,13 @@ class NewsletterController extends Controller
                 'Ngày ĐK' => date('d-m-Y H:i', strtotime($data->created_at))
             ];
         }        
-        
+
         Excel::create('newsletter_' . date('YmdHi'), function ($excel) use ($contents) {
             // Set sheets
             $excel->sheet('Email', function ($sheet) use ($contents) {
                 $sheet->fromArray($contents, null, 'A1', false, true);
             });
-        })->download('xls');
+        })->download('csv');
     }
     /**
     * Store a newly created resource in storage.

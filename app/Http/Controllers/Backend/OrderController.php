@@ -120,14 +120,14 @@ class OrderController extends Controller
                     }
                 
                     $date_apply = date("Y-m-d", strtotime("+1 day"));
-                    if( $totalDoanhThu >= 10000000){
+                    if( $totalDoanhThu >= 20000000){
                         $customer->cap_bac = 3;
                         $customer->date_apply = $date_apply;
                         $customer->save();
                         Mail::send('frontend.cart.mail_member',
                         [                    
                             'cus'             => $customer,
-                            'ck'    => 5,
+                            'ck'    => 4,
                             'hang'    => "Platinum",
                             'total' => $totalDoanhThu,
                             'date_apply' => $date_apply
@@ -138,14 +138,14 @@ class OrderController extends Controller
                             $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
                             $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
                         });
-                    }elseif( $totalDoanhThu >= 5000000){
+                    }elseif( $totalDoanhThu >= 15000000){
                         $customer->cap_bac = 2;
                         $customer->date_apply = $date_apply;
                         $customer->save();
                         Mail::send('frontend.cart.mail_member',
                         [                    
                             'cus'             => $customer,
-                            'ck'    => 4,
+                            'ck'    => 3,
                             'hang'    => "Vàng",
                             'total' => $totalDoanhThu,
                             'date_apply' => $date_apply
@@ -157,14 +157,14 @@ class OrderController extends Controller
                             $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
                         });
 
-                    }elseif( $totalDoanhThu >= 3000000){
+                    }elseif( $totalDoanhThu >= 10000000){
                         $customer->cap_bac = 1;
                         $customer->date_apply = $date_apply;
                         $customer->save();
                         Mail::send('frontend.cart.mail_member',
                         [                    
                             'cus'             => $customer,
-                            'ck'    => 3,
+                            'ck'    => 2,
                             'hang'    => "Bạc",
                             'total' => $totalDoanhThu,
                             'date_apply' => $date_apply
