@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-
+use App\Models\TagObjects;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
@@ -13,6 +13,7 @@ use App\Models\Color;
 use App\Models\ProductImg;
 use App\Models\MetaData;
 use App\Models\ThongTinChung;
+use App\Models\Tag;
 
 use Helper, File, Session, Auth, URL, Image;
 
@@ -80,6 +81,20 @@ class ProductController extends Controller
         }
 
         return view('backend.product.index', compact( 'items', 'arrSearch', 'cateParentList', 'cateArr'));
+    }
+    private function processRelation($dataArr, $object_id, $type = 'add'){
+    
+        if( $type == 'edit'){
+          
+            TagObjects::deleteTags( $object_id, 1);      
+
+        }
+        // xu ly tags
+        if( !empty( $dataArr['tags'] ) && $object_id ){
+            foreach ($dataArr['tags'] as $tag_id) {
+                TagObjects::create(['object_id' => $object_id, 'tag_id' => $tag_id, 'type' => 1]);
+            }
+        }      
     }
     public function kho(Request $request)
     {
@@ -217,7 +232,7 @@ class ProductController extends Controller
         $parent_id = $request->parent_id ? $request->parent_id : 0;
         $cate_id = $request->cate_id ? $request->cate_id : null;
         $cateArr = (object) [];
-  
+      $tagArr = Tag::where('type', 1)->get();
         $cateParentList = CateParent::all();
         
         if( $parent_id > -1){
@@ -225,7 +240,7 @@ class ProductController extends Controller
             $cateArr = Cate::where('parent_id', $parent_id)->select('id', 'name')->orderBy('display_order', 'desc')->get();           
         }
         $colorArr = Color::orderBy('display_order')->get();        
-        return view('backend.product.create', compact('cateParentList', 'cateArr', 'colorArr', 'parent_id', 'cate_id'));
+        return view('backend.product.create', compact('cateParentList', 'cateArr', 'colorArr', 'parent_id', 'cate_id', 'tagArr'));
     }
 
     /**
@@ -291,6 +306,7 @@ class ProductController extends Controller
 
         $this->storeImage( $product_id, $dataArr);
         $this->storeMeta($product_id, 0, $dataArr);
+        $this->processRelation($dataArr, $product_id);
         Session::flash('message', 'Tạo mới sản phẩm thành công');
 
         return redirect()->route('product.index', [
@@ -406,6 +422,7 @@ class ProductController extends Controller
     */
     public function edit($id)
     {
+          $tagArr = Tag::where('type', 1)->get();
         $hinhArr = (object) [];
         $detail = Product::find($id);
 
@@ -422,10 +439,10 @@ class ProductController extends Controller
         if ( $detail->meta_id > 0){
             $meta = MetaData::find( $detail->meta_id );
         }       
-             
+            $tagSelected = Product::productTag($id);  
         $colorArr = Color::all();          
             
-        return view('backend.product.edit', compact( 'detail', 'hinhArr', 'colorArr', 'cateParentList', 'cateArr', 'meta'));
+        return view('backend.product.edit', compact( 'detail', 'hinhArr', 'colorArr', 'cateParentList', 'cateArr', 'meta', 'tagArr', 'tagSelected'));
     }
     public function copy($id)
     {
@@ -516,6 +533,7 @@ class ProductController extends Controller
 
         $this->storeMeta( $product_id, $dataArr['meta_id'], $dataArr);
         $this->storeImage( $product_id, $dataArr);
+         $this->processRelation($dataArr, $product_id, 'edit');
         Session::flash('message', 'Chỉnh sửa thành công');
 
         return redirect()->route('product.edit', $product_id);

@@ -165,6 +165,21 @@
 						  <option value="1" {{ $detail->status == 1 ? "selected" : "" }}>Hiện</option>
 						</select>
 					  </div>     
+              <div class="input-group">
+                          <label>Tags</label>
+                          <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
+                            @if( $tagArr->count() > 0)
+                              @foreach( $tagArr as $value )
+                              <option value="{{ $value->id }}" {{ in_array($value->id, $tagSelected) || (old('tags') && in_array($value->id, old('tags'))) ? "selected" : "" }}>{{ $value->name }}</option>
+                              @endforeach
+                            @endif
+                          </select>
+                          <span class="input-group-btn">
+                            <button style="margin-top:24px" class="btn btn-primary btn-sm" id="btnAddTag" type="button" data-value="3">
+                              Tạo mới
+                            </button>
+                          </span>
+                        </div>
                       <div style="margin-bottom:10px;clear:both"></div>
                       <div class="form-group">
                         <label>Mô tả</label>
