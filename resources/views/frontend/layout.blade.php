@@ -102,6 +102,9 @@
 		.box-products.gift .box-tabs li>a:after {
 			color: #1cb1a8;
 		}
+		.dropdown-menu>li>a{
+			padding: 10px 20px !important;
+		}
 	</style>
 </head>
 <body class="home">
