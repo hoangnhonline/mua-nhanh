@@ -14,6 +14,9 @@
 		                            <i class="hd hd-user"></i> {{ Session::get('username') }} <i class="fa fa-caret-down"></i>
 		                        </a>
 		                        <ul class="dropdown-menu" role="menu">
+		                         	<li class="show-in-checkout">
+		                         		<a href="{{ route('order-history') }}" title="Đơn hàng của tôi"> Đơn hàng của tôi</a>
+		                         	</li>
 		                            <li class="show-in-checkout"><a href="{{ route('logout') }}" rel="nofollow" class="underlined">Đăng xuất</a></li>
 		                        </ul>
 							</li>
