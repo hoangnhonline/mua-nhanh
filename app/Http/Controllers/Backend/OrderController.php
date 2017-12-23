@@ -18,11 +18,12 @@ use Mail;
 class OrderController extends Controller
 {
     protected $list_status = [
-        0 => 'Chờ xử lý',       
-        3 => 'Đã hoàn thành',
-        4 => 'Đã huỷ'    
-      ];
-
+        0 => 'Đã tiếp nhập đơn hàng',
+        1 => 'Hàng đang được chuẩn bị',    
+        3 => 'Đã được chuyển đi',
+        4 => 'Đã giao thành công',
+        5 => 'Đã huỷ'   
+      ];      
     public function index(Request $request){     
         $s['status'] = $status = isset($request->status) ? $request->status : -1;
         $s['date_from'] = $date_from = isset($request->date_from) && $request->date_from !='' ? $request->date_from : date('d-m-Y');
@@ -132,11 +133,8 @@ class OrderController extends Controller
         $customer = Customer::find($customer_id);
         $order = Orders::find($order_id);
        
-        switch ($status_id) {
-            case "1":
-               
-                break;
-            case "3":
+        switch ($status_id) {           
+            case "4":
                 $orderDetail = OrderDetail::where('order_id', $order_id)->get();
                 foreach($orderDetail as $detail){
                     $product_id = $detail->product_id;                    
@@ -148,7 +146,7 @@ class OrderController extends Controller
                 }   
                 if($customer_id > 0){
                     // check thứ hạng thành viên
-                    $totalDoanhThu =  Orders::where(['customer_id' => $customer_id, 'status' => 3])->whereRaw("YEAR(created_at)=".date('Y'))->sum('total_payment');
+                    $totalDoanhThu =  Orders::where(['customer_id' => $customer_id, 'status' => 4])->whereRaw("YEAR(created_at)=".date('Y'))->sum('total_payment');
 
                     $settingArr = Settings::whereRaw('1')->lists('value', 'name');
                     $adminMailArr = explode(',', $settingArr['email_cc']);
@@ -218,10 +216,8 @@ class OrderController extends Controller
                     }
                 }
 
-                break;            
-            case "4":
-
-                break;
+                break;           
+            
             default:
 
                 break;
