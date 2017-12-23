@@ -66,9 +66,9 @@
                                             <td style="text-align:center;"><a style="color:#ec1c24" href="{{ route('order-detail', $order->id)}}">{{ str_pad($order->id, 6, "0", STR_PAD_LEFT)}}</a></td>
                                             <td>{{ date('d/m/Y', strtotime($order->created_at)) }}</td>
                                             <td>                                        
-                                            @foreach($order->order_detail()->get() as $detail)
+                                            @foreach($order->order_detail as $detail)
                                             
-                                            <p>{{ Helper::getName($detail->product_id, 'product') }} [ <span style="color:#ec1c24">{{ $detail->so_luong }}</span> ]</p>
+                                            <p>{{ $detail->product->name }} [ <span style="color:#ec1c24">{{ $detail->amount }}</span> ]</p>
                                             @endforeach
                                             </td>
                                             <td style="text-align:right">{{ number_format($order->tong_tien) }}&nbsp;₫</td>                                    
