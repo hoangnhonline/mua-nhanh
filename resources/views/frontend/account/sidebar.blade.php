@@ -7,22 +7,12 @@
               <div class="layered layered-category">
                   <div class="layered-content">
                       <ul class="tree-menu">
-                          <li {{ \Request::route()->getName() == "account-info" ? "class=active" : "" }}>
-                              <a href="{{ route('account-info') }}" title="Cập nhật thông tin"> Cập nhật thông tin</a>
-                          </li>
+                         
                           <li {{ \Request::route()->getName() == "order-history" || \Request::route()->getName() == "order-detail" ? "class=active" : "" }}>
                               <a href="{{ route('order-history') }}" title="Đơn hàng của tôi"> Đơn hàng của tôi</a>
-                          </li>
-                          <li {{ \Request::route()->getName() == "notification" ? "class=active" : "" }}>
-                              <a href="{{ route('notification') }}" title="Thông báo của tôi"> Thông báo của tôi</a>
-                          </li>
-                          @if(Session::get('facebook_id') == null)
-                          <li {{ \Request::route()->getName() == "change-password" ? "class=active" : "" }}>
-                              <a href="{{ route('change-password') }}" title="Đổi mật khẩu"> Đổi mật khẩu</a>
-                          </li>
-                          @endif
+                          </li>                         
                           <li>
-                              <a href="{{ route('user-logout') }}" title="Thoát tài khoản">Thoát tài khoản </a>
+                              <a href="{{ route('logout') }}" title="Thoát tài khoản">Thoát tài khoản </a>
                           </li>
                       </ul>
                   </div>
