@@ -135,7 +135,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="clearfix" style="margin-top:20px"></div>
+                @if(!empty((array)$tagSelected))
+                <?php $countTag = count($tagSelected);?>
+                <article class="block block-news-with-region">
+                    <u>Tags</u>:
+                    <?php $i = 0; ?>
+                    @foreach($tagSelected as $tag)
+                    <?php $i++; ?>
+                    <a href="{{ route('tag', $tag->slug) }}" title="{!! $tag['name'] !!}">{!! $tag['name'] !!}</a>@if($i< $countTag), @endif
+                    @endforeach     
+                </article>
+                @endif
             </div>
+
             @if ($otherList->count() > 0)
             <div class="sidebar" style="margin-top: 20px">
                 <div class="block block-normal">

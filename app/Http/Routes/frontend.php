@@ -91,6 +91,7 @@ Route::group(['namespace' => 'Frontend'], function()
     
     Route::get('tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
     Route::get('danh-muc/{slug}', ['as' => 'news-list', 'uses' => 'NewsController@newsList']);
+    Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'DetailController@tagDetail']);
     Route::get('lien-he.html', ['as' => 'contact', 'uses' => 'HomeController@contact']);
     Route::get('{slug}.html', ['as' => 'pages', 'uses' => 'HomeController@pages']);    
     Route::get('{slugCateParent}', ['as' => 'cate-parent', 'uses' => 'CateController@cateParent']);    
