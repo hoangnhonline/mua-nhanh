@@ -5,6 +5,7 @@
     <div class="block-breadcrumb">
         <ol class="breadcrumb">
             <li><a href="{{ route('home') }}" title="Trở về trang chủ">Trang chủ</a></li>
+            <li>Tags</li>            
             <li>{!! $cateDetail->name !!}</li>            
         </ol>
     </div>
@@ -27,7 +28,7 @@
                 <div class="block branding category-header">
                     <div class="block_header has-branding">
                         <h1 class="block_title category-header-heading" style="text-transform: uppercase;">
-                            <span class="block_branding">Tag : {!! $cateDetail->name !!}</h1>
+                            <span>Tag : {!! $cateDetail->name !!}</h1>
                     </div>
                 </div><!-- /.header -->
                 <!--<div class="filter-inline current-filter">
@@ -112,5 +113,6 @@
             </div><!-- /.col-md-9 -->
         </div>
     </div>
-</main><!-- /.main -->
+</main><!-- /.main -->  
+
 @stop
