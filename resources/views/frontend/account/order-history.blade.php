@@ -71,7 +71,7 @@
                                             <p>{{ $detail->product->name }} [ <span style="color:#ec1c24">{{ $detail->amount }}</span> ]</p>
                                             @endforeach
                                             </td>
-                                            <td style="text-align:right">{{ number_format($order->tong_tien) }}&nbsp;₫</td>                                    
+                                            <td style="text-align:right">{{ number_format($order->total_payment) }}&nbsp;₫</td>                                    
                                             <td style="text-align:center">
                                                 <span class="order-status">
                                                     {{ $status[$order->status] }}

@@ -76,14 +76,22 @@ class OrderController extends Controller
         $orders = $query->orderBy('orders.id', 'DESC')->get();
         $contents = [];        
         $i = 0;
+        ob_end_clean();
+        ob_start();
         foreach ($orders as $data) {
+            $sp = "";
+            foreach($data->order_detail as $detail){
+                $sp .= $detail->product->name."\n\r";
+            }
             $i++;
             $contents[] = [
                 'STT' => $i,
-                'Email' => $data->email,
-                'Ngày ĐK' => date('d-m-Y H:i', strtotime($data->created_at))
+                'Khách hàng' => $data->fullname."-".$data->phone,
+                'Ngày đặt' => date('d-m-Y H:i', strtotime($data->created_at)),
+                'Sản phẩm' => $sp,
+                'Tổng tiền' => number_format($data->total_payment)
             ];
-        }        
+        }       
 
         Excel::create('orders_' . date('YmdHi'), function ($excel) use ($contents) {
             // Set sheets
@@ -91,6 +99,7 @@ class OrderController extends Controller
                 $sheet->fromArray($contents, null, 'A1', false, true);
             });
         })->download('csv');
+
     }
     public function orderDetail(Request $request, $order_id)
     {
