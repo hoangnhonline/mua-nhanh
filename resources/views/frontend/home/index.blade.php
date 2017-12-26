@@ -184,7 +184,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
     </div>
   </div><!-- /.cosmetic -->
 @endforeach
-
+<!--
   <div class="row-blog">
     <div class="container">
       <div class="blog-list">
@@ -215,5 +215,6 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
               </div>
       </div>
     </div>
-  </div><!-- /.row-blog -->
+  </div>
+-->
 @stop
