@@ -74,6 +74,12 @@
         </ul>
        
       </li>
+      <li {{ in_array(\Request::route()->getName(), ['tag.edit', 'tag.index']) ? "class=active" : "" }}>
+          <a href="{{ route('tag.index') }}">
+            <i class="fa fa-pencil-square-o"></i> 
+            <span>Tags</span>          
+          </a>       
+        </li>
       <li {{ in_array(\Request::route()->getName(), ['newsletter.edit', 'newsletter.index']) ? "class=active" : "" }}>
         <a href="{{ route('newsletter.index') }}">
           <i class="fa fa-pencil-square-o"></i> 
