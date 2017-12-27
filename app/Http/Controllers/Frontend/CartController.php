@@ -166,6 +166,7 @@ class CartController extends Controller
         $dataArr['email']  = $email = $addressInfo['email'];
         $dataArr['phone']  = $addressInfo['phone'];
         $dataArr['method_id'] = $request->method_id;
+        $dataArr['notes'] = $request->notes;
         $dataArr['customer_id'] = $user_id;
         if( isset($addressInfo['choose_other_address']) && $addressInfo['choose_other_address'] == 1 ){
             $dataArr['is_other_address']  = 1;

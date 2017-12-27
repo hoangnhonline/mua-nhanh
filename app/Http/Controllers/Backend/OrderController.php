@@ -133,10 +133,12 @@ class OrderController extends Controller
     public function update(Request $request){
         $status_id   = $request->status_id;
         $order_id    = $request->order_id;
+        $shipping_fee    = $request->shipping_fee ? $request->shipping_fee : 0;
         $customer_id = $request->customer_id;
 
         Orders::where('id', $order_id)->update([
-            'status' => $status_id
+            'status' => $status_id, 
+            'shipping_fee' => $shipping_fee
         ]);
         //get customer to send mail
         $customer = Customer::find($customer_id);
