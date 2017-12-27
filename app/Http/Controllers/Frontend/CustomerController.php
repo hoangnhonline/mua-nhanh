@@ -18,13 +18,10 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-
+        
         $customer_id = Session::get('userId');
-        if(isset($request->vang_lai) && $request->vang_lai == 1){
-            Session::set('vanglai', $data);
-        }else{
-            $customer = Customer::find($customer_id)->update($data);
-        }
+        
+        $customer = Customer::find($customer_id)->update($data);       
 
         if(Session::has('new-register')) {
           Session::forget('new-register');
@@ -42,7 +39,9 @@ class CustomerController extends Controller
           Session::forget('fb_id');
         }
 
-        return 'sucess';
+        Session::flash('message', 'Cập nhật thành công.');
+
+        return redirect()->route('account-info');
     }
 
     public function register(Request $request)
