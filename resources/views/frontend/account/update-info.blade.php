@@ -56,7 +56,7 @@
                               <div class="row">
                                   <div class="col-md-12 form-group clearfix">
                                       <div class="col-form-label"><label for="fullname">Họ và tên</label></div>
-                                      <div class="col-form-input"><input type="text" class="form-control" id="fullname" name="fullname" value="{!! old('fullname', $customer->fullname) !!}"></div>
+                                      <div class="col-form-input"><input type="text" class="form-control" id="full_name" name="full_name" value="{!! old('full_name', $customer->full_name) !!}"></div>
                                   </div>
                                   <div class="col-md-12  form-group clearfix">
                                       <div class="col-form-label"><label for="phone">Điện thoại</label></div>
@@ -68,9 +68,9 @@
                                   </div>
                               </div>
                           
-                            <div class="clearfix account-action">
+                            <div class="clearfix account-action" style="margin-top: 15px;">
                                 <div class="col-form-label"></div>
-                                <div class="col-form-input"><button type="submit" id="btnSave" class="btn btn-yellow btn-flat">Cập nhật</button></div>
+                                <div class="col-form-input"><button type="submit" id="btnSave" class="btn btn-yellow btn-flat btn-primary">Cập nhật</button></div>
                             </div>
                           </form>
                       </div>
