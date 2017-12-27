@@ -56,7 +56,10 @@
                             </p>
                           </div>
                         </div>
-                          <div class="clearfix"></div>
+                          <div class="clearfix" style="margin-bottom: 30px"></div>
+                          <div class="form-group">
+                            <textarea class="form-control" rows="5" name="notes" placeholder="Ghi chú cho đơn hàng"></textarea>
+                          </div>
                         </div>
                       </div>                      
                       <div class="form-group text-right">

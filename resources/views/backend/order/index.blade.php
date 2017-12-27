@@ -113,9 +113,18 @@
                 {{ $order->other_email }}
                 </a>
                 @endif
+                @if($order->notes)
+                <br><p style="color:red;margin-top: 10px;"><u>Ghi chú: </u><i>{{ $order->notes}}</i></p>
+                @endif
                 </td>
                              
-                <td style="text-align:right;width:100px">{{ number_format($order->total_payment) }}</td>
+                <td style="text-align:right;width:100px"><strong style="font-size: 17px">{{ number_format($order->total_payment) }}</strong>
+                  <br>
+                  <div class="form-group form-inline">
+                    <label>Phí ship</label>
+                    <input type="text" name="" value="{{ number_format($order->shipping_fee) }}" class="phiship number" data-id="{{ $order->id }}" class="form-control" data-status="{{ $order->status }}" data-customer="{{ $order->customer_id }}" style="text-align: right;padding-right: 5px;margin-top: 10px;width: 80px">
+                </div>
+                </td>
                 <td>
                   <select class="select-change-status form-control" order-id="{{$order->id}}" customer-id="{{$order->customer_id}}" >
                     @foreach($list_status as $index => $status)
@@ -171,7 +180,31 @@ $(document).ready(function(){
     var customer_id = $(this).attr('customer-id');
     update_status_orders(status_id, order_id, customer_id);
   });
+  $('.phiship').change(function(){
+    var status_id = $(this).data('status');
+    var order_id  = $(this).data('id');
+    var customer_id = $(this).data('customer');
+    var shipping_fee = $(this).val();
+    update_orders(status_id, order_id, customer_id, shipping_fee);
+  });
+  function update_orders(status_id, order_id, customer_id, shipping_fee){
+    $.ajax({
+      url: '{{route('orders.update')}}',
+      type: "POST",
+      data: {
+        status_id : status_id,
+        order_id : order_id,
+        customer_id : customer_id,
+        shipping_fee : shipping_fee
+      },
+      success: function (response) {
+        location.reload()
+      },
+      error: function(response){
 
+      }
+    });
+  }
   function update_status_orders(status_id, order_id, customer_id) {
     $.ajax({
       url: '{{route('orders.update')}}',
