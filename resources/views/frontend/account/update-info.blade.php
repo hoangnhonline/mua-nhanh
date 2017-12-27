@@ -39,7 +39,7 @@
                         <div class="box_header">
                             <h2 class="box_title" style="text-transform:uppercase">THÔNG TIN TÀI KHOẢN</h2>                            
                         </div><!-- /.box_header -->
-                        <div class="col-tab-content admin-content col-md-12" id="all">
+                        <div class="col-tab-content admin-content" id="all" style="padding : 15px 10px">
                   
                           @if(Session::has('message'))                        
                           <p class="alert alert-info" >{{ Session::get('message') }}</p>                  
