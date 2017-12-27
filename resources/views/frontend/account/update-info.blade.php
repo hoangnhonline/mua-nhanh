@@ -39,7 +39,7 @@
                         <div class="box_header">
                             <h2 class="box_title" style="text-transform:uppercase">THÔNG TIN TÀI KHOẢN</h2>                            
                         </div><!-- /.box_header -->
-                        <div class="col-tab-content admin-content" id="all">
+                        <div class="col-tab-content admin-content col-md-12" id="all">
                   
                           @if(Session::has('message'))                        
                           <p class="alert alert-info" >{{ Session::get('message') }}</p>                  
@@ -81,20 +81,6 @@
         </div>
     </div>
 
-<style type="text/css">    
-    .dashboard-order.have-margin {
-        margin-bottom: 20px;
-    }   
-    table.table-responsive thead tr th {
-        display: table-cell;
-        padding: 8px;
-        background: #f8f8f8;
-        font-weight: 500;    
-    }
-    table.table-responsive tbody tr td{
-        font-size: 14px !important;
-    }
-</style>
 <div class="clearfix"></div>
 @endsection
 
