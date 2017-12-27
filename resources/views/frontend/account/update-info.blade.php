@@ -23,9 +23,14 @@
                             </div>
                             <div class="sidebar_widget widget">
                                 <ul class="side-menu">
+                                   <li {{ \Request::route()->getName() == "account-info" ? "class=active" : "" }}>
+                                    <a href="{{ route('account-info') }}" title="Thông tin tài khoản"> Thông tin tài khoản</a>
+                                  </li>
                                    <li {{ \Request::route()->getName() == "order-history" || \Request::route()->getName() == "order-detail" ? "class=active" : "" }}>
                                   <a href="{{ route('order-history') }}" title="Đơn hàng của tôi"> Đơn hàng của tôi</a>
-                              </li>                         
+                                  </li> 
+                                      
+                                                       
                               <li>
                                   <a href="{{ route('logout') }}" title="Thoát tài khoản">Thoát tài khoản </a>
                               </li>
@@ -40,7 +45,13 @@
                             <h2 class="box_title" style="text-transform:uppercase">THÔNG TIN TÀI KHOẢN</h2>                            
                         </div><!-- /.box_header -->
                         <div class="col-tab-content admin-content" id="all" style="padding : 15px 10px">
-                  
+                          <div class="panel panel-info" style="font-size: 17px;padding: 10px;line-height:40px">
+                            <h3>Hạng thành viên : <span style="color:#fb6800">{{ $thuhang }}</span></h3>
+                            @if($sotien > 0)
+                            <p >Bạn còn <strong>{{ number_format($sotien) }}</strong> để đạt hạng <strong>{{ $hangtieptheo }}</strong>.<br></p>
+                            <p style="font-size:15px">Xem quyền lợi của các hạng tại <a style="color:#fb6800" href="http://quanjeans.xyz/co-che-cong-doanh-so-va-ap-dung-chiet-khau-cho-thanh-vien.html" target="_blank">đây</a></p>
+                            @endif
+                          </div>
                           @if(Session::has('message'))                        
                           <p class="alert alert-info" >{{ Session::get('message') }}</p>                  
                           @endif

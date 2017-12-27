@@ -161,7 +161,25 @@ class CustomerController extends Controller
         $customer_id = Session::get('userId');
         $customer = Customer::find($customer_id);
         $listCity = City::orderBy('display_order')->get();
-        return view('frontend.account.update-info', compact('seo', 'customer', 'listCity'));
+        $totalDoanhThu = (int)  Orders::where(['customer_id' => $customer_id, 'status' => 4])->whereRaw("YEAR(created_at)=".date('Y'))->sum('total_payment');
+        if($totalDoanhThu > 20000000){
+            $thuhang = "Hạng Platinum";
+            $hangtieptheo = "";
+            $sotien = 0;
+        }elseif($totalDoanhThu > 15000000 && $totalDoanhThu <= 20000000){
+            $thuhang = "Hạng Vàng";
+            $hangtieptheo = "Hạng Platinum";
+            $sotien = 20000000 - $totalDoanhThu;
+        }elseif($totalDoanhThu > 10000000 && $totalDoanhThu <= 15000000){
+            $thuhang = "Hạng Bạc";
+            $hangtieptheo = "Hạng Vàng";
+            $sotien = 15000000 - $totalDoanhThu;
+        }else{
+            $thuhang = "Thành viên thường";
+            $sotien = 10000000 - $totalDoanhThu;
+            $hangtieptheo = "Hạng Bạc";
+        }
+        return view('frontend.account.update-info', compact('seo', 'customer', 'listCity', 'sotien', 'thuhang', 'hangtieptheo'));
     }
     public function changePassword(Request $request){
         if(!Session::get('userId')){

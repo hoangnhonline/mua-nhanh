@@ -23,6 +23,9 @@
                             </div>
                             <div class="sidebar_widget widget">
                                 <ul class="side-menu">
+                                   <li {{ \Request::route()->getName() == "account-info" ? "class=active" : "" }}>
+                                    <a href="{{ route('account-info') }}" title="Thông tin tài khoản"> Thông tin tài khoản</a>
+                                  </li>
                                    <li {{ \Request::route()->getName() == "order-history" || \Request::route()->getName() == "order-detail" ? "class=active" : "" }}>
                                   <a href="{{ route('order-history') }}" title="Đơn hàng của tôi"> Đơn hàng của tôi</a>
                               </li>                         
