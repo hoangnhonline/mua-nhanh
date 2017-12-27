@@ -19,7 +19,8 @@
     <div class="col-md-12">
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
-      @endif     
+      @endif
+        <a href="{{ route('newsletter.export') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Xuất Excel</a>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>

@@ -24,16 +24,17 @@ class OrderController extends Controller
 {
 
   protected $status = [
-    0 => 'Chờ xử lý',
-    1 => 'Đang giao hàng',    
-    3 => 'Đã hoàn thành',
-    4 => 'Đã huỷ'    
+    0 => 'Đã tiếp nhập đơn hàng',
+    1 => 'Hàng đang được chuẩn bị',    
+    3 => 'Đã được chuyển đi',
+    4 => 'Đã giao thành công',
+    5 => 'Đã huỷ'    
   ];
 
   public function detail(Request $request)
   {
     $order_id = $request->order_id;
-    $order = Orders::find($order_id);
+    $order = Orders::find($order_id);    
     $customer_id = Session::get('userId'); 
 
     if($order->customer_id != $customer_id){
@@ -41,6 +42,7 @@ class OrderController extends Controller
     }else{
       $orderDetail = $order->order_detail;      
     }
+    //dd($orderDetail);die;
     foreach($orderDetail as $detail){
       $detailArr[$detail->product_id] = Product::find($detail->product_id);
     }
@@ -69,7 +71,7 @@ class OrderController extends Controller
   }
 
   public function history(Request $request)
-  {
+  { 
     if(!Session::has('userId')) {
       return redirect()->route('home');
     }

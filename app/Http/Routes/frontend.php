@@ -58,7 +58,19 @@ Route::group(['namespace' => 'Frontend'], function()
         Route::get('success', ['as' => 'success', 'uses' => 'CartController@success']);
         Route::post('save-order', ['as' => 'save-order', 'uses' => 'CartController@saveOrder']);        
     });
-
+    Route::group(['prefix' => 'tai-khoan'], function () {
+        Route::get('don-hang-cua-toi', ['as' => 'order-history', 'uses' => 'OrderController@history']);
+         Route::get('thong-bao-cua-toi', ['as' => 'notification', 'uses' => 'CustomerController@notification']);
+        Route::get('thong-tin-tai-khoan', ['as' => 'account-info', 'uses' => 'CustomerController@accountInfo']);
+        Route::get('doi-mat-khau', ['as' => 'change-password', 'uses' => 'CustomerController@changePassword']);
+        Route::post('cap-nhat', ['as' => 'update-customer', 'uses' => 'CustomerController@update']);
+        Route::post('save-new-password', ['as' => 'save-new-password', 'uses' => 'CustomerController@saveNewPassword']);
+        Route::get('/chi-tiet-don-hang/{order_id}', ['as' => 'order-detail', 'uses' => 'OrderController@detail']);
+        Route::post('/huy-don-hang', ['as' => 'order-cancel', 'uses' => 'OrderController@huy']);
+        Route::post('/forget-password', ['as' => 'forget-password', 'uses' => 'CustomerController@forgetPassword']);
+        Route::get('/reset-password/{key}', ['as' => 'reset-password', 'uses' => 'CustomerController@resetPassword']);
+        Route::post('save-reset-password', ['as' => 'save-reset-password', 'uses' => 'CustomerController@saveResetPassword']);
+    });
     Route::group(['prefix' => 'gio-hang'], function () {
         Route::get('/', ['as' => 'cart', 'uses' => 'CartController@index']);
         Route::get('thong-tin-nhan-hang', ['as' => 'address-info', 'uses' => 'CartController@addressInfo']);
@@ -76,8 +88,10 @@ Route::group(['namespace' => 'Frontend'], function()
         Route::get('mua-hang-thanh-cong', ['as' => 'success', 'uses' => 'CartController@success']);
         Route::post('save-order', ['as' => 'payment', 'uses' => 'CartController@saveOrder']);        
     });
+    
     Route::get('tim-kiem.html', ['as' => 'search', 'uses' => 'HomeController@search']);
     Route::get('danh-muc/{slug}', ['as' => 'news-list', 'uses' => 'NewsController@newsList']);
+    Route::get('tag/{slug}', ['as' => 'tag', 'uses' => 'DetailController@tagDetail']);
     Route::get('lien-he.html', ['as' => 'contact', 'uses' => 'HomeController@contact']);
     Route::get('{slug}.html', ['as' => 'pages', 'uses' => 'HomeController@pages']);    
     Route::get('{slugCateParent}', ['as' => 'cate-parent', 'uses' => 'CateController@cateParent']);    

@@ -155,6 +155,21 @@
 							<option value="1" {{ old('status') == 1 || old('status') == NULL ? "selected" : "" }}>Hiện</option>                  
 						  </select>
 						</div>   
+            <div class="input-group">
+                    <label>Tags</label>
+                    <select class="form-control select2" name="tags[]" id="tags" multiple="multiple">                  
+                      @if( $tagArr->count() > 0)
+                        @foreach( $tagArr as $value )
+                        <option value="{{ $value->id }}" {{ (old('tags') && in_array($value->id, old('tags'))) ? "selected" : "" }}>{{ $value->name }}</option>
+                        @endforeach
+                      @endif
+                    </select>
+                    <span class="input-group-btn">
+                      <button style="margin-top:24px" class="btn btn-primary btn-sm" id="btnAddTag" type="button" data-value="3">
+                        Tạo mới
+                      </button>
+                    </span>
+                  </div>
                         <div style="margin-bottom:10px;clear:both"></div>
                         <div class="form-group">
                             <label>Mô tả</label>
@@ -248,6 +263,38 @@
     height: 35px !important;
   }
 </style>
+<div id="tagModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+    <form method="POST" action="{{ route('tag.ajax-save') }}" id="formAjaxTag">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tạo mới tag</h4>
+      </div>
+      <div class="modal-body" id="contentTag">
+          <input type="hidden" name="type" value="1">
+           <!-- text input -->
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Tags<span class="red-star">*</span></label>
+              <textarea class="form-control" name="str_tag" id="str_tag" rows="4" >{{ old('str_tag') }}</textarea>
+            </div>
+            
+          </div>
+          <div classs="clearfix"></div>
+      </div>
+      <div style="clear:both"></div>
+      <div class="modal-footer" style="text-align:center">
+        <button type="button" class="btn btn-primary btn-sm" id="btnSaveTagAjax"> Save</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" id="btnCloseModalTag">Close</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
 @stop
 @section('javascript_page')
 <script type="text/javascript">
@@ -264,8 +311,62 @@ $(document).ready(function(){
 			}
 		});
 	});
+$(document).on('click', '#btnSaveTagAjax', function(){
+    $.ajax({
+      url : $('#formAjaxTag').attr('action'),
+      data: $('#formAjaxTag').serialize(),
+      type : "post", 
+      success : function(str_id){          
+        $('#btnCloseModalTag').click();
+        $.ajax({
+          url : "{{ route('tag.ajax-list') }}",
+          data: { 
+            type : 1 ,
+            tagSelected : $('#tags').val(),
+            str_id : str_id
+          },
+          type : "get", 
+          success : function(data){
+              $('#tags').html(data);
+              $('#tags').select2('refresh');
+              
+          }
+        });
+      }
+    });
+ }); 
+ 
     $(document).ready(function(){
-      
+      $('#btnAddTag').click(function(){
+        $('#tagModal').modal('show');
+
+    });
+      $('#contentTag #name').change(function(){
+       var name = $.trim( $(this).val() );
+       if( name != '' && $('#contentTag #slug').val() == ''){
+          $.ajax({
+            url: $('#route_get_slug').val(),
+            type: "POST",
+            async: false,      
+            data: {
+              str : name
+            },              
+            success: function (response) {
+              if( response.str ){                  
+                $('#contentTag #slug').val( response.str );
+              }                
+            },
+            error: function(response){                             
+                var errors = response.responseJSON;
+                for (var key in errors) {
+                  
+                }
+                //$('#btnLoading').hide();
+                //$('#btnSave').show();
+            }
+          });
+       }
+    });
       $('#parent_id').change(function(){
         location.href="{{ route('product.create') }}?parent_id=" + $(this).val();
       })

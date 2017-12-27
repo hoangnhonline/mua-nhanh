@@ -35,10 +35,5 @@ class OrderDetail extends Model  {
     {
         return $this->hasOne('App\Models\Product', 'id', 'product_id');
     }
-
-    public function order()
-    {
-        return $this->belongTos('App\Models\Orders', 'id', 'order_id');
-    }
         
 }

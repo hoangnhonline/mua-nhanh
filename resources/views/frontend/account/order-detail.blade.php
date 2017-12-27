@@ -5,31 +5,43 @@
     
   @endsection
 @section('content')
-<div class="columns-container">
-    <div class="container" id="columns">
-        <!-- breadcrumb -->
-        <div class="breadcrumb clearfix">
-            <a class="home" href="{{ route('home') }}" title="trở về trang chủ">Trang chủ</a>
-            <span class="navigation-pipe">&nbsp;</span>
-            <a href="{{ route('order-history') }}" title="Đơn hàng của tôi">Đơn hàng </a>
-            <span class="navigation-pipe">&nbsp;</span>
-            <a href="#" title="Chi tiết">Chi tiết </a>
-        </div>
-        <!-- ./breadcrumb -->
-        
-          <!-- row -->
-          <div class="row">
-          
-              @include ('frontend.account.sidebar')              
-              <!-- Center colunm-->
-              <div class="center_column col-xs-12 col-sm-9" id="center_column">
-                  <!-- page heading-->
-                  <h2 class="page-heading">
-                      <span class="page-heading-title2">Đơn hàng #{{ $str_order_id }} - {{ $status[$order->status] }}</span>
-                  </h2>
-                  <!-- Content page -->
-                    
-                    <div class="account-order-detail">
+<div id="main" class="main-content clearfix" style="margin-top:15px;">
+        <div class="container">
+            <div class="sidebar-content-2">
+                <div class="sidebar sidebar-profile">
+                    <div class="box box-no-padding">
+                        <div class="box_header">
+                            <h2 class="box_title" style="text-transform:uppercase">Thông tin chung</h2>
+                        </div>
+                        <div class="box_body">
+                            <div class="sidebar_widget widget widget-profile">
+                                <div class="profile">                                   
+                                    <div class="profile_info">
+                                        <div class="profile_name"><i class="hd hd-user"></i> {{ Session::get('username') }}</div>       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sidebar_widget widget">
+                                <ul class="side-menu">
+                                   <li {{ \Request::route()->getName() == "order-history" || \Request::route()->getName() == "order-detail" ? "class=active" : "" }}>
+                                  <a href="{{ route('order-history') }}" title="Đơn hàng của tôi"> Đơn hàng của tôi</a>
+                              </li>                         
+                              <li>
+                                  <a href="{{ route('logout') }}" title="Thoát tài khoản">Thoát tài khoản </a>
+                              </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.header -->
+                <div class="content" style="">
+                    <div class="box">
+                        <div class="box_header">
+                            <h2 class="box_title" style="text-transform:uppercase">Đơn hàng #{{ $str_order_id }} - {{ $status[$order->status] }}</h2>
+                            <input type="hidden" name="orderId" id="orderId" value="13313200">
+                        </div><!-- /.box_header -->
+                        <div style="padding : 15px 10px">
+                             <div class="account-order-detail">
                     
                       <p class="date mt10 mb20">Ngày đặt hàng:  {{ $ngay_dat_hang }}</p>
                       
@@ -88,14 +100,22 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($orderDetail as $rowOrder)                          
+                          @foreach($orderDetail as $order) 
+                                                 
                           <tr>
-                            <td><a href="{{ route('product', $detailArr[$rowOrder->product_id]->slug) }}" target="_blank" class="link">{{ $detailArr[$rowOrder->product_id]->name }}</a> </td>
+                        <td>
+                        @if($order->product)
+                        {{ $order->product->name }}
+                        @endif
+                        </td>
+                           <td>
+                             {{ number_format($order->price) }}
+                           </td>
+                          <td>
+                            {{ number_format($order->amount) }}
+                          </td>
                            
-                            <td><strong class="hidden-lg hidden-md">Giá: </strong>{{ number_format($rowOrder->don_gia) }}&nbsp;₫</td>
-                            <td><strong class="hidden-lg hidden-md">Số lượng: </strong>{{ $rowOrder['so_luong'] }} </td>
-                           
-                            <td><strong class="hidden-lg hidden-md">Tổng cộng: </strong>{{ number_format($rowOrder->tong_tien) }}&nbsp;₫</td>
+                            <td><strong class="hidden-lg hidden-md">Tổng cộng: </strong>{{ number_format($rowOrder->total) }}&nbsp;₫</td>
                           </tr>
                           @endforeach                         
                         </tbody>
@@ -122,15 +142,14 @@
                     @if($order->status == 0)
                     <button id="btnHuy" class="btn btn-danger" style="float:right"><i class="fa fa-times"></i> Hủy đơn hàng</button>
                     @endif
-                     </div>
-
-              </div>
-              <!-- ./ Center colunm -->
-              
-          </div>
-          <!-- ./row-->   
+                        </div>
+                        
+                    </div>
+                </div><!-- /.header -->
+            </div>
+        </div>
     </div>
-</div>
+
 <div class="clearfix"></div>
 @endsection
 

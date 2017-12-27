@@ -20,6 +20,7 @@
       @if(Session::has('message'))
       <p class="alert alert-info" >{{ Session::get('message') }}</p>
       @endif
+      <button id="btnExport" data-link="{{ route('orders.export') }}" class="btn btn-info btn-sm" style="margin-bottom:5px">Xuất Excel</button>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Bộ lọc</h3>
@@ -159,6 +160,10 @@ $(document).ready(function(){
     $('#searchForm').submit();
 
   });
+  $('#btnExport').click(function(){
+    $('#searchForm').attr('action', $(this).data('link'));
+    $('#searchForm').submit();
+  })
   $('.datepicker').datepicker({ dateFormat: 'dd-mm-yy' });
   $('.select-change-status').change(function(){
     var status_id = $(this).val();

@@ -193,11 +193,11 @@ class CartController extends Controller
         if(Session::get('cap_bac') > 0){
               $cap_bac = Session::get('cap_bac'); 
               if($cap_bac == 1){
-                $ck = 3;
+                $ck = 2;
               }elseif($cap_bac == 2){
-                $ck = 4;
+                $ck = 3;
               }elseif($cap_bac == 3){
-                $ck = 5;
+                $ck = 4;
               }
               $totalCk = $dataArr['total_bill']*$ck/100;
 

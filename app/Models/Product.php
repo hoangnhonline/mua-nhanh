@@ -73,6 +73,9 @@ class Product extends Model  {
         if( isset($params['is_new']) && $params['is_new'] ){
             $query->where('is_new', $params['is_new']);
         }
+        if(isset($params['listId']) && $params['listId']){
+            $query->whereIn('product.id', $params['listId']);
+        }
         $query->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')            
                             ->select('product_img.image_url', 'product.*');
         $query->orderBy('product.is_hot', 'desc')->orderBy('product.id', 'desc');

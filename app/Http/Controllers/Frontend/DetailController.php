@@ -14,6 +14,10 @@ use App\Models\Banner;
 use App\Models\MetaData;
 use App\Models\Color;
 use App\Models\PriceRange;
+use App\Models\Tag;
+use App\Models\TagObjects;
+use App\Models\Settings;
+
 use Helper, File, Session, Auth;
 
 class DetailController extends Controller
@@ -76,9 +80,59 @@ class DetailController extends Controller
         $kmHot = Articles::getList(['is_hot' => 1, 'cate_id' => 2, 'limit' => 5]);
         $colorList = Color::all(); 
         $priceList = PriceRange::all();
-        return view('frontend.detail.index', compact('detail', 'loaiDetail', 'cateDetail', 'hinhArr', 'productArr', 'seo', 'socialImage', 'otherList', 'kmHot', 'colorList', 'priceList'));
+        $tagSelected = Product::getListTag($detail->id); 
+        return view('frontend.detail.index', compact('detail', 'loaiDetail', 'cateDetail', 'hinhArr', 'productArr', 'seo', 'socialImage', 'otherList', 'kmHot', 'colorList', 'priceList', 'tagSelected'));
     }
+    public function tagDetail(Request $request){
+          $settingArr = Settings::whereRaw('1')->lists('value', 'name');
+        $slug = $request->slug;
+        $cateDetail = Tag::where('slug', $slug)->first();
+        if($cateDetail->type == 1 || $cateDetail->type == 3){ // product           
+            $productList = (object)[];
+            $listId = [];
+            $listId = TagObjects::where(['type' => $cateDetail->type, 'tag_id' => $cateDetail->id])->lists('object_id');
+            if($listId){
+                $listId = $listId->toArray();
+            }
+            if(!empty($listId)){
+                $productList = Product::getList( ['pagination' => $settingArr['product_per_page'], 'status' => 1, 'listId' => $listId] );
+            }
+            
+            if( $cateDetail->meta_id > 0){
+               $seo = MetaData::find( $cateDetail->meta_id )->toArray();
+               $seo['title'] = $seo['title'] != '' ? $seo['title'] : 'Tag - '. $cateDetail->name;
+               $seo['description'] = $seo['description'] != '' ? $seo['description'] : 'Tag - '. $cateDetail->name;
+               $seo['keywords'] = $seo['keywords'] != '' ? $seo['keywords'] : 'Tag - '. $cateDetail->name;
+               $seo['custom_text'] = $seo['custom_text'];
+            }else{
+                $seo['title'] = $seo['description'] = $seo['keywords'] = 'Tag - '. $cateDetail->name;
+                $seo['custom_text'] = "";
+            }
+             $hotProductList = Product::getList(['is_hot' => 1, 'limit' => 5, 'status' => 1]);   
+            return view('frontend.cate.tag', compact('productList', 'socialImage', 'seo', 'cateDetail', 'hotProductList'));
+        }elseif($detail->type == 2){ // articles
+            $articlesArr = (object)[];
+            $listId = [];
+            $listId = TagObjects::where(['type' => 2, 'tag_id' => $detail->id])->lists('object_id');
+            if($listId){
+                $listId = $listId->toArray();
+            }
+            if(!empty($listId)){
+                $articlesArr = Articles::whereIn('id', $listId)->orderBy('id', 'desc')->where('cate_id', '<>', 999)->paginate(20);
+            }  
 
+            if( $detail->meta_id > 0){
+               $seo = MetaData::find( $detail->meta_id )->toArray();
+               $seo['title'] = $seo['title'] != '' ? $seo['title'] : 'Tag - '. $detail->name;
+               $seo['description'] = $seo['description'] != '' ? $seo['description'] : 'Tag - '. $detail->name;
+               $seo['keywords'] = $seo['keywords'] != '' ? $seo['keywords'] : 'Tag - '. $detail->name;
+            }else{
+                $seo['title'] = $seo['description'] = $seo['keywords'] = 'Tag - '. $detail->name;
+            }  
+            $hotProductList = Product::getList(['is_hot' => 1, 'limit' => 5, 'status' => 1]);              
+            return view('frontend.news.tag', compact('title', 'articlesArr', 'seo', 'socialImage', 'detail', 'hotProductList'));
+        }
+    }
     public function ajaxTab(Request $request){
         $table = $request->type ? $request->type : 'category';
         $id = $request->id;

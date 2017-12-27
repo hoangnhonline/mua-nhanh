@@ -12,17 +12,18 @@ use App\Models\OrderDetail;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Settings;
-
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 use Mail;
 class OrderController extends Controller
 {
     protected $list_status = [
-        0 => 'Chờ xử lý',       
-        3 => 'Đã hoàn thành',
-        4 => 'Đã huỷ'    
-      ];
-
+        0 => 'Đã tiếp nhập đơn hàng',
+        1 => 'Hàng đang được chuẩn bị',    
+        3 => 'Đã được chuyển đi',
+        4 => 'Đã giao thành công',
+        5 => 'Đã huỷ'   
+      ];      
     public function index(Request $request){     
         $s['status'] = $status = isset($request->status) ? $request->status : -1;
         $s['date_from'] = $date_from = isset($request->date_from) && $request->date_from !='' ? $request->date_from : date('d-m-Y');
@@ -50,7 +51,56 @@ class OrderController extends Controller
         return view('backend.order.index', compact('orders', 'list_status','s'));
     }
 
+    public function download()
+    {
+        $s['status'] = $status = isset($request->status) ? $request->status : -1;
+        $s['date_from'] = $date_from = isset($request->date_from) && $request->date_from !='' ? $request->date_from : date('d-m-Y');
+        $s['date_to'] = $date_to = isset($request->date_to) && $request->date_to !='' ? $request->date_to : date('d-m-Y');
+        $s['name'] = $name = isset($request->name) && trim($request->name) != '' ? trim($request->name) : '';       
 
+        $query = Orders::whereRaw('1');
+        if( $status > -1){
+            $query->where('status', $status);
+        }
+        if( $date_from ){
+            $dateFromFormat = date('Y-m-d', strtotime($date_from));
+            $query->whereRaw("DATE(created_at) >= '".$dateFromFormat."'");
+        }
+        if( $date_to ){
+            $dateToFormat = date('Y-m-d', strtotime($date_to));
+            $query->whereRaw("DATE(created_at) <= '".$dateToFormat."'");
+        }
+        if( $name != '' ){            
+            $query->whereRaw(" ( email LIKE '%".$name."%' ) OR ( fullname LIKE '%".$name."%' )");
+        }
+        $orders = $query->orderBy('orders.id', 'DESC')->get();
+        $contents = [];        
+        $i = 0;
+        ob_end_clean();
+        ob_start();
+        foreach ($orders as $data) {
+            $sp = "";
+            foreach($data->order_detail as $detail){
+                $sp .= $detail->product->name."\n\r";
+            }
+            $i++;
+            $contents[] = [
+                'STT' => $i,
+                'Khách hàng' => $data->fullname."-".$data->phone,
+                'Ngày đặt' => date('d-m-Y H:i', strtotime($data->created_at)),
+                'Sản phẩm' => $sp,
+                'Tổng tiền' => number_format($data->total_payment)
+            ];
+        }       
+
+        Excel::create('orders_' . date('YmdHi'), function ($excel) use ($contents) {
+            // Set sheets
+            $excel->sheet('Đơn hàng', function ($sheet) use ($contents) {
+                $sheet->fromArray($contents, null, 'A1', false, true);
+            });
+        })->download('csv');
+
+    }
     public function orderDetail(Request $request, $order_id)
     {
         $order = Orders::find($order_id);
@@ -92,11 +142,8 @@ class OrderController extends Controller
         $customer = Customer::find($customer_id);
         $order = Orders::find($order_id);
        
-        switch ($status_id) {
-            case "1":
-               
-                break;
-            case "3":
+        switch ($status_id) {           
+            case "4":
                 $orderDetail = OrderDetail::where('order_id', $order_id)->get();
                 foreach($orderDetail as $detail){
                     $product_id = $detail->product_id;                    
@@ -108,7 +155,7 @@ class OrderController extends Controller
                 }   
                 if($customer_id > 0){
                     // check thứ hạng thành viên
-                    $totalDoanhThu =  Orders::where(['customer_id' => $customer_id, 'status' => 3])->whereRaw("YEAR(created_at)=".date('Y'))->sum('total_payment');
+                    $totalDoanhThu =  Orders::where(['customer_id' => $customer_id, 'status' => 4])->whereRaw("YEAR(created_at)=".date('Y'))->sum('total_payment');
 
                     $settingArr = Settings::whereRaw('1')->lists('value', 'name');
                     $adminMailArr = explode(',', $settingArr['email_cc']);
@@ -120,14 +167,14 @@ class OrderController extends Controller
                     }
                 
                     $date_apply = date("Y-m-d", strtotime("+1 day"));
-                    if( $totalDoanhThu >= 10000000){
+                    if( $totalDoanhThu >= 20000000){
                         $customer->cap_bac = 3;
                         $customer->date_apply = $date_apply;
                         $customer->save();
                         Mail::send('frontend.cart.mail_member',
                         [                    
                             'cus'             => $customer,
-                            'ck'    => 5,
+                            'ck'    => 4,
                             'hang'    => "Platinum",
                             'total' => $totalDoanhThu,
                             'date_apply' => $date_apply
@@ -138,14 +185,14 @@ class OrderController extends Controller
                             $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
                             $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
                         });
-                    }elseif( $totalDoanhThu >= 5000000){
+                    }elseif( $totalDoanhThu >= 15000000){
                         $customer->cap_bac = 2;
                         $customer->date_apply = $date_apply;
                         $customer->save();
                         Mail::send('frontend.cart.mail_member',
                         [                    
                             'cus'             => $customer,
-                            'ck'    => 4,
+                            'ck'    => 3,
                             'hang'    => "Vàng",
                             'total' => $totalDoanhThu,
                             'date_apply' => $date_apply
@@ -157,14 +204,14 @@ class OrderController extends Controller
                             $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
                         });
 
-                    }elseif( $totalDoanhThu >= 3000000){
+                    }elseif( $totalDoanhThu >= 10000000){
                         $customer->cap_bac = 1;
                         $customer->date_apply = $date_apply;
                         $customer->save();
                         Mail::send('frontend.cart.mail_member',
                         [                    
                             'cus'             => $customer,
-                            'ck'    => 3,
+                            'ck'    => 2,
                             'hang'    => "Bạc",
                             'total' => $totalDoanhThu,
                             'date_apply' => $date_apply
@@ -178,10 +225,8 @@ class OrderController extends Controller
                     }
                 }
 
-                break;            
-            case "4":
-
-                break;
+                break;           
+            
             default:
 
                 break;
