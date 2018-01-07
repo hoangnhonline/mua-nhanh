@@ -106,7 +106,7 @@
                 </td>
                 @endif
                 <td>
-                  <img class="img-thumbnail lazy" width="80" data-original="{{ $item->image_url ? Helper::showImage($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
+                  <img class="img-thumbnail lazy" width="80" data-original="{{ $item->image_url ? Helper::showImageThumb($item->image_url) : URL::asset('public/admin/dist/img/no-image.jpg') }}" alt="{{ $item->name }}" title="{{ $item->name }}" />
                 </td>
                 <td>                  
                   {{ $item->code }} - <a style="color:#333;font-weight:bold" href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}">{{ $item->name }}</a> &nbsp; @if( $item->is_hot == 1 )
