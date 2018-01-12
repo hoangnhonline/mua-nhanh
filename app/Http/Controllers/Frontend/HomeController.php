@@ -9,6 +9,8 @@ use App\Models\CateParent;
 use App\Models\Cate;
 use App\Models\Product;
 use App\Models\ProductImg;
+use App\Models\ProductMuaNhanh;
+use App\Models\ProductImgMuaNhanh;
 use App\Models\Banner;
 use App\Models\Pages;
 use App\Models\Articles;
@@ -38,7 +40,39 @@ class HomeController extends Controller
     * @return Response
     */   
     
-   
+   public function dongbo(Request $request){
+    $query = ProductMuaNhanh::whereRaw(' code NOT IN ( SELECT code FROM product)')->get();
+    foreach($query as $pro){        
+        $hinhArr = ProductImgMuaNhanh::where('product_id', $pro->id)->get();
+        $data = $pro->toArray();
+        $thumbnail_id = $data['thumbnail_id'];
+        unset($data['id']);
+
+        $data['thumbnail_id'] = null;
+        //insert product
+        $rsSP = Product::create($data);
+        $product_id = $rsSP->id;
+        
+
+        foreach($hinhArr as $hinh){
+            $dataHinh = $hinh->toArray();
+            //var_dump($dataHinh);die;
+            $dataHinh['product_id'] = $product_id;
+            $hinh_id = $dataHinh['id'];
+            unset($dataHinh['id']);
+            //var_dump($dataHinh);
+            $rs_hinh = ProductImg::create($dataHinh);
+            //dd($rs_hinh);die;
+            //var_dump($hinh_id);
+            if($hinh_id == $thumbnail_id){
+                $rsProduct = Product::find($product_id);                
+                //die('123');
+                $rsProduct->update(['thumbnail_id' => $rs_hinh->id]);
+            }
+        }
+    }
+   }
+
     public function index(Request $request)
     {   
         $productArr = [];
@@ -49,10 +83,11 @@ class HomeController extends Controller
         $seo['keywords'] = $settingArr['site_keywords'];
         $socialImage = $settingArr['banner'];
 
-        $cateParentHot = CateParent::getList(['limit' => 4]);
-        foreach($cateParentHot as $parent){
+        $cateParentHot = CateParent::getList(['limit' => 10, 'parent_id' => 6]);
+        foreach($cateParentHot as $parent){        
             $productArr[$parent->id] = Product::getList(['parent_id' => $parent->id, 'limit' => 10]);
         }
+
         $hotProduct = Product::getList(['is_hot' => 1, 'limit' => 10]);
         $articlesHotList = Articles::where(['cate_id' => 1, 'status' => 1])->orderBy('id', 'desc')->limit(4)->get();
                 

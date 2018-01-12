@@ -123,7 +123,8 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
             <div class="product-wrapper">              
               <div class="tab-panel active">
                 <ul class="products owl-carousel nav-center" data-dots="false" data-loop="false" data-nav = "true" data-margin = "10" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
-                    @foreach($productArr[$parent->id] as $obj)                     
+                    @foreach($productArr[$parent->id] as $obj)   
+
                     <li>
                       <div class="product product-kind-1">
                         <div class="product_image">

@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::get('/test', function() {
     return view('frontend.email.thanks');
 });
@@ -33,7 +34,7 @@ Route::group(['prefix' => 'authentication'], function () {
 });
 Route::group(['namespace' => 'Frontend'], function()
 {   
-    
+    Route::get('/dongbo', ['as' => 'dongbo', 'uses' => 'HomeController@dongbo']);
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::get('/load-slider', ['as' => 'load-slider', 'uses' => 'HomeController@loadSlider']);
     Route::get('/count-message', ['as' => 'count-message', 'uses' => 'HomeController@getNoti']);
@@ -101,6 +102,7 @@ Route::group(['namespace' => 'Frontend'], function()
     Route::post('/search', ['as' => 'ajax-search', 'uses' => 'HomeController@ajaxSearch']);        
     
     Route::post('/get-district', ['as' => 'get-district', 'uses' => 'DistrictController@getDistrict']);
+
     Route::post('/get-ward', ['as' => 'get-ward', 'uses' => 'WardController@getWard']);
     Route::post('share-success', ['as' => 'share-success', 'uses' => 'HomeController@shareSuccess']);    
 
