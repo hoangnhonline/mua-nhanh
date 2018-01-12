@@ -108,7 +108,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
             @foreach($cateArrByLoai[$parent->id] as $cate)
             <?php $i++;             
             ?>
-            @if($i <= 4)
+            @if($i <= 3)
             <li><a href="{!! route('cate', [$parent->slug, $cate->slug]) !!}" title="{!! $cate->name !!}">{!! $cate->name !!}</a></li>
             @endif
             @endforeach
