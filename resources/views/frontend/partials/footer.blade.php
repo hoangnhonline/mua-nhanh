@@ -75,8 +75,8 @@
 					</div>
 				</div>
 				 <div class="col-fter-5">
-		            <a target="_blank" href="#">
-		            <img class="img-responsive" src="{{ URL::asset('public/assets/images/logo-bct.png') }}" style="max-width: 165px;">
+		            <a target="_blank" href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=40884">
+		            <img class="img-responsive" src="http://online.gov.vn/Images/dathongbao.png" style="max-width: 165px;">
 		            </a>
 		        </div>
 			</div>
