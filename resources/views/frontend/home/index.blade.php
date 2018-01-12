@@ -106,8 +106,11 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
             $i = 0;
             ?>
             @foreach($cateArrByLoai[$parent->id] as $cate)
-            <?php $i++; ?>
+            <?php $i++;             
+            ?>
+            @if($i <= 4)
             <li><a href="{!! route('cate', [$parent->slug, $cate->slug]) !!}" title="{!! $cate->name !!}">{!! $cate->name !!}</a></li>
+            @endif
             @endforeach
             <li><a href="{{ route('cate-parent', $parent->slug) }}">Xem tất cả <i class="hd hd-long-arrow-right"></i></a></li>
         </ul>
