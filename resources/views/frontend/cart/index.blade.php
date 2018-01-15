@@ -81,7 +81,7 @@
                                 @endif
                             </table>
                           </div><!-- /.block-progress-steps -->
-                          <div class="box_footer hidden-xs hidden-sm">
+                          <div class="box_footer">
                               <a href="{{ route('home') }}" title="Tiếp tục mua hàng" class="btn btn-main btn-default"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>                              
                               @if(!empty(Session::get('products')))
                               <a href="{{ route('address-info') }}" style="color: #FFF;text-transform: uppercase;" title="Tiến hành đặt hàng" class="btn btn-primary pull-right">Đặt hàng</a>
