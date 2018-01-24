@@ -136,7 +136,7 @@
                   <a class="btn btn-default btn-sm" href="{{ route('product', [$item->slug] ) }}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> Xem</a>                  
                   <a href="{{ route( 'product.edit', [ 'id' => $item->id ]) }}" class="btn btn-warning btn-sm">Chỉnh sửa</a>                 
 
-                  <a onclick="return callDelete('{{ $item->name }}','{{ route( 'product.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm">Xóa</a>
+                  <a onclick="return callDelete('','{{ route( 'product.destroy', [ 'id' => $item->id ]) }}');" class="btn btn-danger btn-sm">Xóa</a>
 
                 </td>
               </tr> 
@@ -172,7 +172,7 @@
 <script type="text/javascript">
 function callDelete(name, url){  
   swal({
-    title: 'Bạn muốn xóa "' + name +'"?',
+    title: 'Bạn chắc chắn muốn xóa?',
     text: "Dữ liệu sẽ không thể phục hồi.",
     type: 'warning',
     showCancelButton: true,
