@@ -231,12 +231,17 @@ class CartController extends Controller
         
         $settingArr = Settings::whereRaw('1')->lists('value', 'name');
         $adminMailArr = explode(',', $settingArr['email_cc']);
-        
+        if($email != ''){
+
+            $emailArr = array_merge([$email], $adminMailArr);
+        }else{
+            $emailArr = $adminMailArr;
+        }
         
         // send email
         $order_id =str_pad($order_id, 6, "0", STR_PAD_LEFT);
         
-        if(!empty($adminMailArr)){
+        if(!empty($emailArr)){
             Mail::send('frontend.cart.email',
                 [                    
                     'orderDetail'             => $orderDetail,
@@ -245,25 +250,10 @@ class CartController extends Controller
                     'method_id' => $dataArr['method_id'],
                     'order_id' => $order_id                    
                 ],
-                function($message) use ($adminMailArr, $order_id) {
-                    $message->subject('Xác nhận đơn hàng hàng #'.$order_id);
-                    $message->to($adminMailArr);
-                    $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
-                    $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
-            });
-        }
-        if($email != ''){
-            Mail::send('frontend.cart.email',
-                [                    
-                    'orderDetail'             => $orderDetail,
-                    'arrProductInfo'    => $arrProductInfo,
-                    'getlistProduct'    => $getlistProduct,            
-                    'method_id' => $dataArr['method_id'],
-                    'order_id' => $order_id                    
-                ],
-                function($message) use ($email, $order_id) {
+                function($message) use ($email, $adminMailArr, $order_id) {
                     $message->subject('Xác nhận đơn hàng hàng #'.$order_id);
                     $message->to($email);
+                    $message->bcc($adminMailArr);
                     $message->from('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
                     $message->sender('muanhanhgiatot.vn@gmail.com', 'muanhanhgiatot.vn');
             });
