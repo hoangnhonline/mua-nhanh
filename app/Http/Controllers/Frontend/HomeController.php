@@ -153,6 +153,7 @@ class HomeController extends Controller
                         ->select('product_img.image_url', 'product.*');
         if($tu_khoa){
             $query->where('product.alias', 'LIKE', '%'.$tu_khoa.'%');
+            $query->orWhere('product.code', 'LIKE', '%'.$tu_khoa.'%');
         }
         if($code){
             $query->where('product.code', 'LIKE', '%'.$code.'%');
