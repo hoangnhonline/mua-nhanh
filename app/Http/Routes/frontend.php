@@ -14,6 +14,7 @@
 Route::get('/test', function() {
     return view('frontend.email.thanks');
 });
+
 Route::group(['prefix' => 'social-auth'], function () {
     Route::group(['prefix' => 'facebook'], function () {
         Route::get('redirect/', ['as' => 'fb-auth', 'uses' => 'SocialAuthController@redirect']);
@@ -34,6 +35,7 @@ Route::group(['prefix' => 'authentication'], function () {
 });
 Route::group(['namespace' => 'Frontend'], function()
 {   
+    Route::get('/zel', ['as' => 'zel', 'uses' => 'HomeController@zel']);
     Route::get('/dongbo', ['as' => 'dongbo', 'uses' => 'HomeController@dongbo']);
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::get('/load-slider', ['as' => 'load-slider', 'uses' => 'HomeController@loadSlider']);

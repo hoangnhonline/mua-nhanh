@@ -23,7 +23,7 @@ use App\Models\UserShare;
 use App\Models\PriceRange;
 use App\Models\Orders;
 
-use Helper, File, Session, Auth, Hash;
+use Helper, File, Session, Auth, Hash,Mail;
 
 class HomeController extends Controller
 {
@@ -39,7 +39,24 @@ class HomeController extends Controller
     *
     * @return Response
     */   
-    
+    public function zel(Request $request){
+
+    exec('casperjs --load-images=false test.js', $arr, $res); 
+    $gia = str_replace(" ZEL/BTC Exchange / Stocks.exchange", "", $arr[0]);
+    if((float) $gia >= 0.00005){
+        Mail::send('zel',
+            [
+                'gia' => $gia
+            ],
+            function($message) {
+                $message->subject('Giá ZEL cao');
+                $message->to('hoangnhonline@gmail.com');
+                $message->from('hoangnhonline@gmail.com', 'HOANGNHONLINE');
+                $message->sender('hoangnhonline@gmail.com', 'HOANGNHONLINE');
+        });
+    }
+
+    }
    public function dongbo(Request $request){
     $query = ProductMuaNhanh::whereRaw(' code NOT IN ( SELECT code FROM product)')->get();
     foreach($query as $pro){        
