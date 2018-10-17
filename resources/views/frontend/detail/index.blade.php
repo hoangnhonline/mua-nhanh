@@ -133,6 +133,7 @@
                         <div role="tabpanel" class="tab-pane" id="evaluate">
                             <div class="fb-comments" data-href="{{ url()->current() }}" data-width="100%" data-numposts="5"></div>
                         </div>
+						<div class="fb-comments" data-href="{{ url()->current() }}" data-width="100%" data-numposts="5"></div>
                     </div>
                 </div>
                 <div class="clearfix" style="margin-top:20px"></div>

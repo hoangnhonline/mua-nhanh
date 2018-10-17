@@ -1,4 +1,5 @@
 <?php
+//die('Website is under construction.');
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

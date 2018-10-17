@@ -36,7 +36,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
         <span class="box-title" style="color: red"> sản phẩm HOT</span>
       </div>
       <div class="box-product-content">
-              <ul class="products owl-carousel nav-center" data-dots="false" data-loop="true" data-nav = "true" data-margin = "10" data-responsive='{"0":{"items":2},"600":{"items":3},"1000":{"items":5}}'>
+              <ul class="products owl-carousel nav-center" data-dots="false" data-loop="true" data-nav = "true" data-margin = "10" data-responsive='{"0":{"items":3},"600":{"items":3},"1000":{"items":5}}'>
                     @foreach($hotProduct as $obj)                     
                     <li>
                       <div class="product product-kind-1">
@@ -125,7 +125,7 @@ $bannerArr = DB::table('banner')->where(['object_id' => 1, 'object_type' => 3])-
           <div class="tab-container">
             <div class="product-wrapper">              
               <div class="tab-panel active">
-                <ul class="products owl-carousel nav-center" data-dots="false" data-loop="false" data-nav = "true" data-margin = "10" data-responsive='{"0":{"items":2},"600":{"items":3},"1000":{"items":4}}'>
+                <ul class="products owl-carousel nav-center" data-dots="false" data-loop="false" data-nav = "true" data-margin = "10" data-responsive='{"0":{"items":3},"600":{"items":3},"1000":{"items":4}}'>
                     @foreach($productArr[$parent->id] as $obj)   
 
                     <li>
