@@ -111,7 +111,15 @@
                             </tr>
                             <tr bgcolor="#eee">
                               <td colspan="3" align="right" style="padding:7px 9px"><strong><big>Tổng đơn hàng</big></strong></td>
-                              <td align="right" style="padding:7px 9px"><strong><big><span>{!! number_format($orderDetail->total_payment) !!}&nbsp;₫</span></big></strong></td>
+                              <td align="right" style="padding:7px 9px"><strong><big><span>{!! number_format($orderDetail->total_bill) !!}&nbsp;₫</span></big></strong></td>
+                            </tr>
+                            <tr>
+                              <td colspan="3" align="right" style="padding:5px 9px">Giảm giá coupon</td>
+                              <td align="right" style="padding:5px 9px"><span>{!! number_format(Session::get('tien_giam')) !!}&nbsp;₫&nbsp;₫</span></td>
+                            </tr>
+                            <tr bgcolor="#eee">
+                              <td colspan="3" align="right" style="padding:7px 9px"><strong><big>Tổng đơn hàng</big></strong></td>
+                              <td align="right" style="padding:7px 9px"><strong><big><span>{!! number_format($orderDetail->total_bill - Session::get('tien_giam')) !!}&nbsp;₫</span></big></strong></td>
                             </tr>
                           </tfoot>
                         </table>                        

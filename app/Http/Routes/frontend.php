@@ -76,6 +76,7 @@ Route::group(['namespace' => 'Frontend'], function()
     });
     Route::group(['prefix' => 'gio-hang'], function () {
         Route::get('/', ['as' => 'cart', 'uses' => 'CartController@index']);
+        Route::post('/', ['as' => 'check-coupon', 'uses' => 'CartController@index']);
         Route::get('thong-tin-nhan-hang', ['as' => 'address-info', 'uses' => 'CartController@addressInfo']);
         Route::get('thong-tin-don-hang', ['as' => 'order-info', 'uses' => 'CartController@orderInfo']);
         Route::get('empty-cart', ['as' => 'empty-cart', 'uses' => 'CartController@deleteAll']);

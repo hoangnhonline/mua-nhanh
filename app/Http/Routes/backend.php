@@ -24,6 +24,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend', 'middleware' => '
         Route::post('/update', ['as' => 'pages.update', 'uses' => 'PagesController@update']);
         Route::get('{id}/destroy', ['as' => 'pages.destroy', 'uses' => 'PagesController@destroy']);
     });
+    Route::group(['prefix' => 'coupon'], function () {
+        Route::get('/', ['as' => 'coupon.index', 'uses' => 'CouponController@index']);
+        Route::get('/create', ['as' => 'coupon.create', 'uses' => 'CouponController@create']);
+        Route::post('/store', ['as' => 'coupon.store', 'uses' => 'CouponController@store']);
+        Route::get('{id}/edit',   ['as' => 'coupon.edit', 'uses' => 'CouponController@edit']);
+        Route::post('/update', ['as' => 'coupon.update', 'uses' => 'CouponController@update']);
+        Route::get('{id}/destroy', ['as' => 'coupon.destroy', 'uses' => 'CouponController@destroy']);
+    });
     Route::group(['prefix' => 'color'], function () {
         Route::get('/', ['as' => 'color.index', 'uses' => 'ColorController@index']);
         Route::get('/create', ['as' => 'color.create', 'uses' => 'ColorController@create']);

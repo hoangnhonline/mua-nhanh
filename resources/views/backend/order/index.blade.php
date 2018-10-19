@@ -72,9 +72,12 @@
              <tr>
               <th style="width: 1%">No.</th>
               <th style="width: 1%;white-space:nowrap;width:200px"> Đơn hàng</th>
-              <th style="text-align:center;width:150px">Ngày đặt hàng</th>
+              <th style="text-align:center;">Ngày đặt hàng</th>
               <th style="text-align:left;width:200px">Giao hàng đến</th>           
-              <th style="text-align:right;width:100px">Tổng hoá đơn</th>
+              <th style="text-align:right;width:100px">Tổng tiền</th>
+              <th style="text-align:right;width: 1%">Coupon</th>
+              
+              <th style="text-align:right;width:100px">Tổng thanh toán</th>
               <th width="120px" style="white-space:nowrap">Trạng thái</th>
               <th width="1%" style="white-space:nowrap"> </th>
             </tr>
@@ -88,9 +91,7 @@
                 <td style="text-align:center">{{ $i }}</td>                
                 <td>
                 <a href="" style="font-size:14px; font-weight:bold">
-                <?php 
-
-                ?>
+                
                 #{{ str_pad($order->id, 6,'0', STR_PAD_LEFT) }}</a> 
                 <span style="color:#555"> bởi {{$order->fullname}}</span>
                 <br>
@@ -117,8 +118,15 @@
                 <br><p style="color:red;margin-top: 10px;"><u>Ghi chú: </u><i>{{ $order->notes}}</i></p>
                 @endif
                 </td>
+                <td style="text-align:right;width:100px"><strong style="font-size: 17px">{{ number_format($order->total_bill) }}</strong></td>
+                <td style="white-space: nowrap;text-align: right">
+                  @if($order->coupon)
+                  <strong style="color: red">{{ $order->coupon }}</strong> <br> 
+                  {{ number_format($order->tien_giam) }}
+                  @endif
+                </td>
                              
-                <td style="text-align:right;width:100px"><strong style="font-size: 17px">{{ number_format($order->total_payment) }}</strong>
+                <td style="text-align:right;width:100px;white-space: nowrap;"><strong style="font-size: 17px;color: blue">{{ number_format($order->total_payment) }}</strong>
                   <br>
                   <div class="form-group form-inline">
                     <label>Phí ship</label>

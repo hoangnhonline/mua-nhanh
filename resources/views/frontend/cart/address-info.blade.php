@@ -142,6 +142,16 @@
                         <span class="k">Tổng cộng</span>
                         <span class="v _total" id="cart_info_total _total" data-order="total">{{ number_format($total-$totalCk) }} đ</span>
                     </li>
+                    @if(Session::get('tien_giam') > 0)
+                    <li class="giamgia">
+                        <span class="k">Giảm giá</span>
+                        <span id="order-total" class="v">{{ number_format(Session::get('tien_giam')) }} đ</span>
+                    </li>
+                    <li class="giamgia">
+                        <span class="k" style="font-size: 20px;color:#000">Còn lại</span>
+                        <span id="order-total" class="v" style="font-size: 20px;color:#000">{{ number_format(Session::get('thanh_toan')) }} đ</span>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </div>

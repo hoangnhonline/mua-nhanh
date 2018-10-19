@@ -48,11 +48,17 @@ class Orders extends Model  {
       'customer_id',
       'cap_bac',
       'date_apply',
-      'notes'
+      'notes',
+      'tien_giam',
+      'coupon_id'
     ];
 
     public function order_detail()
     {
         return $this->hasMany('App\Models\OrderDetail', 'order_id');
+    }    
+    public function coupon()
+    {
+        return $this->belongsTo('App\Models\Coupon', 'coupon_id');
     }
 }

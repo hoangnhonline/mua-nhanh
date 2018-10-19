@@ -11,6 +11,7 @@ use App\Models\Orders;
 use App\Models\OrderDetail;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Coupon;
 use App\Models\Settings;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
@@ -146,6 +147,9 @@ class OrderController extends Controller
        
         switch ($status_id) {           
             case "4":
+                if($order->coupon_id > 0){
+                    Coupon::find($order->coupon_id)->update(['used' => 1]);
+                }
                 $orderDetail = OrderDetail::where('order_id', $order_id)->get();
                 foreach($orderDetail as $detail){
                     $product_id = $detail->product_id;                    

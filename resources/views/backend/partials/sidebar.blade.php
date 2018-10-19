@@ -39,6 +39,12 @@
           
         </a>       
       </li> 
+      <li {{ in_array(\Request::route()->getName(), ['coupon.edit', 'coupon.index', 'coupon.create']) ? "class=active" : "" }}>
+          <a href="{{ route('coupon.index') }}">
+            <i class="fa fa-pencil-square-o"></i> 
+            <span>Coupon</span>          
+          </a>       
+        </li>
       <li {{ in_array(\Request::route()->getName(), ['customer.index', 'customer.edit', 'customer.create']) ? "class=active" : "" }}>
         <a href="{{ route('customer.index') }}">
           <i class="fa fa-file-image-o"></i> 

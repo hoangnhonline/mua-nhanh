@@ -127,13 +127,53 @@
                             <span id="order-subtotal" class="v"><strong style="color:#0088cc">{{ number_format($total*$ck/100) }} đ</strong></span>
                         </li>
                         @endif
+                        <li>
+                          <span style="color:red;margin-bottom: 5px;display: block;">{!! $errorCoupon !!}</span>
+                          <form method="POST" route="{{ route('cart')}}">
+                            {{ csrf_field() }}
+                            <div class="input-group">
+                                <input id="coupon" name="coupon" placeholder="Mã giảm giá.." type="text" class="form-control" value="{{ $coupon }}">
+                                <span class="input-group-btn">
+                                <button style="background-color: #fb6800;color: #FFF;" class="btn btn-default btn-coupon" type="submit">Sử dụng</button>
+                            </span>
+                            </div>
+                          </form>
+                        </li>
                         <li class="total">
                             <span class="k">Tổng cộng</span>
                             <span id="order-total" class="v">{{ number_format($total-$totalCk) }} đ</span>
                         </li>
+                        <?php 
+                        if($detailCoupon){
+                          if($detailCoupon->type == 1){
+                            $tien_giam = $detailCoupon->coupon_value;
+                          }else{
+                            $tien_giam = $detailCoupon->coupon_value*($total - $totalCk)/100;
+                          }
+                          $thanh_toan = $total - $totalCk - round($tien_giam);
+                          if($thanh_toan < 0 ){
+                            $thanh_toan = 0;
+                          }
+                          \Session::put('tien_giam', $tien_giam);
+                          \Session::put('thanh_toan', $thanh_toan);
+                          \Session::put('coupon', $coupon);
+                          \Session::put('coupon_id', $detailCoupon->id);
+                        ?>
+                        <li class="giamgia">
+                            <span class="k">Giảm giá</span>
+                            <span id="order-total" class="v">{{ number_format($tien_giam) }} đ</span>
+                        </li>
+
+                        <li class="giamgia">
+                            <span class="k" style="font-size: 20px;color:#000">Còn lại</span>
+                            <span id="order-total" class="v" style="font-size: 20px;color:#000">{{ number_format($thanh_toan) }} đ</span>
+                        </li>
+                        <?php } ?>
+                        
                     </ul>
+
                 </div>
-            </div>
+            </div>            
         </div>
       </div><!-- /.content-sidebar-2 -->
     </div>

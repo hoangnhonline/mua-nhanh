@@ -14,6 +14,7 @@ use App\Models\OrderDetail;
 use App\Models\Settings;
 use App\Models\Customer;
 use App\Models\BaoKimPayment;
+use App\Models\Coupon;
 
 use Helper, File, Session, Auth;
 use Mail;
@@ -26,15 +27,26 @@ class CartController extends Controller
     }
     public function index(Request $request)
     {
+        $errorCoupon = null;
+        $detailCoupon = [];
+        $coupon = null;
+        if(isset($request->coupon)){
+            $coupon = $request->coupon;
+            $detailCoupon = Coupon::where('coupon', $coupon)->where('used', 0)->first();
+            if(!$detailCoupon){
+                $errorCoupon = "Mã giảm giá không hợp lệ";
+            }
+        }
         $getlistProduct = Session::get('products');
         if(!empty($getlistProduct)){
-        $listProductId = array_keys($getlistProduct);
-        $arrProductInfo = Product::whereIn('product.id', $listProductId)
+            $listProductId = array_keys($getlistProduct);
+            $arrProductInfo = Product::whereIn('product.id', $listProductId)
                             ->leftJoin('product_img', 'product_img.id', '=','product.thumbnail_id')
                             ->select('product_img.image_url', 'product.*')->get();
         }
+        
         $seo['title'] = $seo['description'] = $seo['keywords'] = "Giỏ hàng";
-        return view('frontend.cart.index', compact('arrProductInfo', 'getlistProduct', 'seo'));
+        return view('frontend.cart.index', compact('arrProductInfo', 'getlistProduct', 'seo', 'errorCoupon', 'detailCoupon', 'coupon'));
     }
     public function payment(Request $request){        
 
@@ -185,9 +197,10 @@ class CartController extends Controller
 
             $dataArr['total_bill'] += $price * $getlistProduct[$product->id];
             $arrPrice[$product->id] = $price;
-        }
+        }        
 
-        $dataArr['total_payment'] = $dataArr['total_bill'];
+        $tien_giam = (int) Session::get('tien_giam');                     
+        $dataArr['total_payment'] = $dataArr['total_bill'] - $tien_giam;
 
         // tinh chiet khau
         $totalCk = 0;                 
@@ -205,8 +218,12 @@ class CartController extends Controller
               $dataArr['total_payment'] = $dataArr['total_bill'] - $totalCk;
               $dataArr['discount'] = $totalCk;
         }
-
+        $dataArr['tien_giam'] = $tien_giam;
+        $dataArr['coupon_id'] = Session::get('coupon_id');
         $rs = Orders::create($dataArr);
+        if($dataArr['coupon_id'] > 0){
+            Coupon::find($dataArr['coupon_id'])->update(['used' => 1]);
+        }
         if($user_id){
             $detailCustomer = Customer::find($user_id);
             $detailCustomer->full_name = $addressInfo['fullname'];
@@ -236,8 +253,7 @@ class CartController extends Controller
             $emailArr = array_merge([$email], $adminMailArr);
         }else{
             $emailArr = $adminMailArr;
-        }
-        
+        }       
         // send email
         $order_id =str_pad($order_id, 6, "0", STR_PAD_LEFT);
         
