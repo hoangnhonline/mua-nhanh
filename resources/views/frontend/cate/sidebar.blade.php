@@ -47,7 +47,7 @@
                             <?php $i = 0;?>
                             @foreach($hotProductList as $obj)
                             <?php $i++; ?>
-                            <div class="product-wrapper product-auto-resize product-image-padding">
+                            <div class="product-wrapper product-auto-resize product-image-padding col-xs-4">
                                 
                                 <div class="product">
                                     <div class="product_image">
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="product_info">
                                         <div class="product_price _product_price">
-                                            <span class="price">
+                                            <span class="price" style="font-size:13px;">
                                                 <span class="price_value" itemprop="price">
                                                     @if($obj->is_sale == 1 && $obj->price_sale > 0)
                                                     {{ number_format($obj->price_sale) }}
@@ -71,7 +71,7 @@
                                                     @endif
                                                 </span><span class="price_symbol">đ</span>
                                                 @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )                                                        
-                                                <span class="price_discount">-{{ $obj->sale_percent }}%</span>
+                                                <span class="price_discount" style="font-size:13px;margin-left:0px">-{{ $obj->sale_percent }}%</span>
                                                 @endif
                                             </span>
                                         </div>
@@ -83,7 +83,7 @@
                                         </div>                          
                                         @else
                                         @if( $obj->is_sale == 1 && $obj->sale_percent > 0 )
-                                        <div class="product_price product_price-list-price _product_price_old " style="display: inline-block;">
+                                        <div style="font-size:13px;" class="product_price product_price-list-price _product_price_old " style="display: inline-block;">
                                             <span class="price price-list-price">
                                             <span class="price_value">{{ number_format($obj->price) }}</span><span class="price_symbol">đ</span>
                                             </span>

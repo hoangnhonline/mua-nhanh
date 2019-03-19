@@ -169,6 +169,12 @@
                             <span id="order-total" class="v" style="font-size: 20px;color:#000">{{ number_format($thanh_toan) }} đ</span>
                         </li>
                         <?php } ?>
+						@if(!empty(Session::get('products')))
+                        <li style="text-align: center;">                          
+                              <a href="{{ route('address-info') }}" style="color: #FFF;text-transform: uppercase;" title="Tiến hành đặt hàng" class="btn btn-primary">Đặt hàng</a>
+                              
+                        </li>
+                        @endif
                         
                     </ul>
 

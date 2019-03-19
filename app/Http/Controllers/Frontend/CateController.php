@@ -48,7 +48,7 @@ class CateController extends Controller
                 $seo['title'] = $seo['description'] = $seo['keywords'] = $parentDetail->name;
             }  
             $productList = Product::getList( ['parent_id' => $parent_id, 'pagination' => $settingArr['product_per_page'], 'status' => 1] );
-            $hotProductList = Product::getList(['is_hot' => 1, 'parent_id' => $parent_id, 'limit' => 5, 'status' => 1]);			
+            $hotProductList = Product::getList(['is_hot' => 1, 'parent_id' => $parent_id, 'limit' => 6, 'status' => 1]);			
             return view('frontend.cate.parent', compact('parent_id', 'parentDetail', 'cateList', 'productArr', 'seo', 'hotProductList', 'productList'));
 
         }else{
@@ -79,7 +79,7 @@ class CateController extends Controller
             }  
             $page = $request->page ? $request->page : 1;                             
             $parentDetail = CateParent::find($cateDetail->parent_id);
-            $hotProductList = Product::getList(['is_hot' => 1, 'cate_id' => $cate_id, 'limit' => 5, 'status' => 1]);    
+            $hotProductList = Product::getList(['is_hot' => 1, 'cate_id' => $cate_id, 'limit' => 6, 'status' => 1]);    
             return view('frontend.cate.child', compact('parent_id', 'cateDetail', 'productList', 'seo', 'page', 'hotProductList', 'priceList', 'parentDetail'));
             
         }else{
